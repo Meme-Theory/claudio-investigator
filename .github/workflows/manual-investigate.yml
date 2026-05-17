@@ -1,0 +1,95 @@
+name: Manual investigation
+
+# Click "Run workflow" in the Actions tab to investigate one artist on demand,
+# without having to file an issue. The Phase 3 issue-based flow isn't wired
+# up yet — this is the path to use until then.
+on:
+  workflow_dispatch:
+    inputs:
+      artist_name:
+        description: 'Artist name to investigate (required)'
+        required: true
+        type: string
+      spotify_url:
+        description: 'Spotify URL hint (optional)'
+        required: false
+        type: string
+      youtube_url:
+        description: 'YouTube / YouTube Music URL hint (optional)'
+        required: false
+        type: string
+      apple_url:
+        description: 'Apple Music URL hint (optional)'
+        required: false
+        type: string
+      notes:
+        description: 'Submitter notes (optional)'
+        required: false
+        type: string
+
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run investigation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GENIUS_TOKEN: ${{ secrets.GENIUS_TOKEN }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          MUSICBRAINZ_USER_AGENT: 'ClAudioInvestigator/0.0.1 (+https://github.com/${{ github.repository }})'
+          ARTIST: ${{ inputs.artist_name }}
+          SPOTIFY_URL: ${{ inputs.spotify_url }}
+          YOUTUBE_URL: ${{ inputs.youtube_url }}
+          APPLE_URL: ${{ inputs.apple_url }}
+          NOTES: ${{ inputs.notes }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          # Build the CLI arg list from optional inputs.
+          args=("$ARTIST")
+          [ -n "$SPOTIFY_URL" ] && args+=(--spotify-url "$SPOTIFY_URL")
+          [ -n "$YOUTUBE_URL" ] && args+=(--youtube-url "$YOUTUBE_URL")
+          [ -n "$APPLE_URL" ]   && args+=(--apple-url "$APPLE_URL")
+          [ -n "$NOTES" ]       && args+=(--notes "$NOTES")
+          python -m investigator.main investigate "${args[@]}" --transcript \
+            | tee artifacts/verdict.json
+
+      - name: Render verdict to step summary
+        if: always()
+        run: |
+          {
+            echo "## Verdict — \`${ARTIST}\`"
+            echo
+            if [ -s artifacts/verdict.json ]; then
+              echo '```json'
+              cat artifacts/verdict.json
+              echo '```'
+            else
+              echo "_(no output produced — see the run logs)_"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          ARTIST: ${{ inputs.artist_name }}
+
+      - name: Upload verdict artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verdict-${{ github.run_id }}
+          path: artifacts/verdict.json
+          if-no-files-found: ignore
