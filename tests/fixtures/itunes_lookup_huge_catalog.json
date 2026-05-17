@@ -1,0 +1,28 @@
+{
+  "resultCount": 23,
+  "results": [
+    {"wrapperType": "artist", "artistName": "Phantom Catalog", "artistId": 9009000000, "primaryGenreName": "Electronic"},
+    {"wrapperType": "collection", "collectionId": 1, "collectionName": "Album A", "artworkUrl100": "https://example.invalid/a.jpg", "trackCount": 8, "releaseDate": "2025-01-05T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 2, "collectionName": "Album B", "artworkUrl100": "https://example.invalid/b.jpg", "trackCount": 8, "releaseDate": "2025-01-19T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 3, "collectionName": "Album C", "artworkUrl100": "https://example.invalid/c.jpg", "trackCount": 8, "releaseDate": "2025-02-02T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 4, "collectionName": "Album D", "artworkUrl100": "https://example.invalid/d.jpg", "trackCount": 8, "releaseDate": "2025-02-16T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 5, "collectionName": "Album E", "artworkUrl100": "https://example.invalid/e.jpg", "trackCount": 8, "releaseDate": "2025-03-02T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 6, "collectionName": "Album F", "artworkUrl100": "https://example.invalid/f.jpg", "trackCount": 8, "releaseDate": "2025-03-16T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 7, "collectionName": "Album G", "artworkUrl100": "https://example.invalid/g.jpg", "trackCount": 8, "releaseDate": "2025-03-30T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 8, "collectionName": "Album H", "artworkUrl100": "https://example.invalid/h.jpg", "trackCount": 8, "releaseDate": "2025-04-13T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 9, "collectionName": "Album I", "artworkUrl100": "https://example.invalid/i.jpg", "trackCount": 8, "releaseDate": "2025-04-27T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 10, "collectionName": "Album J", "artworkUrl100": "https://example.invalid/j.jpg", "trackCount": 8, "releaseDate": "2025-05-11T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 11, "collectionName": "Album K", "artworkUrl100": "https://example.invalid/k.jpg", "trackCount": 8, "releaseDate": "2025-05-25T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 12, "collectionName": "Album L", "artworkUrl100": "https://example.invalid/l.jpg", "trackCount": 8, "releaseDate": "2025-06-08T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 13, "collectionName": "Album M", "artworkUrl100": "https://example.invalid/m.jpg", "trackCount": 8, "releaseDate": "2025-06-22T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 14, "collectionName": "Album N", "artworkUrl100": "https://example.invalid/n.jpg", "trackCount": 8, "releaseDate": "2025-07-06T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 15, "collectionName": "Album O", "artworkUrl100": "https://example.invalid/o.jpg", "trackCount": 8, "releaseDate": "2025-07-20T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 16, "collectionName": "Album P", "artworkUrl100": "https://example.invalid/p.jpg", "trackCount": 8, "releaseDate": "2025-08-03T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 17, "collectionName": "Album Q", "artworkUrl100": "https://example.invalid/q.jpg", "trackCount": 8, "releaseDate": "2025-08-17T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 18, "collectionName": "Album R", "artworkUrl100": "https://example.invalid/r.jpg", "trackCount": 8, "releaseDate": "2025-08-31T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 19, "collectionName": "Album S", "artworkUrl100": "https://example.invalid/s.jpg", "trackCount": 8, "releaseDate": "2025-09-14T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 20, "collectionName": "Album T", "artworkUrl100": "https://example.invalid/t.jpg", "trackCount": 8, "releaseDate": "2025-09-28T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 21, "collectionName": "Album U", "artworkUrl100": "https://example.invalid/u.jpg", "trackCount": 8, "releaseDate": "2025-10-12T07:00:00Z"},
+    {"wrapperType": "collection", "collectionId": 22, "collectionName": "Album V", "artworkUrl100": "https://example.invalid/v.jpg", "trackCount": 8, "releaseDate": "2024-12-29T08:00:00Z"}
+  ]
+}

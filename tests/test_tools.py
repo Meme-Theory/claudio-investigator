@@ -124,6 +124,29 @@ def test_itunes_lookup_known_ai_surfaces_2025_only_catalog(load_fixture) -> None
     assert result["earliest_release_date"].startswith("2025-")
     # Four albums in 2025 — fits the high-output pattern the rubric flags
     assert result["album_count"] == 4
+    assert result["albums_truncated"] is False  # 4 < 15 sample limit
+
+
+@responses.activate
+def test_itunes_lookup_truncates_huge_catalog_with_histogram(load_fixture) -> None:
+    """22-album AI catalog must truncate to the sample limit and surface a year histogram."""
+    responses.add(responses.GET, ITUNES_SEARCH_URL, json=load_fixture("itunes_search_known_ai.json"))
+    responses.add(responses.GET, ITUNES_LOOKUP_URL, json=load_fixture("itunes_lookup_huge_catalog.json"))
+
+    result = lookup_itunes("Phantom Catalog")
+
+    assert result["found"] is True
+    assert result["album_count"] == 22
+    assert result["albums_truncated"] is True
+    assert result["albums_returned"] == 15  # ALBUM_SAMPLE_LIMIT
+    assert len(result["albums"]) == 15
+    # Histogram captures ALL releases by year, including the 21 truncated ones.
+    histogram = result["release_year_histogram"]
+    assert histogram.get("2025") == 21
+    assert histogram.get("2024") == 1
+    # Most-recent-first ordering
+    sample_dates = [a["release_date"] for a in result["albums"]]
+    assert sample_dates == sorted(sample_dates, reverse=True)
 
 
 # --- MusicBrainz -----------------------------------------------------------

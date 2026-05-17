@@ -12,12 +12,19 @@ here; if we start seeing 429s, add a `rate_limited(0.1)` decorator.
 
 from __future__ import annotations
 
+from collections import Counter
 from typing import Any
 
 from ._http import get_json, make_session
 
 SEARCH_URL = "https://itunes.apple.com/search"
 LOOKUP_URL = "https://itunes.apple.com/lookup"
+
+# Cap the album list we return to the model. Large AI catalogs (50+ releases)
+# blow up the token budget with negligible signal beyond what
+# `release_year_histogram` already encodes. The signal we care about is
+# "is the catalog big and recent?" — not the title of release #37.
+ALBUM_SAMPLE_LIMIT = 15
 
 TOOLS = [
     {
@@ -90,6 +97,20 @@ def lookup_itunes(artist_name: str, country: str = "us", **_: Any) -> dict:
     albums = [_normalize_album(e) for e in lookup_results if e.get("wrapperType") == "collection"]
     release_dates = sorted(a["release_date"] for a in albums if a.get("release_date"))
 
+    year_histogram = dict(sorted(
+        Counter(
+            d[:4] for d in release_dates if d and len(d) >= 4
+        ).items()
+    ))
+
+    # Most-recent-first; truncate so 50-album AI catalogs don't blow up
+    # tool-result tokens. The histogram preserves velocity info; sample
+    # gives the model concrete titles to reason about.
+    albums_sorted = sorted(
+        albums, key=lambda a: a.get("release_date") or "", reverse=True
+    )
+    albums_sample = albums_sorted[:ALBUM_SAMPLE_LIMIT]
+
     return {
         "found": True,
         "query": artist_name,
@@ -99,7 +120,10 @@ def lookup_itunes(artist_name: str, country: str = "us", **_: Any) -> dict:
         "primary_genre": primary.get("primaryGenreName"),
         "artist_url": primary.get("artistLinkUrl"),
         "album_count": len(albums),
-        "albums": albums,
+        "albums_returned": len(albums_sample),
+        "albums_truncated": len(albums) > ALBUM_SAMPLE_LIMIT,
+        "albums": albums_sample,
+        "release_year_histogram": year_histogram,
         "earliest_release_date": release_dates[0] if release_dates else None,
         "latest_release_date": release_dates[-1] if release_dates else None,
         "other_matches": [

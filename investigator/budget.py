@@ -48,10 +48,21 @@ class Budget:
 
     @property
     def total_tokens(self) -> int:
+        """Tokens representing genuinely-new model work this investigation.
+
+        Deliberately excludes `cache_read_tokens` — those are re-reads of
+        content the model first processed (and that we already counted via
+        `cache_creation_tokens` or `input_tokens`) on an earlier iteration.
+        Counting them double-bills the same context against the iteration
+        cap, causing investigations with rich tool results to trip the cap
+        prematurely even when no actual runaway is happening.
+
+        The intent of `max_tokens_total` is to bound runaway context growth,
+        not to penalize the prompt cache.
+        """
         return (
             self.input_tokens
             + self.output_tokens
-            + self.cache_read_tokens
             + self.cache_creation_tokens
         )
 
@@ -105,6 +116,8 @@ class Budget:
         self.vision_passes_used += 1
 
     def summary(self) -> dict[str, Any]:
+        # cache_read_tokens is reported but NOT included in total_tokens —
+        # see the docstring on `total_tokens` for the rationale.
         return {
             "iterations": self.iterations,
             "input_tokens": self.input_tokens,
@@ -112,6 +125,12 @@ class Budget:
             "cache_read_tokens": self.cache_read_tokens,
             "cache_creation_tokens": self.cache_creation_tokens,
             "total_tokens": self.total_tokens,
+            "billable_tokens": (
+                self.input_tokens
+                + self.output_tokens
+                + self.cache_read_tokens
+                + self.cache_creation_tokens
+            ),
             "usd_spent": round(self.usd_spent, 4),
             "vision_passes_used": self.vision_passes_used,
             "exhaustion_reason": self.exhaustion_reason,

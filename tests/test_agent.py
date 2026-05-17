@@ -106,6 +106,27 @@ def test_budget_vision_pass_cap() -> None:
     assert not b.can_use_vision()
 
 
+def test_budget_total_excludes_cache_reads() -> None:
+    """cache_read_tokens are re-reads of already-counted content; they must
+    NOT count toward the iteration cap or we trip prematurely on rich tool
+    results."""
+    b = Budget(max_tokens_total=10_000)
+    # Mostly cache reads — should NOT exhaust the cap.
+    b.charge({
+        "input_tokens": 500,
+        "output_tokens": 100,
+        "cache_read_input_tokens": 50_000,  # massive, but doesn't count
+        "cache_creation_input_tokens": 200,
+    })
+    assert b.has_remaining()
+    assert b.total_tokens == 500 + 100 + 200  # excludes cache_read
+    # ...but the report still includes it under billable_tokens for
+    # cost-tracking visibility:
+    summary = b.summary()
+    assert summary["cache_read_tokens"] == 50_000
+    assert summary["billable_tokens"] == 500 + 100 + 50_000 + 200
+
+
 # --- Agent loop ---------------------------------------------------------- #
 
 
