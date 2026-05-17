@@ -1,10 +1,26 @@
 [
   {
-    "id": "example-artist-slug",
-    "name": "Example Artist",
-    "spotify": "0OdUWJ0sBjDrqHygGUXeCF",
-    "apple": "159260351",
-    "youtube": "UCxxxxxxxxxxxxxxxxxxxx",
-    "note": "Must satisfy ALL: present in MusicBrainz, has Discogs physical release, has concert history (Songkick/Bandsintown), pre-2020 catalog start. 50 entries needed for the Phase 0 tier-5 sample."
+    "id": "aphex-twin",
+    "name": "Aphex Twin",
+    "spotify": "6kBDZFXuLrZgHnvmPu9NsG",
+    "apple": "82636",
+    "youtube": "UCQpsLlpUlsdkRoZyaSwUTuw",
+    "note": "MusicBrainz f27ec8db-af05-4f36-916e-3d57f91ecf5e; Discogs vinyl pressings 1992-onwards; documented tour history; catalog start 1985. Genre: IDM / electronic."
+  },
+  {
+    "id": "kendrick-lamar",
+    "name": "Kendrick Lamar",
+    "spotify": "2YZyLoL8N0Wb9xBt1NhZWg",
+    "apple": "368183298",
+    "youtube": "UCwy-2_NoVouhA0OQUDvelHA",
+    "note": "MusicBrainz 381086ea-f511-4aba-bdf9-71c753dc5077; multiple vinyl pressings; extensive tour history (Bandsintown); debut 2003. Genre: hip-hop."
+  },
+  {
+    "id": "bjork",
+    "name": "Björk",
+    "spotify": "7w29UYBi0qsHi5RTcv3lmA",
+    "apple": "55005",
+    "youtube": "UCsZHHukcW6FEDx0x0agvBdg",
+    "note": "MusicBrainz 87c5dedd-371d-4a53-9f7f-80522fb7f3cb; extensive vinyl catalog including reissues; tours and major venue history; catalog start 1977. Genre: art-pop / experimental."
   }
 ]

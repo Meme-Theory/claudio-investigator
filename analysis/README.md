@@ -16,11 +16,46 @@ This directory is the home of the empirical-priors work that precedes any invest
 - **Tier 2 (50):** SOA entries with `disclosure == partial` — likely positives with some uncertainty
 - **Tier 3 (50):** SOA entries with `disclosure == none` AND 3+ markers — strong community signal, unverified
 - **Tier 4 (50):** SOA entries with `disclosure == none` AND 0–1 markers — genuinely ambiguous; where the rubric earns its keep
-- **Tier 5 (50):** Human controls — picker's choice, must satisfy:
-  - present in MusicBrainz
-  - has Discogs physical release
-  - has concert history (Songkick / Bandsintown)
-  - pre-2020 catalog start
+- **Tier 5 (50):** Human controls — picker's choice from your own listening, must satisfy ALL of:
+  - present in MusicBrainz (has an MBID)
+  - has Discogs physical release (vinyl, CD, or cassette pressing)
+  - has concert history (Songkick / Bandsintown listings or documented tours)
+  - pre-2020 catalog start (earliest release ≥ 5 years old)
+
+## Populating tier 5 — `human_controls.json`
+
+Copy `human_controls.template.json` to `human_controls.json` and replace the
+example entries with your 50 picks. The template has three worked examples
+showing the expected fields; the criteria above all four must hold for each
+entry.
+
+**Field reference:**
+
+| Field | Required | How to find it |
+|---|---|---|
+| `id` | yes | a lowercase-hyphenated slug for the artist (any unique identifier works) |
+| `name` | yes | display name as it appears in MusicBrainz |
+| `spotify` | recommended | the 22-char ID from `open.spotify.com/artist/{id}` |
+| `apple` | optional | the numeric ID from `music.apple.com/.../artist/{name}/{id}` |
+| `youtube` | optional | the channel ID (`UC...`) from `youtube.com/channel/{id}` |
+| `note` | recommended | one-line note citing your evidence for the four criteria (MBID, a Discogs release, a tour year, a debut year) |
+
+**Picking strategy:**
+
+- Use your own listening — the dev plan explicitly calls for "picker's choice
+  from your own listening."
+- Mix genres deliberately. 50 indie-rock artists would over-fit the
+  calibration to one sound; pick across rock, hip-hop, electronic, jazz, folk,
+  classical, world, etc.
+- Mix eras. Some legacy artists (Aretha Franklin, Joni Mitchell) and some
+  contemporary (Bon Iver, Phoebe Bridgers) — diversity helps catch rubric
+  failures that correlate with age of catalog.
+- Easy bar to clear: anyone with a Wikipedia page, a Bandcamp with vinyl, and
+  documented tours will satisfy all four. If you're unsure about an artist,
+  pick someone else.
+
+Once `human_controls.json` exists, re-run `python analysis/eda.py` and the
+tier-5 entries will be appended to `calibration_set.json` automatically.
 
 ## `marker_priors.json` schema
 
