@@ -32,7 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # ref: main so that GitHub's "Re-run" button picks up the LATEST
+      # code on main, not the SHA the workflow was originally dispatched
+      # against. We don't need run-to-run replayability for ad-hoc
+      # investigations — we need "run the current code." If we ever want
+      # versioned acceptance runs later, switch back to the default behavior.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
