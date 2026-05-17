@@ -1,0 +1,12 @@
+{
+  "pagination": { "per_page": 5, "items": 1, "page": 1, "pages": 1 },
+  "results": [
+    {
+      "id": 45,
+      "type": "artist",
+      "title": "Aphex Twin",
+      "uri": "/artist/45-Aphex-Twin",
+      "resource_url": "https://api.discogs.com/artists/45"
+    }
+  ]
+}

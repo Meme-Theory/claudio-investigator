@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": 27,
+      "name": "Daft Punk",
+      "link": "https://www.deezer.com/artist/27",
+      "picture": "https://example.invalid/deezer/daftpunk.jpg",
+      "picture_medium": "https://example.invalid/deezer/daftpunk_med.jpg",
+      "nb_album": 21,
+      "nb_fan": 5847234,
+      "type": "artist"
+    }
+  ],
+  "total": 1,
+  "next": null
+}

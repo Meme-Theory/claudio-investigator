@@ -19,6 +19,8 @@ import threading
 import time
 from typing import Any
 
+import requests
+
 from ._http import get_json, make_session, post_form
 
 TOKEN_URL = "https://accounts.spotify.com/api/token"
@@ -109,15 +111,28 @@ def _get_access_token() -> str:
 
         auth_b64 = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
         session = make_session()
-        payload = post_form(
-            session,
-            TOKEN_URL,
-            data={"grant_type": "client_credentials"},
-            headers={
-                "Authorization": f"Basic {auth_b64}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-        )
+        try:
+            payload = post_form(
+                session,
+                TOKEN_URL,
+                data={"grant_type": "client_credentials"},
+                headers={
+                    "Authorization": f"Basic {auth_b64}",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            )
+        except requests.HTTPError as e:
+            # Surface the response body so the agent's tool_result includes
+            # what Spotify actually said (invalid_client, etc.) rather than
+            # a bare "403 Forbidden" with no actionable detail.
+            status = e.response.status_code if e.response is not None else "?"
+            body = (e.response.text if e.response is not None else "")[:300]
+            raise RuntimeError(
+                f"Spotify auth failed (status={status}): {body or '<no body>'}. "
+                "Check SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET in your env / "
+                "GitHub Actions secrets. Common cause: client ID and secret "
+                "swapped, or trailing whitespace pasted with the value."
+            ) from e
         access_token = payload["access_token"]
         expires_in = int(payload.get("expires_in", 3600))
         _token_state["access_token"] = access_token

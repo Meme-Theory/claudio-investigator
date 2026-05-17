@@ -1,0 +1,29 @@
+{
+  "artist": {
+    "name": "Aphex Twin",
+    "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+    "url": "https://www.last.fm/music/Aphex+Twin",
+    "image": [],
+    "streamable": "0",
+    "ontour": "0",
+    "stats": {
+      "listeners": "1487412",
+      "playcount": "62841593"
+    },
+    "similar": { "artist": [] },
+    "tags": {
+      "tag": [
+        { "name": "electronic", "url": "https://www.last.fm/tag/electronic" },
+        { "name": "IDM", "url": "https://www.last.fm/tag/IDM" },
+        { "name": "ambient", "url": "https://www.last.fm/tag/ambient" },
+        { "name": "experimental", "url": "https://www.last.fm/tag/experimental" }
+      ]
+    },
+    "bio": {
+      "links": { "link": {} },
+      "published": "01 Jan 2024",
+      "summary": "Aphex Twin is the most-known alias of Richard D. James, a British electronic artist born in 1971.",
+      "content": "Aphex Twin is the most-known alias of Richard D. James..."
+    }
+  }
+}

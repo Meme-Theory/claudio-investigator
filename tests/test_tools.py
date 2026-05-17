@@ -29,6 +29,11 @@ from investigator.tools.spotify import (
 from investigator.tools.spotify import (
     TOKEN_URL as SPOTIFY_TOKEN_URL,
 )
+from investigator.tools.deezer import SEARCH_URL as DEEZER_SEARCH_URL
+from investigator.tools.deezer import lookup_deezer
+from investigator.tools.discogs import ARTIST_URL as DISCOGS_ARTIST_URL
+from investigator.tools.discogs import SEARCH_URL as DISCOGS_SEARCH_URL
+from investigator.tools.discogs import lookup_discogs
 from investigator.tools.genius import (
     ARTISTS_URL as GENIUS_ARTISTS_URL,
 )
@@ -38,6 +43,8 @@ from investigator.tools.genius import (
 from investigator.tools.genius import (
     get_genius_lyrics,
 )
+from investigator.tools.lastfm import API_URL as LASTFM_API_URL
+from investigator.tools.lastfm import get_lastfm_artist
 from investigator.tools.spotify import (
     get_spotify_albums,
     get_spotify_artist,
@@ -514,19 +521,162 @@ def test_genius_missing_token_raises(monkeypatch) -> None:
         get_genius_lyrics("Anything")
 
 
-# --- Phase 3+ tools still scaffolded --------------------------------------
+# --- Deezer ----------------------------------------------------------------
 
 
-@pytest.mark.skip(reason="Phase 3+ — tools/discogs.py is still scaffolded.")
-def test_discogs_lookup() -> None:
-    raise NotImplementedError
+@responses.activate
+def test_deezer_finds_artist(load_fixture) -> None:
+    responses.add(responses.GET, DEEZER_SEARCH_URL, json=load_fixture("deezer_found.json"))
+
+    result = lookup_deezer("Daft Punk")
+
+    assert result["found"] is True
+    assert result["found_exact"] is True
+    assert result["exact_match"]["id"] == 27
+    assert result["exact_match"]["nb_fan"] == 5847234
 
 
-@pytest.mark.skip(reason="Phase 3+ — tools/lastfm.py is still scaffolded.")
-def test_lastfm_lookup() -> None:
-    raise NotImplementedError
+@responses.activate
+def test_deezer_no_matches(load_fixture) -> None:
+    responses.add(responses.GET, DEEZER_SEARCH_URL, json=load_fixture("deezer_empty.json"))
+
+    result = lookup_deezer("Nonexistent Synthwave 998")
+
+    assert result["found"] is False
+    assert result["candidates"] == []
 
 
-@pytest.mark.skip(reason="Phase 3+ — tools/deezer.py is still scaffolded.")
-def test_deezer_lookup() -> None:
-    raise NotImplementedError
+# --- Discogs --------------------------------------------------------------
+
+
+@pytest.fixture
+def fake_discogs_env(monkeypatch):
+    monkeypatch.setenv("DISCOGS_TOKEN", "test-discogs-token")
+
+
+@responses.activate
+def test_discogs_classifies_physical_releases(load_fixture, fake_discogs_env) -> None:
+    responses.add(responses.GET, DISCOGS_SEARCH_URL, json=load_fixture("discogs_search.json"))
+    responses.add(
+        responses.GET,
+        f"{DISCOGS_ARTIST_URL}/45/releases",
+        json=load_fixture("discogs_releases_mixed.json"),
+    )
+
+    result = lookup_discogs("Aphex Twin")
+
+    assert result["found"] is True
+    assert result["has_physical_release"] is True
+    # 3 vinyl/CD releases + 1 File/MP3 release in the fixture
+    assert result["physical_release_count"] == 3
+    assert result["digital_only_release_count"] == 1
+    assert result["release_count"] == 4
+
+
+@responses.activate
+def test_discogs_flags_digital_only_catalog(load_fixture, fake_discogs_env) -> None:
+    """The 'no-physical-release' shape: artist on Discogs but all digital."""
+    responses.add(responses.GET, DISCOGS_SEARCH_URL, json={
+        "pagination": {"per_page": 5, "items": 1, "page": 1, "pages": 1},
+        "results": [{
+            "id": 9001,
+            "type": "artist",
+            "title": "Synthwave Phantom",
+            "uri": "/artist/9001",
+            "resource_url": "..."
+        }],
+    })
+    responses.add(
+        responses.GET,
+        f"{DISCOGS_ARTIST_URL}/9001/releases",
+        json=load_fixture("discogs_releases_digital_only.json"),
+    )
+
+    result = lookup_discogs("Synthwave Phantom")
+
+    assert result["found"] is True
+    assert result["has_physical_release"] is False
+    assert result["physical_release_count"] == 0
+    assert result["digital_only_release_count"] == 3
+
+
+@responses.activate
+def test_discogs_no_match(load_fixture, fake_discogs_env) -> None:
+    responses.add(responses.GET, DISCOGS_SEARCH_URL, json=load_fixture("discogs_empty_search.json"))
+
+    result = lookup_discogs("Some Nonexistent Artist 998")
+
+    assert result["found"] is False
+
+
+def test_discogs_missing_token_raises(monkeypatch) -> None:
+    monkeypatch.delenv("DISCOGS_TOKEN", raising=False)
+    with pytest.raises(RuntimeError, match="DISCOGS_TOKEN"):
+        lookup_discogs("anything")
+
+
+# --- Last.fm --------------------------------------------------------------
+
+
+@pytest.fixture
+def fake_lastfm_env(monkeypatch):
+    monkeypatch.setenv("LASTFM_API_KEY", "test-lastfm-key")
+
+
+@responses.activate
+def test_lastfm_artist_info(load_fixture, fake_lastfm_env) -> None:
+    responses.add(responses.GET, LASTFM_API_URL, json=load_fixture("lastfm_artist_found.json"))
+
+    result = get_lastfm_artist("Aphex Twin")
+
+    assert result["found"] is True
+    assert result["name"] == "Aphex Twin"
+    assert result["listeners"] == 1487412
+    assert result["playcount"] == 62841593
+    assert result["playcount_per_listener"] > 40  # heavy replay = engaged audience
+    assert "electronic" in result["tags"]
+    assert result["ai_tag_present"] is False
+    assert result["bio_present"] is True
+
+
+@responses.activate
+def test_lastfm_ai_tag_detection(load_fixture, fake_lastfm_env) -> None:
+    """Last.fm community tags like 'ai music' / 'suno' should surface as a flag."""
+    responses.add(responses.GET, LASTFM_API_URL, json=load_fixture("lastfm_artist_ai_tagged.json"))
+
+    result = get_lastfm_artist("Synthwave Phantom")
+
+    assert result["found"] is True
+    assert result["ai_tag_present"] is True
+    assert "ai music" in result["tags"]
+
+
+@responses.activate
+def test_lastfm_artist_not_found(load_fixture, fake_lastfm_env) -> None:
+    responses.add(responses.GET, LASTFM_API_URL, json=load_fixture("lastfm_artist_not_found.json"))
+
+    result = get_lastfm_artist("Nonexistent")
+
+    assert result["found"] is False
+
+
+def test_lastfm_missing_key_raises(monkeypatch) -> None:
+    monkeypatch.delenv("LASTFM_API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="LASTFM_API_KEY"):
+        get_lastfm_artist("anything")
+
+
+# --- Spotify error reporting (smoke test for auth-failure surfacing) -----
+
+
+@responses.activate
+def test_spotify_auth_failure_surfaces_response_body(fake_spotify_env) -> None:
+    responses.add(
+        responses.POST,
+        SPOTIFY_TOKEN_URL,
+        json={"error": "invalid_client", "error_description": "Invalid client"},
+        status=400,
+    )
+
+    with pytest.raises(RuntimeError, match="invalid_client"):
+        search_spotify_artist("anything")

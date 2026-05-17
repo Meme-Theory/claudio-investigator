@@ -1,0 +1,24 @@
+{
+  "artist": {
+    "name": "Synthwave Phantom",
+    "mbid": "",
+    "url": "https://www.last.fm/music/Synthwave+Phantom",
+    "streamable": "0",
+    "ontour": "0",
+    "stats": {
+      "listeners": "412",
+      "playcount": "537"
+    },
+    "tags": {
+      "tag": [
+        { "name": "ai music", "url": "https://www.last.fm/tag/ai+music" },
+        { "name": "synthwave", "url": "https://www.last.fm/tag/synthwave" },
+        { "name": "suno", "url": "https://www.last.fm/tag/suno" }
+      ]
+    },
+    "bio": {
+      "summary": "",
+      "content": ""
+    }
+  }
+}

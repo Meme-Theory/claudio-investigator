@@ -1,0 +1,26 @@
+{
+  "pagination": { "per_page": 100, "items": 3, "page": 1, "pages": 1 },
+  "releases": [
+    {
+      "id": 9001,
+      "title": "Neon Drift",
+      "year": 2025,
+      "format": "File, MP3, Album",
+      "type": "release"
+    },
+    {
+      "id": 9002,
+      "title": "Cyber Tears",
+      "year": 2025,
+      "format": "File, FLAC",
+      "type": "release"
+    },
+    {
+      "id": 9003,
+      "title": "Velvet Code",
+      "year": 2025,
+      "format": "File, WAV, Album",
+      "type": "release"
+    }
+  ]
+}

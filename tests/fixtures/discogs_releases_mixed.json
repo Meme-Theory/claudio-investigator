@@ -1,0 +1,33 @@
+{
+  "pagination": { "per_page": 100, "items": 4, "page": 1, "pages": 1 },
+  "releases": [
+    {
+      "id": 1001,
+      "title": "Selected Ambient Works 85-92",
+      "year": 1992,
+      "format": "Vinyl, LP, Album, Reissue",
+      "type": "master"
+    },
+    {
+      "id": 1002,
+      "title": "Drukqs",
+      "year": 2001,
+      "format": "2x Vinyl, LP, Album",
+      "type": "master"
+    },
+    {
+      "id": 1003,
+      "title": "Syro",
+      "year": 2014,
+      "format": "CD, Album",
+      "type": "master"
+    },
+    {
+      "id": 1004,
+      "title": "Cheetah EP",
+      "year": 2016,
+      "format": "File, MP3, EP",
+      "type": "release"
+    }
+  ]
+}
