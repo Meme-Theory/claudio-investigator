@@ -1,0 +1,2 @@
+# Generated dist/artists.json lives here, written by .github/workflows/build-index.yml.
+# Don't edit by hand; the workflow will overwrite anything in this directory.

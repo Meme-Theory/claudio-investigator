@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/*.tar.gz
+dist/*.whl
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+
+# Local secrets
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Project-specific
+analysis/cache/
+analysis/scratch/
+investigator/.cache/
+
+# Soul Over AI vendored copy — keep history-light; Phase 0 decides vendor vs submodule
+analysis/soul-over-ai/.git

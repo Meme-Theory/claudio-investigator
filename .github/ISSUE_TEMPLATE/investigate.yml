@@ -1,0 +1,39 @@
+name: Investigate Artist
+description: Submit a music artist for AI-detection investigation.
+title: 'Investigate: '
+labels: ['investigate']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting an artist for investigation. The bot will read
+        this issue, run an investigation, and post results as a comment within
+        a few minutes. High-confidence verdicts will auto-open a PR to add the
+        artist to the index.
+  - type: input
+    id: name
+    attributes:
+      label: Artist name
+      placeholder: e.g. Kaizuken
+    validations:
+      required: true
+  - type: input
+    id: spotify
+    attributes:
+      label: Spotify URL (if known)
+      placeholder: https://open.spotify.com/artist/...
+  - type: input
+    id: youtube
+    attributes:
+      label: YouTube or YouTube Music URL (if known)
+      placeholder: https://music.youtube.com/channel/...
+  - type: input
+    id: apple
+    attributes:
+      label: Apple Music URL (if known)
+      placeholder: https://music.apple.com/...
+  - type: textarea
+    id: notes
+    attributes:
+      label: Submitter notes (optional)
+      description: Anything that made you suspect this artist? Specific tracks, album-art, lyrics, release patterns?

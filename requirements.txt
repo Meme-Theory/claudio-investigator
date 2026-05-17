@@ -1,0 +1,9 @@
+# Runtime deps — kept in sync with pyproject.toml [project.dependencies].
+# This file exists so GitHub Actions can `pip install -r requirements.txt`
+# without resolving the editable install.
+
+anthropic>=0.39.0
+pydantic>=2.6
+requests>=2.31
+python-dotenv>=1.0
+click>=8.1

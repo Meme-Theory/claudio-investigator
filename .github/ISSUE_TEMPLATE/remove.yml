@@ -1,0 +1,45 @@
+name: Removal Request
+description: Request removal or re-evaluation of an existing entry in the index.
+title: 'Remove: '
+labels: ['remove']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template if you believe an existing entry in the index is
+        incorrect, should be removed, or needs re-evaluation. The bot will
+        re-run the investigation with current data and update or remove the
+        entry if signals have shifted enough to demote it below `likely_ai`.
+
+        If the entry is still confidently AI-classified after the re-investigation,
+        and no contradicting evidence is produced, the entry stands.
+  - type: input
+    id: name
+    attributes:
+      label: Artist name (as it appears in the index)
+      placeholder: e.g. Kaizuken
+    validations:
+      required: true
+  - type: input
+    id: entry
+    attributes:
+      label: Link to the current entry file
+      placeholder: https://github.com/.../src/kaizuken.json
+    validations:
+      required: true
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason for the request
+      options:
+        - This artist is not AI-generated
+        - New disconfirming evidence has surfaced since the original verdict
+        - Rights-holder request (will follow up out-of-band if needed)
+        - Other (explain below)
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: New evidence or context
+      description: Links to interviews, live performances, MusicBrainz/Discogs updates, label info — anything that would shift the rubric's signals.

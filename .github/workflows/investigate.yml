@@ -1,0 +1,42 @@
+name: Investigate Artist
+
+on:
+  issues:
+    types: [opened, labeled]
+
+# Fire on either the `investigate` label (new artist submission) or the
+# `remove` label (removal/re-evaluation request). `main.py` routes by label.
+jobs:
+  investigate:
+    if: contains(github.event.issue.labels.*.name, 'investigate') || contains(github.event.issue.labels.*.name, 'remove')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - name: Run investigation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          GENIUS_TOKEN: ${{ secrets.GENIUS_TOKEN }}
+          MUSICBRAINZ_USER_AGENT: 'ClAudioInvestigator/0.0.1 (https://github.com/${{ github.repository }})'
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: python -m investigator.main investigate-from-issue

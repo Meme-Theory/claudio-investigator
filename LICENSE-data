@@ -1,0 +1,41 @@
+Open Database License (ODbL) v1.0
+=================================
+
+The curated artist index in this repository — the contents of `src/` and the
+generated `dist/artists.json` — is licensed under the Open Database License
+(ODbL) v1.0. Individual records within the database (the contents) are
+licensed under the Database Contents License (DbCL) v1.0.
+
+Full license text:
+  - ODbL v1.0:  https://opendatacommons.org/licenses/odbl/1-0/
+  - DbCL v1.0:  https://opendatacommons.org/licenses/dbcl/1-0/
+
+You are free to:
+  - Share — copy and redistribute the database
+  - Create — produce works from the database
+  - Adapt — modify, transform, and build upon the database
+
+Under these terms:
+  - Attribution — You must attribute any public use of the database, or works
+    produced from the database, as specified by the ODbL.
+  - Share-Alike — If you publicly use any adapted version of this database,
+    or works produced from an adapted database, you must also offer that
+    adapted database under the ODbL.
+  - Keep Open — If you redistribute the database, or an adapted version of
+    it, then you may use technological measures that restrict the work (such
+    as DRM) only as long as you also redistribute a version without such
+    measures.
+
+Required attribution string for downstream use:
+
+    "Contains information from ClAudio Investigator, which is made available
+     under the Open Database License (ODbL)."
+
+Copyright (c) 2026 ClAudio Investigator contributors.
+
+NOTE: This file is a summary notice for convenience. The full ODbL text at
+the URL above is the binding legal document; if you intend to use this
+database, read the full text.
+
+The source code in this repository is licensed separately under the MIT
+License. See LICENSE.

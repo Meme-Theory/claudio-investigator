@@ -1,0 +1,3 @@
+# Canned API responses live here, one JSON per source.
+# Naming: `{source}_{descriptor}.json` — e.g. `itunes_known_ai.json`.
+# Generate by hitting the live API once, sanitizing PII, and committing.

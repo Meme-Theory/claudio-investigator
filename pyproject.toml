@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claudio-investigator"
+version = "0.0.1"
+description = "Agent-driven public index of AI-generated music artists."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "ClAudio Investigator" }]
+keywords = ["ai-music", "music-metadata", "claude", "agents"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+]
+dependencies = [
+    "anthropic>=0.39.0",
+    "pydantic>=2.6",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    "click>=8.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+    "responses>=0.25",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+analysis = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "jupyter>=1.0",
+]
+
+[project.scripts]
+claudio = "investigator.main:cli"
+
+[tool.setuptools.packages.find]
+include = ["investigator*"]
+exclude = ["tests*", "analysis*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true

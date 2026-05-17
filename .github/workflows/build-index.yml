@@ -1,0 +1,52 @@
+name: Build dist/artists.json
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/*.json'
+      - 'investigator/**'
+      - '.github/workflows/build-index.yml'
+  workflow_dispatch:
+
+# Concatenates src/*.json into dist/artists.json so consumers can fetch one
+# file instead of walking the src/ directory.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Concatenate src/*.json → dist/artists.json
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          src = pathlib.Path("src")
+          out = []
+          for p in sorted(src.glob("*.json")):
+              out.append(json.loads(p.read_text(encoding="utf-8")))
+          pathlib.Path("dist").mkdir(exist_ok=True)
+          pathlib.Path("dist/artists.json").write_text(
+              json.dumps(out, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(f"Built dist/artists.json with {len(out)} entries.")
+          PY
+
+      - name: Commit if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git diff --quiet dist/artists.json; then
+            git add dist/artists.json
+            git commit -m "build: regenerate dist/artists.json"
+            git push
+          else
+            echo "No change to dist/artists.json."
+          fi
