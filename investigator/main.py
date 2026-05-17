@@ -49,12 +49,18 @@ def gather(artist_name: str, spotify_id: str | None) -> None:
 @click.option("--youtube-url", default=None)
 @click.option("--apple-url", default=None)
 @click.option("--notes", default=None, help="Submitter notes / hints.")
+@click.option(
+    "--transcript/--no-transcript",
+    default=False,
+    help="Include the full per-turn transcript in the output (verbose).",
+)
 def investigate(
     artist_name: str,
     spotify_url: str | None,
     youtube_url: str | None,
     apple_url: str | None,
     notes: str | None,
+    transcript: bool,
 ) -> None:
     """Phase 2 — full investigation. Prints a Verdict JSON to stdout."""
     from .agent import investigate as run_investigation
@@ -70,13 +76,18 @@ def investigate(
         if v
     }
     result = run_investigation(artist_name, hints)
-    payload = {
+    payload: dict = {
         "artist": artist_name,
         "verdict": result.verdict.model_dump() if result.verdict else None,
         "terminated_by": result.terminated_by,
         "budget": result.budget.summary(),
         "model": result.model,
+        "completed_at": result.completed_at.isoformat(),
     }
+    if result.error:
+        payload["error"] = result.error
+    if transcript:
+        payload["transcript"] = result.transcript
     click.echo(json.dumps(payload, indent=2, default=str))
 
 

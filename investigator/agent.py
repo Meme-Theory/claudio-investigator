@@ -6,23 +6,35 @@ the system prompt, the tool schemas, and the budget.
 
 The loop terminates on any of:
   - `submit_verdict` tool call (success)
-  - `stop_reason == "end_turn"` with no tool calls (treat as low confidence)
-  - Budget exhaustion (token, iteration, or USD cap)
+  - `stop_reason == "end_turn"` with no tool calls (agent gave up)
+  - `stop_reason == "refusal"` (model refused for safety reasons)
+  - Budget exhaustion (iteration, token, or USD cap)
+  - Anthropic API error (after SDK retries)
+  - Invalid verdict payload (model called submit_verdict with bad input)
+
+The SDK auto-retries 429 / 5xx with exponential backoff per its `max_retries`
+default; we don't need extra retry logic here.
+
+Cache strategy: `cache_control: {type: "ephemeral"}` on the system text block.
+Tools render before system in the prompt prefix (see prompt-caching docs), so
+that single breakpoint caches both `tools` and `system` together — they're the
+stable prefix across iterations within one investigation.
 """
 
 from __future__ import annotations
 
 import json
 import logging
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
-from anthropic import Anthropic
+from anthropic import Anthropic, APIError
 
 from .budget import Budget
 from .rubric import SUBMIT_VERDICT_TOOL, SYSTEM_PROMPT, build_initial_prompt
 from .schema import Verdict
-from .tools import TOOLS, TOOL_RUNNERS
+from .tools import TOOL_RUNNERS, TOOLS
 
 logger = logging.getLogger(__name__)
 
@@ -30,24 +42,80 @@ DEFAULT_MODEL = "claude-haiku-4-5"
 DEFAULT_MAX_TOKENS = 2048
 DEFAULT_TEMPERATURE = 0.2
 
+# Loop terminated_by values — keep stable; downstream code switches on these.
+TERMINATED_SUBMIT_VERDICT = "submit_verdict"
+TERMINATED_END_TURN = "end_turn"
+TERMINATED_REFUSAL = "refusal"
+TERMINATED_NO_TOOLS = "no_tools"
+TERMINATED_BUDGET = "budget_exhausted"
+TERMINATED_API_ERROR = "api_error"
+TERMINATED_INVALID_VERDICT = "invalid_verdict"
 
+
+@dataclass
 class InvestigationResult:
     """Bundle of what one investigation produced."""
 
-    def __init__(
-        self,
-        verdict: Verdict | None,
-        budget: Budget,
-        transcript: list[dict],
-        model: str,
-        terminated_by: str,
-    ) -> None:
-        self.verdict = verdict
-        self.budget = budget
-        self.transcript = transcript
-        self.model = model
-        self.terminated_by = terminated_by  # 'submit_verdict' | 'end_turn' | 'budget_exhausted' | 'no_tools'
-        self.completed_at = datetime.now(UTC)
+    verdict: Verdict | None
+    budget: Budget
+    transcript: list[dict] = field(default_factory=list)
+    model: str = DEFAULT_MODEL
+    terminated_by: str = ""
+    completed_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    error: str | None = None
+
+
+# --- Helpers ----------------------------------------------------------------
+
+
+def _block_to_dict(block: Any) -> dict:
+    """Best-effort serialize a content block for the transcript record.
+
+    SDK content blocks are Pydantic v2 models with `.model_dump()`. Tests pass
+    `MagicMock` blocks — fall back to attribute-by-attribute serialization.
+    """
+    if hasattr(block, "model_dump"):
+        try:
+            return block.model_dump()
+        except Exception:
+            pass
+    out: dict[str, Any] = {}
+    for key in ("type", "text", "id", "name", "input", "thinking"):
+        value = getattr(block, key, None)
+        if value is not None:
+            out[key] = value
+    return out
+
+
+def _execute_tool(name: str, input_data: dict, budget: Budget) -> tuple[dict, bool]:
+    """Run one non-terminal tool; capture exceptions as structured errors.
+
+    Returns (payload, is_error). On error, the payload is shaped so the model
+    can read why it failed without crashing the loop.
+    """
+    runner = TOOL_RUNNERS.get(name)
+    if runner is None:
+        return ({"error": f"unknown tool: {name}"}, True)
+    try:
+        # The vision tool needs the budget to enforce its per-investigation cap.
+        if name == "analyze_album_art":
+            return (runner(budget=budget, **input_data), False)
+        return (runner(**input_data), False)
+    except Exception as e:
+        logger.exception("tool %s raised", name)
+        return ({"error": str(e), "tool": name}, True)
+
+
+def _build_system_blocks() -> list[dict]:
+    """System prompt with a cache breakpoint covering tools+system."""
+    return [{
+        "type": "text",
+        "text": SYSTEM_PROMPT,
+        "cache_control": {"type": "ephemeral"},
+    }]
+
+
+# --- Main loop --------------------------------------------------------------
 
 
 def investigate(
@@ -58,76 +126,107 @@ def investigate(
     model: str = DEFAULT_MODEL,
     budget: Budget | None = None,
 ) -> InvestigationResult:
-    """Run one investigation. Returns a populated InvestigationResult.
+    """Run one investigation. Pure inputs -> outputs.
 
-    The caller is responsible for persistence (writing the record, posting the
-    GitHub comment, opening the PR). This function is pure inputs -> outputs.
+    Caller is responsible for persistence — writing the curated record, posting
+    the GitHub comment, opening the PR. This function just produces the
+    verdict (or a structured failure).
     """
-    raise NotImplementedError(
-        "Phase 2 implementation. The skeleton below shows the intended loop shape."
-    )
+    client = client or Anthropic()
+    budget = budget or Budget()
+    tools_schema = [*TOOLS, SUBMIT_VERDICT_TOOL]
+    system_blocks = _build_system_blocks()
 
-    # --- Reference skeleton — implement in Phase 2 ----------------------------
-    # client = client or Anthropic()
-    # budget = budget or Budget()
-    # tools_schema = [*TOOLS, SUBMIT_VERDICT_TOOL]
-    # # The last tool gets `cache_control` so the whole tools array caches with
-    # # the system prompt — both are stable per investigation.
-    # tools_schema[-1] = {**tools_schema[-1], "cache_control": {"type": "ephemeral"}}
-    #
-    # messages: list[dict] = [
-    #     {"role": "user", "content": build_initial_prompt(artist_name, hints or {})}
-    # ]
-    # transcript: list[dict] = []
-    #
-    # while budget.has_remaining():
-    #     response = client.messages.create(
-    #         model=model,
-    #         max_tokens=DEFAULT_MAX_TOKENS,
-    #         temperature=DEFAULT_TEMPERATURE,
-    #         system=[{
-    #             "type": "text",
-    #             "text": SYSTEM_PROMPT,
-    #             "cache_control": {"type": "ephemeral"},
-    #         }],
-    #         tools=tools_schema,
-    #         messages=messages,
-    #     )
-    #     budget.charge(response.usage)
-    #     transcript.append({"role": "assistant", "content": [b.model_dump() for b in response.content]})
-    #
-    #     if response.stop_reason == "end_turn":
-    #         return InvestigationResult(None, budget, transcript, model, "end_turn")
-    #
-    #     tool_uses = [b for b in response.content if b.type == "tool_use"]
-    #     if not tool_uses:
-    #         return InvestigationResult(None, budget, transcript, model, "no_tools")
-    #
-    #     # Terminal action — submit_verdict — intercepted, never executed as a tool.
-    #     for block in tool_uses:
-    #         if block.name == "submit_verdict":
-    #             verdict = Verdict(**block.input)
-    #             return InvestigationResult(verdict, budget, transcript, model, "submit_verdict")
-    #
-    #     # Execute requested tools and feed results back.
-    #     tool_results = []
-    #     for block in tool_uses:
-    #         runner = TOOL_RUNNERS.get(block.name)
-    #         if runner is None:
-    #             result = {"error": f"unknown tool: {block.name}"}
-    #         else:
-    #             try:
-    #                 result = runner(budget=budget, **block.input)
-    #             except Exception as e:  # tool errors are passed back to the model, not fatal
-    #                 logger.exception("tool %s raised", block.name)
-    #                 result = {"error": str(e), "tool": block.name}
-    #         tool_results.append({
-    #             "type": "tool_result",
-    #             "tool_use_id": block.id,
-    #             "content": json.dumps(result),
-    #         })
-    #
-    #     messages.append({"role": "assistant", "content": response.content})
-    #     messages.append({"role": "user", "content": tool_results})
-    #
-    # return InvestigationResult(None, budget, transcript, model, "budget_exhausted")
+    messages: list[dict] = [
+        {"role": "user", "content": build_initial_prompt(artist_name, hints or {})}
+    ]
+    transcript: list[dict] = []
+
+    while budget.has_remaining():
+        try:
+            response = client.messages.create(
+                model=model,
+                max_tokens=DEFAULT_MAX_TOKENS,
+                temperature=DEFAULT_TEMPERATURE,
+                system=system_blocks,
+                tools=tools_schema,
+                messages=messages,
+            )
+        except APIError as e:
+            logger.exception("Anthropic API error")
+            return InvestigationResult(
+                verdict=None,
+                budget=budget,
+                transcript=transcript,
+                model=model,
+                terminated_by=TERMINATED_API_ERROR,
+                error=str(e),
+            )
+
+        budget.charge(response.usage)
+        transcript.append({
+            "role": "assistant",
+            "stop_reason": getattr(response, "stop_reason", None),
+            "content": [_block_to_dict(b) for b in (response.content or [])],
+        })
+
+        stop_reason = getattr(response, "stop_reason", None)
+        if stop_reason == "refusal":
+            return InvestigationResult(
+                verdict=None, budget=budget, transcript=transcript,
+                model=model, terminated_by=TERMINATED_REFUSAL,
+            )
+        if stop_reason == "end_turn":
+            return InvestigationResult(
+                verdict=None, budget=budget, transcript=transcript,
+                model=model, terminated_by=TERMINATED_END_TURN,
+            )
+
+        tool_uses = [b for b in (response.content or []) if getattr(b, "type", None) == "tool_use"]
+        if not tool_uses:
+            return InvestigationResult(
+                verdict=None, budget=budget, transcript=transcript,
+                model=model, terminated_by=TERMINATED_NO_TOOLS,
+            )
+
+        # submit_verdict is terminal — intercept BEFORE executing any other tool
+        # this turn. Doing it first means the agent doesn't waste a tool call
+        # if it submits alongside another action.
+        for block in tool_uses:
+            if getattr(block, "name", None) == "submit_verdict":
+                try:
+                    verdict = Verdict(**(block.input or {}))
+                except Exception as e:
+                    logger.exception("invalid verdict payload from submit_verdict")
+                    return InvestigationResult(
+                        verdict=None, budget=budget, transcript=transcript,
+                        model=model, terminated_by=TERMINATED_INVALID_VERDICT,
+                        error=str(e),
+                    )
+                return InvestigationResult(
+                    verdict=verdict, budget=budget, transcript=transcript,
+                    model=model, terminated_by=TERMINATED_SUBMIT_VERDICT,
+                )
+
+        # Execute requested tools and feed results back.
+        tool_results = []
+        for block in tool_uses:
+            payload, is_error = _execute_tool(
+                name=block.name,
+                input_data=block.input or {},
+                budget=budget,
+            )
+            tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": block.id,
+                "content": json.dumps(payload, default=str),
+                "is_error": is_error,
+            })
+
+        messages.append({"role": "assistant", "content": response.content})
+        messages.append({"role": "user", "content": tool_results})
+
+    return InvestigationResult(
+        verdict=None, budget=budget, transcript=transcript,
+        model=model, terminated_by=TERMINATED_BUDGET,
+    )
