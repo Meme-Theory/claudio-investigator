@@ -1,0 +1,24 @@
+{
+  "created": "2026-05-17T15:00:00.000Z",
+  "count": 2,
+  "offset": 0,
+  "artists": [
+    {
+      "id": "11111111-2222-3333-4444-555555555555",
+      "type": "Group",
+      "score": 82,
+      "name": "Synthwave Phantoms",
+      "sort-name": "Synthwave Phantoms",
+      "country": "DE",
+      "aliases": []
+    },
+    {
+      "id": "22222222-3333-4444-5555-666666666666",
+      "type": "Person",
+      "score": 76,
+      "name": "Phantom of the Synthwave",
+      "sort-name": "Phantom of the Synthwave",
+      "aliases": []
+    }
+  ]
+}

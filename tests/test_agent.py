@@ -44,8 +44,9 @@ def test_budget_iterations_cap() -> None:
 
 
 def test_budget_usd_cap() -> None:
-    b = Budget(max_usd=0.5)
-    # 500k input tokens at $1/MTok = $0.50 — triggers cap.
+    # Set max_tokens_total well above the charge so the USD cap fires first.
+    b = Budget(max_usd=0.5, max_tokens_total=10_000_000)
+    # 500k input tokens at $1/MTok = $0.50 — exactly hits the USD cap.
     b.charge({"input_tokens": 500_000, "output_tokens": 0})
     assert not b.has_remaining()
     assert b.exhaustion_reason == "max_usd"

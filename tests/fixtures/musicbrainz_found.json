@@ -1,0 +1,20 @@
+{
+  "created": "2026-05-17T15:00:00.000Z",
+  "count": 1,
+  "offset": 0,
+  "artists": [
+    {
+      "id": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+      "type": "Person",
+      "score": 100,
+      "name": "Aphex Twin",
+      "sort-name": "Aphex Twin",
+      "country": "GB",
+      "disambiguation": "Richard D. James",
+      "aliases": [
+        { "name": "Richard James", "sort-name": "James, Richard" },
+        { "name": "AFX", "sort-name": "AFX" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "href": "https://api.spotify.com/v1/artists/6kBDZFXuLrZgHnvmPu9NsG/albums?include_groups=album%2Csingle&offset=0&limit=50",
+  "items": [
+    {
+      "id": "5MS3MvWHJ3lOZPLiMxzOU6",
+      "name": "Selected Ambient Works 85-92",
+      "type": "album",
+      "album_type": "album",
+      "album_group": "album",
+      "release_date": "1992-11-09",
+      "release_date_precision": "day",
+      "total_tracks": 13,
+      "images": [
+        { "url": "https://example.invalid/img/saw_640.jpg", "height": 640, "width": 640 }
+      ],
+      "external_urls": { "spotify": "https://open.spotify.com/album/5MS3MvWHJ3lOZPLiMxzOU6" }
+    },
+    {
+      "id": "0NWbwDZY1VkRqFafuQm6wk",
+      "name": "Drukqs",
+      "type": "album",
+      "album_type": "album",
+      "album_group": "album",
+      "release_date": "2001-10-22",
+      "release_date_precision": "day",
+      "total_tracks": 30,
+      "images": [
+        { "url": "https://example.invalid/img/drukqs_640.jpg", "height": 640, "width": 640 }
+      ],
+      "external_urls": { "spotify": "https://open.spotify.com/album/0NWbwDZY1VkRqFafuQm6wk" }
+    }
+  ],
+  "limit": 50,
+  "next": null,
+  "offset": 0,
+  "previous": null,
+  "total": 2
+}

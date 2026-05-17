@@ -1,0 +1,37 @@
+{
+  "resultCount": 3,
+  "results": [
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Aphex Twin",
+      "artistLinkUrl": "https://music.apple.com/us/artist/aphex-twin/82636",
+      "artistId": 82636,
+      "primaryGenreName": "Electronic"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 82636,
+      "collectionId": 1456820040,
+      "collectionName": "Selected Ambient Works 85-92",
+      "collectionViewUrl": "https://music.apple.com/us/album/saw-85-92/1456820040",
+      "artworkUrl100": "https://example.invalid/artwork/saw8592.jpg",
+      "trackCount": 13,
+      "releaseDate": "1992-11-09T08:00:00Z",
+      "collectionExplicitness": "notExplicit"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 82636,
+      "collectionId": 1473637148,
+      "collectionName": "Drukqs",
+      "collectionViewUrl": "https://music.apple.com/us/album/drukqs/1473637148",
+      "artworkUrl100": "https://example.invalid/artwork/drukqs.jpg",
+      "trackCount": 30,
+      "releaseDate": "2001-10-22T07:00:00Z",
+      "collectionExplicitness": "notExplicit"
+    }
+  ]
+}

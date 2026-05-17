@@ -1,0 +1,52 @@
+{
+  "resultCount": 5,
+  "results": [
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistName": "Synthwave Phantom",
+      "artistId": 9001234567,
+      "primaryGenreName": "Electronic"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 9001234567,
+      "collectionId": 9100000001,
+      "collectionName": "Neon Drift",
+      "artworkUrl100": "https://example.invalid/artwork/neon.jpg",
+      "trackCount": 8,
+      "releaseDate": "2025-03-12T07:00:00Z"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 9001234567,
+      "collectionId": 9100000002,
+      "collectionName": "Cyber Tears",
+      "artworkUrl100": "https://example.invalid/artwork/cyber.jpg",
+      "trackCount": 6,
+      "releaseDate": "2025-06-20T07:00:00Z"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 9001234567,
+      "collectionId": 9100000003,
+      "collectionName": "Velvet Code",
+      "artworkUrl100": "https://example.invalid/artwork/velvet.jpg",
+      "trackCount": 9,
+      "releaseDate": "2025-09-04T07:00:00Z"
+    },
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 9001234567,
+      "collectionId": 9100000004,
+      "collectionName": "Hollow Empire",
+      "artworkUrl100": "https://example.invalid/artwork/hollow.jpg",
+      "trackCount": 11,
+      "releaseDate": "2025-12-18T08:00:00Z"
+    }
+  ]
+}

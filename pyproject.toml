@@ -59,6 +59,12 @@ ignore = ["E501"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "-ra --strict-markers"
+filterwarnings = [
+    # Silence the urllib3/chardet version-skew warning that `requests` emits
+    # on import in environments where urllib3 > 2 is installed alongside the
+    # older `requests` version pinned by some distros. Third-party noise.
+    "ignore:.*urllib3.*chardet.*:Warning",
+]
 
 [tool.mypy]
 python_version = "3.12"

@@ -1,0 +1,12 @@
+{
+  "id": "6kBDZFXuLrZgHnvmPu9NsG",
+  "name": "Aphex Twin",
+  "type": "artist",
+  "popularity": 72,
+  "followers": { "href": null, "total": 1487412 },
+  "genres": ["IDM", "intelligent dance music", "electronic"],
+  "images": [
+    { "url": "https://example.invalid/img/aphex_640.jpg", "height": 640, "width": 640 }
+  ],
+  "external_urls": { "spotify": "https://open.spotify.com/artist/6kBDZFXuLrZgHnvmPu9NsG" }
+}
