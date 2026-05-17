@@ -1,0 +1,33 @@
+{
+  "meta": { "status": 200 },
+  "response": {
+    "hits": [
+      {
+        "type": "song",
+        "result": {
+          "id": 1001,
+          "title": "Windowlicker",
+          "url": "https://genius.com/Aphex-twin-windowlicker-lyrics",
+          "primary_artist": {
+            "id": 47831,
+            "name": "Aphex Twin",
+            "url": "https://genius.com/artists/Aphex-twin"
+          }
+        }
+      },
+      {
+        "type": "song",
+        "result": {
+          "id": 1002,
+          "title": "Come to Daddy",
+          "url": "https://genius.com/Aphex-twin-come-to-daddy-lyrics",
+          "primary_artist": {
+            "id": 47831,
+            "name": "Aphex Twin",
+            "url": "https://genius.com/artists/Aphex-twin"
+          }
+        }
+      }
+    ]
+  }
+}

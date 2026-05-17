@@ -1,0 +1,15 @@
+{
+  "kind": "youtube#searchListResponse",
+  "pageInfo": { "totalResults": 1, "resultsPerPage": 5 },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "id": { "kind": "youtube#channel", "channelId": "UCQpsLlpUlsdkRoZyaSwUTuw" },
+      "snippet": {
+        "title": "Aphex Twin",
+        "description": "Official channel.",
+        "publishedAt": "2008-07-23T19:08:17Z"
+      }
+    }
+  ]
+}

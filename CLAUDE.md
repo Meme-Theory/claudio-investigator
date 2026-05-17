@@ -55,16 +55,30 @@ docs/                 # SIGNALS.md (taxonomy), METHODOLOGY.md (public), CALIBRAT
 
 ## Env vars
 
-See `.env.example`. Required for full operation:
+Tools live in three tiers based on what's actually required to run them.
+See `.env.example` for the full reference.
 
-- `ANTHROPIC_API_KEY` — Claude API
-- `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` — client-credentials flow
-- `YOUTUBE_API_KEY` — Data API v3
-- `DISCOGS_TOKEN` — personal access token
-- `LASTFM_API_KEY` — generous free tier
-- `GENIUS_TOKEN` — for lyric retrieval
+**Required for the minimum viable agent run** (Anthropic + the two tools
+the user has tokens for as of 2026-05-17):
+- `ANTHROPIC_API_KEY` — Claude API itself
+- `YOUTUBE_API_KEY` — `get_youtube_channel`
+- `GENIUS_TOKEN` — `get_genius_lyrics`
 
-`MUSICBRAINZ_USER_AGENT` should be set to a descriptive UA per their policy.
+**No account needed** (these tools work out of the box):
+- iTunes Search API — `lookup_itunes`
+- MusicBrainz — `lookup_musicbrainz`. Set `MUSICBRAINZ_USER_AGENT` to a
+  descriptive UA per their policy (default in `.env.example` is fine).
+
+**Optional** (implemented but requires a free developer-account signup;
+without these, the agent gets a graceful tool error and adapts):
+- `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` — `search_spotify_artist`,
+  `get_spotify_artist`, `get_spotify_albums`. Without Spotify, the markers
+  `popularity-follower-mismatch` and `suno-duration-cap` lose their
+  evidence path.
+
+**Not yet implemented** (runners raise; agent catches and skips):
+- `DISCOGS_TOKEN`, `LASTFM_API_KEY` — corresponding tools are scaffolded.
+- Vision tool (`analyze_album_art`) is Phase 4.
 
 ## Don'ts (project-specific traps)
 

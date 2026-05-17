@@ -28,10 +28,31 @@ from investigator.tools.spotify import (
 from investigator.tools.spotify import (
     TOKEN_URL as SPOTIFY_TOKEN_URL,
 )
+from investigator.tools.genius import (
+    ARTISTS_URL as GENIUS_ARTISTS_URL,
+)
+from investigator.tools.genius import (
+    SEARCH_URL as GENIUS_SEARCH_URL,
+)
+from investigator.tools.genius import (
+    get_genius_lyrics,
+)
 from investigator.tools.spotify import (
     get_spotify_albums,
     get_spotify_artist,
     search_spotify_artist,
+)
+from investigator.tools.youtube import (
+    CHANNELS_URL as YOUTUBE_CHANNELS_URL,
+)
+from investigator.tools.youtube import (
+    PLAYLIST_ITEMS_URL as YOUTUBE_PLAYLIST_URL,
+)
+from investigator.tools.youtube import (
+    SEARCH_URL as YOUTUBE_SEARCH_URL,
+)
+from investigator.tools.youtube import (
+    get_youtube_channel,
 )
 
 
@@ -243,14 +264,196 @@ def test_spotify_missing_credentials_raises(monkeypatch) -> None:
         search_spotify_artist("anything")
 
 
-# --- Phase 2+ tools (still scaffolded) -------------------------------------
+# --- YouTube --------------------------------------------------------------
 
 
-@pytest.mark.skip(reason="Phase 2 — tools/youtube.py is still scaffolded.")
-def test_youtube_channel_lookup() -> None:
+@pytest.fixture
+def fake_youtube_env(monkeypatch):
+    monkeypatch.setenv("YOUTUBE_API_KEY", "test-yt-key")
+
+
+@responses.activate
+def test_youtube_channel_by_id(load_fixture, fake_youtube_env) -> None:
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_id.json")
+    )
+    responses.add(
+        responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
+    )
+
+    result = get_youtube_channel("UCQpsLlpUlsdkRoZyaSwUTuw")
+
+    assert result["found"] is True
+    assert result["resolved_via"] == "id"
+    assert result["channel_id"] == "UCQpsLlpUlsdkRoZyaSwUTuw"
+    assert result["title"] == "Aphex Twin"
+    assert result["country"] == "GB"
+    assert result["subscriber_count"] == 612000
+    assert result["video_count"] == 47
+    assert result["recent_uploads_sampled"] == 3
+    assert result["recent_uploads_earliest"].startswith("2017-")
+    assert result["recent_uploads_latest"].startswith("2024-")
+
+
+@responses.activate
+def test_youtube_channel_by_handle(load_fixture, fake_youtube_env) -> None:
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_handle.json")
+    )
+    responses.add(
+        responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
+    )
+
+    result = get_youtube_channel("@AphexTwin")
+
+    assert result["found"] is True
+    assert result["resolved_via"] == "handle"
+    assert result["channel_id"] == "UCQpsLlpUlsdkRoZyaSwUTuw"
+
+
+@responses.activate
+def test_youtube_channel_by_url(load_fixture, fake_youtube_env) -> None:
+    """A youtube.com URL containing a channel ID should extract it without a search call."""
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_id.json")
+    )
+    responses.add(
+        responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
+    )
+
+    result = get_youtube_channel(
+        "https://www.youtube.com/channel/UCQpsLlpUlsdkRoZyaSwUTuw/about"
+    )
+
+    assert result["found"] is True
+    assert result["resolved_via"] == "id"
+
+
+@responses.activate
+def test_youtube_channel_by_search_fallback(load_fixture, fake_youtube_env) -> None:
+    """Arbitrary text input → search.list → channels.list (more quota)."""
+    responses.add(
+        responses.GET, YOUTUBE_SEARCH_URL, json=load_fixture("youtube_search_channels.json")
+    )
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_id.json")
+    )
+    responses.add(
+        responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
+    )
+
+    result = get_youtube_channel("Aphex Twin")
+
+    assert result["found"] is True
+    assert result["resolved_via"] == "search"
+    assert result["channel_id"] == "UCQpsLlpUlsdkRoZyaSwUTuw"
+
+
+@responses.activate
+def test_youtube_search_returns_no_match(load_fixture, fake_youtube_env) -> None:
+    responses.add(
+        responses.GET, YOUTUBE_SEARCH_URL, json=load_fixture("youtube_search_empty.json")
+    )
+
+    result = get_youtube_channel("Some Nonexistent Artist 998")
+
+    assert result["found"] is False
+
+
+@responses.activate
+def test_youtube_channel_not_found_by_handle(load_fixture, fake_youtube_env) -> None:
+    """forHandle lookup that returns no items → found=false (no search fallback)."""
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_empty.json")
+    )
+
+    result = get_youtube_channel("@nonexistent")
+
+    assert result["found"] is False
+    assert result["resolved_via"] == "handle"
+
+
+@responses.activate
+def test_youtube_playlist_fetch_failure_doesnt_kill_lookup(
+    load_fixture, fake_youtube_env
+) -> None:
+    """If playlistItems errors, channel lookup still succeeds with empty uploads."""
+    responses.add(
+        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_id.json")
+    )
+    responses.add(responses.GET, YOUTUBE_PLAYLIST_URL, status=500)
+
+    result = get_youtube_channel("UCQpsLlpUlsdkRoZyaSwUTuw")
+
+    assert result["found"] is True
+    assert result["recent_uploads_sampled"] == 0
+    assert result["subscriber_count"] == 612000
+
+
+def test_youtube_missing_api_key_raises(monkeypatch) -> None:
+    monkeypatch.delenv("YOUTUBE_API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="YOUTUBE_API_KEY"):
+        get_youtube_channel("UCQpsLlpUlsdkRoZyaSwUTuw")
+
+
+# --- Genius ---------------------------------------------------------------
+
+
+@pytest.fixture
+def fake_genius_env(monkeypatch):
+    monkeypatch.setenv("GENIUS_TOKEN", "test-genius-token")
+
+
+@responses.activate
+def test_genius_finds_artist_and_returns_top_songs(load_fixture, fake_genius_env) -> None:
+    responses.add(responses.GET, GENIUS_SEARCH_URL, json=load_fixture("genius_search.json"))
+    responses.add(
+        responses.GET,
+        f"{GENIUS_ARTISTS_URL}/47831/songs",
+        json=load_fixture("genius_artist_songs.json"),
+    )
+
+    result = get_genius_lyrics("Aphex Twin", max_tracks=3)
+
+    assert result["found"] is True
+    assert result["artist_id"] == 47831
+    assert result["artist_name"] == "Aphex Twin"
+    assert result["song_count_returned"] == 3
+    assert result["songs"][0]["title"] == "Windowlicker"
+    assert result["songs"][0]["pageviews"] == 184321
+    # Sanity: the documented limitation about lyric text is surfaced
+    assert "lyric text" in result["note"].lower()
+
+
+@responses.activate
+def test_genius_no_hits_returns_not_found(load_fixture, fake_genius_env) -> None:
+    responses.add(responses.GET, GENIUS_SEARCH_URL, json=load_fixture("genius_empty_search.json"))
+
+    result = get_genius_lyrics("Synthwave Phantom 998")
+
+    assert result["found"] is False
+    assert "no search hits" in result["reason"]
+
+
+def test_genius_missing_token_raises(monkeypatch) -> None:
+    monkeypatch.delenv("GENIUS_TOKEN", raising=False)
+    with pytest.raises(RuntimeError, match="GENIUS_TOKEN"):
+        get_genius_lyrics("Anything")
+
+
+# --- Phase 3+ tools still scaffolded --------------------------------------
+
+
+@pytest.mark.skip(reason="Phase 3+ — tools/discogs.py is still scaffolded.")
+def test_discogs_lookup() -> None:
     raise NotImplementedError
 
 
-@pytest.mark.skip(reason="Phase 2 — tools/discogs.py is still scaffolded.")
-def test_discogs_lookup() -> None:
+@pytest.mark.skip(reason="Phase 3+ — tools/lastfm.py is still scaffolded.")
+def test_lastfm_lookup() -> None:
+    raise NotImplementedError
+
+
+@pytest.mark.skip(reason="Phase 3+ — tools/deezer.py is still scaffolded.")
+def test_deezer_lookup() -> None:
     raise NotImplementedError

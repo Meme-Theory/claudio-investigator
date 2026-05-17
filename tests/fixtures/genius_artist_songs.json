@@ -1,0 +1,34 @@
+{
+  "meta": { "status": 200 },
+  "response": {
+    "songs": [
+      {
+        "id": 1001,
+        "title": "Windowlicker",
+        "title_with_featured": "Windowlicker",
+        "url": "https://genius.com/Aphex-twin-windowlicker-lyrics",
+        "release_date_for_display": "March 22, 1999",
+        "annotation_count": 12,
+        "stats": { "pageviews": 184321 }
+      },
+      {
+        "id": 1002,
+        "title": "Come to Daddy",
+        "title_with_featured": "Come to Daddy",
+        "url": "https://genius.com/Aphex-twin-come-to-daddy-lyrics",
+        "release_date_for_display": "October 6, 1997",
+        "annotation_count": 8,
+        "stats": { "pageviews": 95412 }
+      },
+      {
+        "id": 1003,
+        "title": "Avril 14th",
+        "title_with_featured": "Avril 14th",
+        "url": "https://genius.com/Aphex-twin-avril-14th-lyrics",
+        "release_date_for_display": "October 22, 2001",
+        "annotation_count": 4,
+        "stats": { "pageviews": 47812 }
+      }
+    ]
+  }
+}
