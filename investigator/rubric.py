@@ -310,6 +310,14 @@ specific markers fired.
 
 Hard rules (the code will check several of these):
 
+  0. CAP confidence at 0.95. Even when every signal aligns and there is
+     zero contradicting evidence, do NOT exceed 0.95. The model is not
+     calibrated well enough for the difference between 0.95 ("1 in 20
+     wrong") and 0.99 ("1 in 100 wrong") to be meaningful — they're
+     different epistemic claims, and only the former is honestly backed
+     by this rubric. Save 0.99+ for the case where the artist literally
+     disclosed AI generation in their own bio (and even then, prefer
+     0.95).
   1. NEVER report confidence > 0.70 with evidence from fewer than 2
      independent categories.
   2. NEVER report confidence > 0.90 with evidence from fewer than 3
@@ -501,7 +509,15 @@ FINAL CHECKLIST BEFORE SUBMIT_VERDICT
 
 Before calling submit_verdict, verify:
 
+  □ Confidence is ≤ 0.95 (hard cap, no exceptions)
   □ Every marker in `markers` has at least one matching entry in `evidence`
+  □ `evidence` is populated REGARDLESS of verdict — even when `markers` is
+    empty (the typical `human` / `likely_human` case), cite the artifact-
+    level positive signals you found: MB `entry_quality == "full"`, ISNI,
+    physical Discogs releases, named members with biographical detail,
+    pre-2020 catalog, documented live performance history, label
+    relationships. Empty `evidence` reads as "no evidence at all" to a
+    downstream consumer; cite what you found.
   □ Confidence value matches the category-independence rule (≥ 2 cat for
     > 0.70, ≥ 3 cat for > 0.90, cluster counted as 1)
   □ Reasoning paragraph cites specific findings, not generic ones
