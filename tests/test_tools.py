@@ -20,6 +20,7 @@ from investigator.tools import TOOLS, TOOL_RUNNERS
 from investigator.tools.itunes import LOOKUP_URL as ITUNES_LOOKUP_URL
 from investigator.tools.itunes import SEARCH_URL as ITUNES_SEARCH_URL
 from investigator.tools.itunes import lookup_itunes
+from investigator.tools.musicbrainz import ARTIST_URL as MB_ARTIST_URL
 from investigator.tools.musicbrainz import SEARCH_URL as MB_SEARCH_URL
 from investigator.tools.musicbrainz import lookup_musicbrainz
 from investigator.tools.spotify import (
@@ -153,16 +154,65 @@ def test_itunes_lookup_truncates_huge_catalog_with_histogram(load_fixture) -> No
 
 
 @responses.activate
-def test_musicbrainz_exact_match_for_known_artist(load_fixture) -> None:
+def test_musicbrainz_exact_match_classifies_full_entry(load_fixture) -> None:
+    """Real human artist with type/country/ISNI/relations → entry_quality=full."""
     responses.add(responses.GET, MB_SEARCH_URL, json=load_fixture("musicbrainz_found.json"))
+    responses.add(
+        responses.GET,
+        f"{MB_ARTIST_URL}/f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+        json=load_fixture("musicbrainz_artist_full.json"),
+    )
 
     result = lookup_musicbrainz("Aphex Twin")
 
     assert result["found"] is True
     assert result["found_exact"] is True
-    assert result["exact_match"]["mbid"] == "f27ec8db-af05-4f36-916e-3d57f91ecf5e"
-    assert result["exact_match"]["country"] == "GB"
-    assert "AFX" in result["exact_match"]["aliases"]
+    em = result["exact_match"]
+    assert em["mbid"] == "f27ec8db-af05-4f36-916e-3d57f91ecf5e"
+    assert em["country"] == "GB"
+    assert em["type"] == "Person"
+    assert em["isni_count"] == 1
+    assert em["life_span_begin"] == "1985"
+    assert em["entry_quality"] == "full"
+    # Meaningful relations (everything that isn't auto-import streaming).
+    assert em["relation_count_meaningful"] >= 3
+    assert "official homepage" in em["relation_types"]
+    assert "wikipedia" in em["relation_types"]
+
+
+@responses.activate
+def test_musicbrainz_exact_match_classifies_stub(load_fixture) -> None:
+    """Auto-imported distributor stub (no type/country/ISNI, only streaming
+    URL relations) → entry_quality=stub. This is what AI artists look like
+    in MB when distributors auto-submit their streaming presence."""
+    responses.add(responses.GET, MB_SEARCH_URL, json={
+        "created": "2026-05-17T15:00:00.000Z",
+        "count": 1,
+        "offset": 0,
+        "artists": [{
+            "id": "c4732cad-0916-4629-90ec-12b563180aed",
+            "score": 100,
+            "name": "Fall To Pieces",
+            "sort-name": "Fall To Pieces",
+        }],
+    })
+    responses.add(
+        responses.GET,
+        f"{MB_ARTIST_URL}/c4732cad-0916-4629-90ec-12b563180aed",
+        json=load_fixture("musicbrainz_artist_stub.json"),
+    )
+
+    result = lookup_musicbrainz("Fall To Pieces")
+
+    assert result["found"] is True
+    assert result["found_exact"] is True
+    em = result["exact_match"]
+    assert em["type"] is None
+    assert em["country"] is None
+    assert em["isni_count"] == 0
+    assert em["relation_count"] == 4
+    assert em["relation_count_meaningful"] == 0   # all 4 are auto-import streaming
+    assert em["entry_quality"] == "stub"
 
 
 @responses.activate

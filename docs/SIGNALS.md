@@ -9,10 +9,15 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 ## Catalog & ground-truth markers
 
 ### `no-musicbrainz`
-**What:** Artist has no MusicBrainz entry under their stage name or any obvious alias.
-**Why it's a signal:** MusicBrainz is community-curated and has near-universal coverage of human artists with any recorded output. AI music projects are systematically missing — nobody bothers entering them. Absence is one of the strongest single tells.
-**Evidence shape:** `lookup_musicbrainz` returns `{found: false}` for the canonical name and all submitter-provided aliases.
-**Caveats:** New human artists (debut <12 months) may also be missing. Don't weight as heavily if catalog is genuinely new in a way that matches a human debut pattern (one EP, one venue, social presence).
+**What:** Artist has no MEANINGFUL MusicBrainz presence. Two cases qualify: (a) no entry at all, or (b) a STUB entry — auto-imported by a distributor with no curated metadata.
+**Why it's a signal:** Real human artists accumulate curated MB metadata over time — type (Group/Person), country, ISNI, member relations, label-rels, life-span dates. Distributors (DistroKid, TuneCore, CD Baby, AudioSalad) automatically submit stub MB entries for every artist they distribute, AI projects included. The bare existence of an MB entry is therefore NOT a human signal; only the *richness* of the entry counts.
+**Evidence shape:**
+- Case (a): `lookup_musicbrainz` returns `{found: false}` for the canonical name and any reasonable alias.
+- Case (b): `lookup_musicbrainz` returns `found_exact: true` with `exact_match.entry_quality == "stub"`. Cite the specific missing fields (`type: null`, `country: null`, `isni_count: 0`, `relation_count_meaningful: 0`).
+**Caveats:**
+- New human artists (debut <12 months) may legitimately have no entry yet — don't weight heavily if the catalog is genuinely new AND there's a real social or live presence.
+- An `entry_quality: "partial"` entry is genuinely ambiguous — don't flag this marker for partials, AND don't treat partials as strong human evidence.
+- This rubric was specifically tuned around a Phase 2 false-negative ("Fall To Pieces" — auto-distributor stub treated as human by the agent). Be deliberate about reading `entry_quality`, not just `found_exact`.
 
 ### `no-physical-release`
 **What:** No Discogs entry for any physical media — no vinyl, CD, cassette, or release-by-label.

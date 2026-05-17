@@ -157,17 +157,30 @@ empirically validated against a labeled corpus. Use them, but pair with at
 least one Tier 1 marker before pushing confidence above 0.70.
 
   • `no-musicbrainz`
-    What: The artist has no MusicBrainz entry under their canonical name or
-    any obvious variant. MusicBrainz is community-curated and has near-total
-    coverage of human artists with any recorded output; AI music projects
-    are systematically missing because nobody bothers entering them.
-    Evidence: lookup_musicbrainz returned found=false for the canonical
-    name AND (if multiple plausible spellings exist) for at least one
-    variant. Cite both lookups in evidence.
-    Caveats: Genuinely new human artists (debut within ~12 months) may be
-    legitimately missing from MusicBrainz. Don't weight this signal heavily
-    when the catalog is small AND the artist appears to have a real social
-    or live presence.
+    What: The artist has no MEANINGFUL MusicBrainz presence. TWO cases
+    both qualify:
+      (a) No MB entry at all  → lookup_musicbrainz returns found=false.
+      (b) Stub entry only     → lookup_musicbrainz returns
+                                found_exact=true with
+                                exact_match.entry_quality == "stub".
+    CRITICAL — read this carefully:
+    Distributors (DistroKid, TuneCore, CD Baby, AudioSalad, etc.)
+    AUTO-SUBMIT bare stub MB entries for every artist they distribute,
+    INCLUDING AI projects. The bare presence of an MB entry is NOT a
+    human signal. A "stub" entry has only the artist's streaming URLs
+    mechanically scraped — no type ("Person" / "Group"), no country, no
+    ISNI, no member relations, no label relations, no life-span date.
+    Only an `entry_quality == "full"` entry — with curated metadata an
+    editor had to add — counts as a human signal.
+    Evidence to cite:
+      For case (a): the search returned no matches; quote `found=false`.
+      For case (b): `entry_quality == "stub"`, AND enumerate the missing
+                    fields explicitly ("no type, no country, no ISNI,
+                    relation_count_meaningful == 0"). Do NOT just say
+                    "MB entry exists" — that misses the point.
+    Caveats: An `entry_quality == "partial"` entry is genuinely ambiguous;
+    don't flag this marker for partial entries AND don't treat partials
+    as strong human evidence.
 
   • `no-physical-release`
     What: No Discogs entry for any physical media — no vinyl, no CD, no
@@ -308,10 +321,34 @@ Hard rules (the code will check several of these):
      `evidence` field that supports it.
   5. WHEN IN DOUBT, drop the confidence. A confident `unclear` at 0.55
      is preferable to a wrong `likely_ai` at 0.85.
-  6. CONTRADICTING evidence outweighs supporting evidence. A live concert
-     listing, a Discogs vinyl pressing, or pre-2020 catalog is strong
-     human evidence that should pull confidence DOWN regardless of how
-     suspicious other signals look.
+  6. CONTRADICTING evidence outweighs supporting evidence — BUT IT MUST BE
+     ARTIFACT-LEVEL, not REGISTRATION-LEVEL.
+
+     STRONG human artifacts (these DO override AI markers, pull confidence
+     DOWN):
+       - Live concert listing with named venue and date (Songkick,
+         Bandsintown, or documented tour history)
+       - Discogs PHYSICAL release pressing (vinyl, CD, cassette — NOT
+         "Discogs has the artist", which is just registration)
+       - MusicBrainz `entry_quality == "full"` (especially with ISNI,
+         label-rels, member-rels, or life-span begin date)
+       - Pre-2020 catalog releases with verifiable historical press
+         coverage
+       - Documented members with birth dates / biographical detail
+
+     WEAK / REGISTRATION-LEVEL (these DO NOT override AI markers — do not
+     treat them as strong human evidence, no matter how natural that
+     feels):
+       - Bare presence on any streaming platform (Spotify, Apple, YT, etc.)
+       - MusicBrainz stub entry (`entry_quality == "stub"`) — these are
+         distributor auto-imports and fire on AI artists too
+       - YouTube channel existence (anyone can create one in minutes)
+       - "Discogs has the artist" without a physical pressing
+       - High view counts or playlist placement (algorithmic, not earned)
+
+     If your only "contradicting" evidence is registration-level, you do
+     NOT have grounds to override Tier 1 markers like `2024-onwards`. Lean
+     `likely_ai` not `likely_human`.
 
 ===========================================================================
 INVESTIGATION STRATEGY
@@ -436,14 +473,25 @@ COMMON FAILURE MODES (don't do these)
    evidence list.
 
 4. Ignoring contradicting evidence. If the artist has a Discogs vinyl
-   release, that's strong human evidence regardless of how AI-ish the
-   visuals look. Drop the confidence below 0.70 even with multiple AI
-   markers firing.
+   release, a populated MB entry with members and ISNI, or a documented
+   pre-2020 tour history, that's strong human evidence regardless of how
+   AI-ish the visuals look. Drop the confidence below 0.70 even with
+   multiple AI markers firing.
 
-5. Confidence inflation. Don't get to 0.90 by counting markers — get there
+5. Treating a MusicBrainz STUB as a human signal. If lookup_musicbrainz
+   returns `found_exact=true` but `entry_quality == "stub"`, that is
+   NOT contradicting evidence — distributors auto-submit MB stubs for
+   AI artists too. The stub IS the no-musicbrainz signal (case (b) of
+   the marker definition). Saying "the artist IS in MusicBrainz so it
+   must be human" while the entry has no type / no country / no ISNI /
+   only auto-import streaming relations is the failure mode this rubric
+   was specifically tuned to prevent. Look at `entry_quality`, not just
+   `found_exact`.
+
+6. Confidence inflation. Don't get to 0.90 by counting markers — get there
    by counting INDEPENDENT CATEGORIES, with the cluster rule applied.
 
-6. Running tools you don't need. If you already have three independent
+7. Running tools you don't need. If you already have three independent
    categories of evidence and a confident verdict, additional tool calls
    are budget waste. Submit.
 

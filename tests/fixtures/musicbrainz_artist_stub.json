@@ -1,0 +1,40 @@
+{
+  "id": "c4732cad-0916-4629-90ec-12b563180aed",
+  "name": "Fall To Pieces",
+  "sort-name": "Fall To Pieces",
+  "type": null,
+  "country": null,
+  "disambiguation": "",
+  "gender-id": null,
+  "life-span": {
+    "begin": null,
+    "end": null,
+    "ended": false
+  },
+  "area": null,
+  "end-area": null,
+  "isnis": [],
+  "aliases": [],
+  "rating": { "votes-count": 0, "value": null },
+  "relations": [
+    {
+      "type": "free streaming",
+      "url": { "resource": "https://open.spotify.com/artist/2WRavyZrFClZuCdi5v5OSu" }
+    },
+    {
+      "type": "free streaming",
+      "url": { "resource": "https://www.deezer.com/artist/277743381" }
+    },
+    {
+      "type": "streaming",
+      "url": { "resource": "https://music.apple.com/artist/example" }
+    },
+    {
+      "type": "streaming",
+      "url": { "resource": "https://music.youtube.com/channel/example" }
+    }
+  ],
+  "release-groups": [
+    {"id": "rg1", "title": "Some Release"}
+  ]
+}

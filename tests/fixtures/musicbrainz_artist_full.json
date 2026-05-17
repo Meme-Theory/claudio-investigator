@@ -1,0 +1,57 @@
+{
+  "id": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+  "name": "Aphex Twin",
+  "sort-name": "Aphex Twin",
+  "type": "Person",
+  "country": "GB",
+  "disambiguation": "Richard D. James",
+  "gender": "Male",
+  "life-span": {
+    "begin": "1985",
+    "end": null,
+    "ended": false
+  },
+  "area": {
+    "name": "United Kingdom",
+    "iso-3166-1-codes": ["GB"]
+  },
+  "isnis": ["0000000114627030"],
+  "aliases": [
+    { "name": "Richard James", "sort-name": "James, Richard", "type": "Legal name" },
+    { "name": "AFX", "sort-name": "AFX", "type": "Artist name" }
+  ],
+  "rating": { "votes-count": 387, "value": 4.45 },
+  "relations": [
+    {
+      "type": "free streaming",
+      "url": { "resource": "https://open.spotify.com/artist/6kBDZFXuLrZgHnvmPu9NsG" }
+    },
+    {
+      "type": "streaming",
+      "url": { "resource": "https://tidal.com/browse/artist/3522" }
+    },
+    {
+      "type": "official homepage",
+      "url": { "resource": "https://aphextwin.warp.net/" }
+    },
+    {
+      "type": "social network",
+      "url": { "resource": "https://twitter.com/aphextwin" }
+    },
+    {
+      "type": "wikipedia",
+      "url": { "resource": "https://en.wikipedia.org/wiki/Aphex_Twin" }
+    },
+    {
+      "type": "discogs",
+      "url": { "resource": "https://www.discogs.com/artist/45" }
+    }
+  ],
+  "release-groups": [
+    {"id": "g1", "title": "Selected Ambient Works 85-92"},
+    {"id": "g2", "title": "Richard D. James Album"},
+    {"id": "g3", "title": "Drukqs"},
+    {"id": "g4", "title": "Syro"},
+    {"id": "g5", "title": "Cheetah EP"}
+  ]
+}
