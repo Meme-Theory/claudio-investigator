@@ -28,12 +28,15 @@ class Budget:
     """Mutable counters; instantiate one per investigation."""
 
     max_iterations: int = 12
-    # 40K is comfortable headroom for ~5–8 iterations with the current
-    # SYSTEM_PROMPT (~5K tokens) plus tool results (~2–4K per iter). Bumped
-    # from the dev plan's 20K after real investigations were tripping the
-    # cap with rich-but-legitimate evidence streams. Haiku 4.5 has 200K
-    # context and we're still well under the USD ceiling at this size.
-    max_tokens_total: int = 40_000
+    # 100K aligns the token cap with `max_iterations=12` given typical
+    # per-iteration growth (~3–8K new tokens). The USD cap is the real
+    # safety bound: at Haiku 4.5 pricing ($1/MTok input, $5/MTok output),
+    # even a pathological 100K-token investigation costs ~$0.10 — 5x
+    # under the $0.50 USD ceiling. Earlier defaults (20K, then 40K) were
+    # conservative legacies of the dev plan's unknown cost model;
+    # observed cost is $0.02–0.06 per investigation, so we can give the
+    # agent more rope without practical risk.
+    max_tokens_total: int = 100_000
     max_usd: float = 0.50
 
     iterations: int = 0
