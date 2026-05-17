@@ -43,7 +43,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if ! git diff --quiet dist/artists.json; then
+          # Use `git status --porcelain` instead of `git diff --quiet` so
+          # untracked dist/artists.json (first-ever build) is also committed.
+          if [ -n "$(git status --porcelain dist/artists.json)" ]; then
             git add dist/artists.json
             git commit -m "build: regenerate dist/artists.json"
             git push
