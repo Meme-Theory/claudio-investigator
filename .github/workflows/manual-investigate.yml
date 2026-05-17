@@ -1,5 +1,11 @@
 name: Manual investigation
 
+# Per-run display title surfaces the artist name in the Actions UI and — more
+# importantly — in the GitHub REST API's runs-list response. External clients
+# (the meme-engine-web frontend) match dispatched runs by substring on this
+# field, so don't drop it without coordinating with that side.
+run-name: "Investigate: ${{ inputs.artist_name }}"
+
 # Click "Run workflow" in the Actions tab to investigate one artist on demand,
 # without having to file an issue. The Phase 3 issue-based flow isn't wired
 # up yet — this is the path to use until then.
