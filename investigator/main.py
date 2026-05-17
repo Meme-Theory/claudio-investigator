@@ -25,6 +25,15 @@ logger = logging.getLogger(__name__)
 @click.option("-v", "--verbose", is_flag=True, help="Enable debug logging.")
 def cli(verbose: bool) -> None:
     """ClAudio Investigator command line."""
+    # Load .env if present so local CLI invocations get the same env GitHub
+    # Actions would. Silently no-op if python-dotenv isn't installed or
+    # there's no .env file in the cwd.
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv()
+    except ImportError:
+        pass
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
