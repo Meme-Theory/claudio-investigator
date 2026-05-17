@@ -1,0 +1,27 @@
+{
+  "id": "darkangelai",
+  "name": "DarkangelAI",
+  "dateAdded": "2026-01-03T17:37:39.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states the project \"combines traditional songwriting with the power of artificial intelligence,\" and the artist name itself alludes to AI usage.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7mB3fh2hIAHmqOHYcOMWbq",
+  "apple": "1773162873",
+  "amazon": "B0DJRZV1N1",
+  "youtube": "UCM6rF0Swa07CKgKRHmzeQ_Q",
+  "tiktok": "@polesinuasi1987",
+  "instagram": null
+}

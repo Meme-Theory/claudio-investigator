@@ -1,0 +1,27 @@
+{
+  "id": "fractured-language",
+  "name": "Fractured Language",
+  "dateAdded": "2026-01-02T12:01:20.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The Spotify bio states: \"Each track is brought to life through the use of AI - some feature my own voice, melodies, or lyrics, while others are entirely AI-generated.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0ZV3f3ovtpkofj9Y4CA8we",
+  "apple": "1846472383",
+  "amazon": "B0FWJBQQKS",
+  "youtube": "UCE2nWSkKiSPhbx9ntPukiaA",
+  "tiktok": null,
+  "instagram": "fracturedlanguage"
+}

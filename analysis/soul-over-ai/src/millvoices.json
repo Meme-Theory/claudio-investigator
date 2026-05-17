@@ -1,0 +1,28 @@
+{
+  "id": "millvoices",
+  "name": "Millvoices",
+  "dateAdded": "2026-02-01T22:32:38.995Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2667,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Instagram bio implies Suno usage: \"The Weird Side of Music Child of the Sunoverse.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5AftTDwWo0cop0pxXuT8Tc",
+  "apple": "1847151952",
+  "amazon": null,
+  "youtube": "UCdNqz-g62_rZAZL-GjjBO7A",
+  "tiktok": null,
+  "instagram": "millvoices_official"
+}

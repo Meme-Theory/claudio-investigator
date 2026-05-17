@@ -1,0 +1,26 @@
+{
+  "name": "souloverai",
+  "version": "1.0.0",
+  "description": "A public index of AI-generated and AI-assisted music. It is used to power the website [https://souloverai.com](https://souloverai.com).",
+  "type": "module",
+  "scripts": {
+    "build": "node .github/scripts/build-dist-artists.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoundbyte/soul-over-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xoundbyte/soul-over-ai/issues"
+  },
+  "homepage": "https://github.com/xoundbyte/soul-over-ai#readme",
+  "devDependencies": {
+    "@octokit/rest": "^21.0.2",
+    "@sindresorhus/slugify": "^3.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

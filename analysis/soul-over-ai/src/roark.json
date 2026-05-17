@@ -1,0 +1,27 @@
+{
+  "id": "roark",
+  "name": "Roark",
+  "dateAdded": "2026-02-07T14:50:54.082Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 3132,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The Twitter bio states: \"Digital Musician.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4NNikdyBH8vm8UT1eIBMWZ",
+  "apple": "1783374859",
+  "amazon": "B000QKUJ78",
+  "youtube": "UCYCc6DepfsmkP6VYshSLdeA",
+  "tiktok": "@roarkmusic",
+  "instagram": "roarkmusic_"
+}

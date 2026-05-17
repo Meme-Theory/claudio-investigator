@@ -1,0 +1,27 @@
+{
+  "id": "ames-ives",
+  "name": "Ames Ives",
+  "dateAdded": "2026-01-28T14:36:04.438Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Spotify bio states: \"I'm taking my ideas about the world-the funny, the political, the absurd-and using AI to turn them into music.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0o4LcJRWf8k8du7ELfuINg",
+  "apple": null,
+  "amazon": null,
+  "youtube": "UCcY3gvyetJzXPmDJx9sYcKA",
+  "tiktok": null,
+  "instagram": "amesivesmusic"
+}

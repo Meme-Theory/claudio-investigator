@@ -1,0 +1,27 @@
+{
+  "id": "sodikken",
+  "name": "Sodikken",
+  "dateAdded": "2026-01-02T14:57:02.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": "Releases music under a real artist's name but lacks media presence. Features AI-generated cover art with noticeable errors (e.g., text mistakes on \"Best Place to Be Is Next to You\"), inconsistent style and vocals, and low-quality audio.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0UgwIyebQ3EVoXOAtMgBu8",
+  "apple": "1838732222",
+  "amazon": "B0FBLX5W9B",
+  "youtube": "UCGN-FnTnuisFbCEDWVfi9zQ",
+  "tiktok": null,
+  "instagram": null
+}

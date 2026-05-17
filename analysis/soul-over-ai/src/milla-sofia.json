@@ -1,0 +1,27 @@
+{
+  "id": "milla-sofia",
+  "name": "Milla Sofia",
+  "dateAdded": "2026-01-02T11:12:29.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Spotify and Instagram bios mentions AI involvement, and the profile picture appears to be AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "73Es5rYMcaHu0WPz9oaVlV",
+  "apple": "1776407088",
+  "amazon": "B0DL43PKXJ",
+  "youtube": "UCOzjwCoTjeBAvlUrSt0kahw",
+  "tiktok": "@millas_sofia",
+  "instagram": "millasofiafin"
+}

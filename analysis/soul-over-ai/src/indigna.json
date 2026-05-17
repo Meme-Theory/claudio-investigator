@@ -1,0 +1,26 @@
+{
+  "id": "indigna",
+  "name": "IndignA",
+  "dateAdded": "2026-01-03T18:40:41.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The music shows clear AI traits despite claims of manual rhythm guitar composition alongside Suno AI use. With 22 albums (around 290 tracks) released in just over a year, the output is unusually high, indicating the content is likely predominantly AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6G1cEkXW2Q5jllo1wgwDvE",
+  "apple": "1759011414",
+  "amazon": "B003NZV3WI",
+  "youtube": "UCcYaql1A7yTsOjoY0d__BLg",
+  "tiktok": "@indigna2024",
+  "instagram": "indigna_band"
+}

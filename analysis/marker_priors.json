@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-05-17T15:07:46+00:00",
+  "corpus_source": "xoundbyte/soul-over-ai@c9e2e0f036a04d4f9f62b2614912b96bcdc8c017",
+  "corpus_size_active": 1375,
+  "random_seed": 20260517,
+  "disclosure_distribution": {
+    "none": 959,
+    "confirmed": 215,
+    "full": 21,
+    "partial": 180
+  },
+  "markers": {
+    "2024-onwards": {
+      "raw_count": 285,
+      "raw_freq": 0.2073,
+      "disclosed_count": 74,
+      "freq_when_disclosed": 0.3136,
+      "undisclosed_count": 161,
+      "freq_when_undisclosed": 0.1679,
+      "lift": 1.868
+    },
+    "ai-visuals": {
+      "raw_count": 1009,
+      "raw_freq": 0.7338,
+      "disclosed_count": 215,
+      "freq_when_disclosed": 0.911,
+      "undisclosed_count": 660,
+      "freq_when_undisclosed": 0.6882,
+      "lift": 1.324
+    },
+    "anonymous": {
+      "raw_count": 847,
+      "raw_freq": 0.616,
+      "disclosed_count": 151,
+      "freq_when_disclosed": 0.6398,
+      "undisclosed_count": 613,
+      "freq_when_undisclosed": 0.6392,
+      "lift": 1.001
+    },
+    "high-output": {
+      "raw_count": 784,
+      "raw_freq": 0.5702,
+      "disclosed_count": 145,
+      "freq_when_disclosed": 0.6144,
+      "undisclosed_count": 549,
+      "freq_when_undisclosed": 0.5725,
+      "lift": 1.073
+    },
+    "inconsistent-style": {
+      "raw_count": 220,
+      "raw_freq": 0.16,
+      "disclosed_count": 43,
+      "freq_when_disclosed": 0.1822,
+      "undisclosed_count": 147,
+      "freq_when_undisclosed": 0.1533,
+      "lift": 1.189
+    }
+  },
+  "cooccurrence": {
+    "2024-onwards|ai-visuals": {
+      "count": 253,
+      "jaccard": 0.243
+    },
+    "2024-onwards|anonymous": {
+      "count": 234,
+      "jaccard": 0.2606
+    },
+    "2024-onwards|high-output": {
+      "count": 215,
+      "jaccard": 0.2518
+    },
+    "2024-onwards|inconsistent-style": {
+      "count": 69,
+      "jaccard": 0.1583
+    },
+    "ai-visuals|anonymous": {
+      "count": 730,
+      "jaccard": 0.6483
+    },
+    "ai-visuals|high-output": {
+      "count": 654,
+      "jaccard": 0.5742
+    },
+    "ai-visuals|inconsistent-style": {
+      "count": 192,
+      "jaccard": 0.1851
+    },
+    "anonymous|high-output": {
+      "count": 534,
+      "jaccard": 0.4868
+    },
+    "anonymous|inconsistent-style": {
+      "count": 145,
+      "jaccard": 0.1573
+    },
+    "high-output|inconsistent-style": {
+      "count": 147,
+      "jaccard": 0.1715
+    }
+  },
+  "platform_coverage": {
+    "spotify": {
+      "all_count": 1375,
+      "all_fraction": 1.0,
+      "disclosed_count": 236,
+      "disclosed_fraction": 1.0
+    },
+    "apple": {
+      "all_count": 1273,
+      "all_fraction": 0.9258,
+      "disclosed_count": 204,
+      "disclosed_fraction": 0.8644
+    },
+    "amazon": {
+      "all_count": 1067,
+      "all_fraction": 0.776,
+      "disclosed_count": 163,
+      "disclosed_fraction": 0.6907
+    },
+    "youtube": {
+      "all_count": 1279,
+      "all_fraction": 0.9302,
+      "disclosed_count": 231,
+      "disclosed_fraction": 0.9788
+    },
+    "tiktok": {
+      "all_count": 591,
+      "all_fraction": 0.4298,
+      "disclosed_count": 108,
+      "disclosed_fraction": 0.4576
+    },
+    "instagram": {
+      "all_count": 611,
+      "all_fraction": 0.4444,
+      "disclosed_count": 116,
+      "disclosed_fraction": 0.4915
+    }
+  },
+  "shscore_population": {
+    "populated": 0,
+    "total": 1375,
+    "populated_fraction": 0.0
+  },
+  "disclosure_types_coverage": {
+    "entries_with_types": 51,
+    "fraction_populated": 0.0371,
+    "type_counts": {
+      "instrumentation": 35,
+      "mastering": 26,
+      "mixing": 26,
+      "vocals": 47,
+      "lyrics": 5
+    }
+  }
+}

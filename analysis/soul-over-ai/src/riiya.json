@@ -1,0 +1,27 @@
+{
+  "id": "riiya",
+  "name": "RIIYA",
+  "dateAdded": "2026-01-03T18:35:29.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "YouTube, TikTok and Instagram bios refer to the artist as \"Africa's 1st A.I Pop Star\".",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5MyKYMt1JjnHxNZyVxGYjA",
+  "apple": "1845116952",
+  "amazon": "B0B8XWMT77",
+  "youtube": "UC_W7hj08OSz9YtrPa_qzNQQ",
+  "tiktok": "@riiyamusic",
+  "instagram": "riiyamusic"
+}

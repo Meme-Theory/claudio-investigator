@@ -1,0 +1,29 @@
+{
+  "id": "kuroshibapalette",
+  "name": "kuroshibapalette",
+  "dateAdded": "2026-02-14T16:56:58.561Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 3398,
+  "disclosure": "full",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style",
+    "2024-onwards"
+  ],
+  "notes": "YouTube channel description states: \"AI Music & AI Video  by Kuroshibapalette.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0OFXacOlqEejo9tCfS20iP",
+  "apple": "1816232768",
+  "amazon": "B0F9L5FXS7",
+  "youtube": "UCUmZKjaaFxao9lzozxSGd1w",
+  "tiktok": "@kuroshibapalette1029",
+  "instagram": "kuroshiba_palette1029"
+}

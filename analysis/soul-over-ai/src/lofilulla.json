@@ -1,0 +1,28 @@
+{
+  "id": "lofilulla",
+  "name": "LofiLulla",
+  "dateAdded": "2026-01-24T23:29:50.499Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The YouTube bio states: \"Experience the magic of AI -where virtual artists bring every song to life with passion and precision.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7cNMZuHLHT9eEQ11It1CY5",
+  "apple": "1865654371",
+  "amazon": null,
+  "youtube": "UCOSYz86Wqnghvfk7tPyEyNg",
+  "tiktok": null,
+  "instagram": "lofilulla"
+}

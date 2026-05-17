@@ -1,0 +1,27 @@
+{
+  "id": "mythic-harmonies",
+  "name": "Mythic Harmonies",
+  "dateAdded": "2026-01-03T18:25:55.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Uses AI-generated visuals in music videos and album artwork. The website provides no concrete information about performers, focusing instead on thematic content related to Norse religion.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5ZCJzRZ8kztJP3zdI4vf49",
+  "apple": "1835145347",
+  "amazon": "B0D3M91NKF",
+  "youtube": "UCZOO_Ljoj5D0AzmnikavIcA",
+  "tiktok": "@mythic.harmonies",
+  "instagram": "mythic.harmonies"
+}

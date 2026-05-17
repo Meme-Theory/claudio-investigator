@@ -1,0 +1,26 @@
+{
+  "id": "angelina-mormando",
+  "name": "Angelina Mormando",
+  "dateAdded": "2026-01-15T20:05:01.667Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The Spotify description states that the project is \"is a virtual artist.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4rYruNinsmb8uS86TM2qGX",
+  "apple": "1832348763",
+  "amazon": "B0FLX6PDDF",
+  "youtube": "UCDP-EeKBA3NGWEfV5hTLaIg",
+  "tiktok": "@angelinamormandomusic",
+  "instagram": "angelinamormando"
+}

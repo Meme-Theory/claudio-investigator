@@ -1,0 +1,28 @@
+{
+  "id": "skycan",
+  "name": "SkyCan",
+  "dateAdded": "2026-01-26T23:01:10.218Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0HcVQuIdyt5FuvI0LUzeGj",
+  "apple": "1821843491",
+  "amazon": "B0FF55RGWR",
+  "youtube": "UCMWStVcKYUjt-yECe9pm9KA",
+  "tiktok": null,
+  "instagram": "skycan.wav"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "ladyan",
+  "name": "LadyAn",
+  "dateAdded": "2026-01-02T13:43:20.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The artist's back catalog consists exclusively of releases from 2025 as of the time of writing, accompanied by AI-generated visuals.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7baklZiKsChz4UqHTpynJg",
+  "apple": "1828916810",
+  "amazon": "B0B5DFK453",
+  "youtube": "UCINvP3s1FRxxMGUzbL6WhLA",
+  "tiktok": null,
+  "instagram": null
+}

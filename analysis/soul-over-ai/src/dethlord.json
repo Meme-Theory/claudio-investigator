@@ -1,0 +1,27 @@
+{
+  "id": "dethlord",
+  "name": "Dethlord",
+  "dateAdded": "2026-01-03T14:04:03.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Spotify, YouTube and TikTok bios describe the band as an \"AI-assisted music project\".",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1t2wbcDeg7PIQBv4DQq3yv",
+  "apple": "1787242732",
+  "amazon": "B0DRG8VH34",
+  "youtube": "UCEvWjJwHzKiMAT8t8mmySNg",
+  "tiktok": "@dethlordproductions",
+  "instagram": "dethlordproductions"
+}

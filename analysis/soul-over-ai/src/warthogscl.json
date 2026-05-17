@@ -1,0 +1,26 @@
+{
+  "id": "warthogscl",
+  "name": "WarthogSCL",
+  "dateAdded": "2025-12-28T12:40:39.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The Spotify page acknowledges the use of AI, with the artist confirming that the vocals are AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1zV38ouhyBDW46QqgAj0Wf",
+  "apple": "1745903893",
+  "amazon": "B0D3YD56N6",
+  "youtube": "UCxrZOV4fKVgtF_sLlJHvbAw",
+  "tiktok": "@warthogscl",
+  "instagram": "warthogscl"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "gobta-d",
+  "name": "GOBTA D",
+  "dateAdded": "2026-01-03T12:47:43.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Multiple tracks feature different vocal timbres, each showing varying degrees of AI-related artifacts. Approximately 40 tracks were released within eight months, including a collaboration with an artist widely identified as AI-generated on Spotify.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5COZbbIyF7BV9xiaVafNXN",
+  "apple": "1783489150",
+  "amazon": "B0DPN1GM31",
+  "youtube": "UCfKRMUxQj9v6X3QsFNywQuA",
+  "tiktok": null,
+  "instagram": null
+}

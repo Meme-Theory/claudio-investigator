@@ -1,0 +1,26 @@
+{
+  "id": "crimson-trace",
+  "name": "Crimson Trace",
+  "dateAdded": "2026-01-03T13:59:06.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "SubmitHub detects strong AI characteristics in their music.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2g9YrYe0cG2UBvcvGbX0hT",
+  "apple": "1824207913",
+  "amazon": "B0FGDSC6YB",
+  "youtube": "UCJPC44d44zhDIWE7VvizlUQ",
+  "tiktok": "@crimsontrace.official",
+  "instagram": null
+}

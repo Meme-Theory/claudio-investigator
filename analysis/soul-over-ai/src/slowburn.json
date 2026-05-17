@@ -1,0 +1,26 @@
+{
+  "id": "slowburn",
+  "name": "SLOWBURN",
+  "dateAdded": "2026-01-02T14:53:24.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "High release volume paired with a sound characteristic of AI-generated music. Claims that lyrics are \"original\".",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3f33w5RmmO0PJ2ktZi3L02",
+  "apple": "1773126939",
+  "amazon": "B0F29KMTC4",
+  "youtube": "UCBGSepF_tQ-Io97hxPSWTyg",
+  "tiktok": "@slowburn_music",
+  "instagram": "slowburn_music"
+}

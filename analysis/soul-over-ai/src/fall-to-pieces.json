@@ -1,0 +1,26 @@
+{
+  "id": "fall-to-pieces",
+  "name": "Fall To Pieces",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-02-09T19:45:51.104Z",
+  "removed": false,
+  "issue": 3299,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "Generic AI art on social profiles; no artist details; vocals vary between songs",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2WRavyZrFClZuCdi5v5OSu",
+  "apple": "1762650579",
+  "amazon": null,
+  "youtube": "UCqU8Kg37EDgq6AQaRTMh-Rg",
+  "tiktok": null,
+  "instagram": null
+}

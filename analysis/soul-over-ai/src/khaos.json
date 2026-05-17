@@ -1,0 +1,27 @@
+{
+  "id": "khaos",
+  "name": "Khaos",
+  "dateAdded": "2026-01-04T10:56:43.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": "SubmitHub flags the songs as strongly showing AI-generated characteristics.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0MwZD0lskUQtUUxNtWC1sN",
+  "apple": "1802707332",
+  "amazon": null,
+  "youtube": "UCasLQifNQGW4V9n5QrqKcnA",
+  "tiktok": null,
+  "instagram": null
+}

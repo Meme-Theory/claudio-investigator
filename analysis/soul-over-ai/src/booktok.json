@@ -1,0 +1,28 @@
+{
+  "id": "booktok",
+  "name": "BookTok",
+  "dateAdded": "2026-01-03T17:26:05.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "High volume of song releases aligned with the trending \"spicy BookTok\" theme on TikTok.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3XhzIq3xGVsEIcPf5gz1Cm",
+  "apple": "1842691484",
+  "amazon": "B0FT1LG7HS",
+  "youtube": "UCANDqNI2amhhJfuYhcg7qAg",
+  "tiktok": "@booktok.music_",
+  "instagram": "booktok.music"
+}

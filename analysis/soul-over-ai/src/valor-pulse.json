@@ -1,0 +1,26 @@
+{
+  "id": "valor-pulse",
+  "name": "Valor Pulse",
+  "dateAdded": "2026-01-21T17:07:59.754Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The YouTube bio states: \"All music created with AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6YlXfzhdIBxVkwceCrKCTj",
+  "apple": "1861301953",
+  "amazon": null,
+  "youtube": "UCuWocpjSHgm9kxYnAihc23w",
+  "tiktok": null,
+  "instagram": null
+}

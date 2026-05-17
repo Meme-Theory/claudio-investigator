@@ -1,0 +1,28 @@
+{
+  "id": "myroadtunes",
+  "name": "MyRoadTunes",
+  "dateAdded": "2026-02-15T13:54:37.860Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 3216,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "high-output",
+    "inconsistent-style",
+    "2024-onwards"
+  ],
+  "notes": "YouTube bio states: \"This journey is fueled by a unique collaboration: Human creativity, AI tools, and a cat's adventurous spirit.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5XcHnaQo3Omkuanlj3kQXQ",
+  "apple": "1847147264",
+  "amazon": "B0FX16TQ34",
+  "youtube": "UCgoFspP4ynOhOwUX77NFMkQ",
+  "tiktok": "@myroadtunes",
+  "instagram": "myroadtunes"
+}

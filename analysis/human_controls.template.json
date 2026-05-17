@@ -1,0 +1,10 @@
+[
+  {
+    "id": "example-artist-slug",
+    "name": "Example Artist",
+    "spotify": "0OdUWJ0sBjDrqHygGUXeCF",
+    "apple": "159260351",
+    "youtube": "UCxxxxxxxxxxxxxxxxxxxx",
+    "note": "Must satisfy ALL: present in MusicBrainz, has Discogs physical release, has concert history (Songkick/Bandsintown), pre-2020 catalog start. 50 entries needed for the Phase 0 tier-5 sample."
+  }
+]

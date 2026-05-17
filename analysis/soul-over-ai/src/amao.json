@@ -1,0 +1,26 @@
+{
+  "id": "amao",
+  "name": "Amao",
+  "dateAdded": "2026-01-21T14:42:59.222Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"Occasionally use AI to create music.\" However, the high output  suggests that the majority of the songs on this channel are AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0mfMxjfwqyOtLR90dwxCfH",
+  "apple": "1832302640",
+  "amazon": "B001E6ADP6",
+  "youtube": "UCB2_2r0V_2UclZb9eemHiIA",
+  "tiktok": null,
+  "instagram": null
+}

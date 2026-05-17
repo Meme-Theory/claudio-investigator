@@ -1,0 +1,27 @@
+{
+  "id": "unfinish",
+  "name": "UNFINISH",
+  "dateAdded": "2025-12-26T19:40:18.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Unusually high amount of releases in a short period of time. SubmitHub AI checker indicates that songs show AI-generated characteristics.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "28aQQfMIOEPqjMzYg4DkBx",
+  "apple": "1745622306",
+  "amazon": "B0D3SWPKGF",
+  "youtube": "UC0CKcvRcOxAxl2qCwUYTrlA",
+  "tiktok": null,
+  "instagram": null
+}

@@ -1,0 +1,27 @@
+{
+  "id": "dominik-witka",
+  "name": "Dominik Witka",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-02-13T20:42:31.775Z",
+  "removed": false,
+  "issue": 3529,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The Spotify bio states: \"Important: Only songs with YELLOW covers are AI-Demos Others are \"traditionally\" made songs and collaborations! 🎮 Human Lyrics, AI-Demos, Collaborations and more! ⚔️🎸.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5cATbhvkfafBq6O064Mz96",
+  "apple": "1738079685",
+  "amazon": null,
+  "youtube": "UCuAGcoK2uEGm5E4_xazQjBQ",
+  "tiktok": "@musicwithdominik",
+  "instagram": "musicwithdominik"
+}

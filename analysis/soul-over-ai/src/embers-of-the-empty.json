@@ -1,0 +1,26 @@
+{
+  "id": "embers-of-the-empty",
+  "name": "Embers Of The Empty",
+  "dateAdded": "2026-01-30T20:42:24.581Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2642,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "anonymous"
+  ],
+  "notes": "The Spotify bio states: \"Created with AI Assistance.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1EE6CRJaSEPEQrghG3hqz9",
+  "apple": "1859141652",
+  "amazon": "B0G5GJJZNW",
+  "youtube": "UCS3jCFAhAkyckKB1ezzfZCw",
+  "tiktok": null,
+  "instagram": "embersoftheempty"
+}

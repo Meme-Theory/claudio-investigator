@@ -1,0 +1,27 @@
+{
+  "id": "vowless",
+  "name": "Vowless",
+  "dateAdded": "2026-01-23T17:12:21.313Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"AI-assisted production.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7tySWxsUMoqeioehmcy0Ps",
+  "apple": "1855836114",
+  "amazon": null,
+  "youtube": "UCT80y8yCDaKG4uPj53s90QA",
+  "tiktok": "@vowlessmusic",
+  "instagram": "vowlessmusic"
+}

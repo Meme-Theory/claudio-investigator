@@ -1,0 +1,26 @@
+{
+  "id": "cloud-chief",
+  "name": "Cloud Chief",
+  "dateAdded": "2025-12-29T19:49:41.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The vocal timbre and musical style are consistent with commonly observed AI-generated music patterns.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4BPXWb9bm3v2vtUimqhkec",
+  "apple": "1668639365",
+  "amazon": "B0BTBY9PJ9",
+  "youtube": "UCfO5onXk-TMGreZTRFRyD_A",
+  "tiktok": null,
+  "instagram": null
+}

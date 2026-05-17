@@ -1,0 +1,25 @@
+{
+  "id": "grgr-playlist",
+  "name": "grgr_playlist",
+  "dateAdded": "2026-01-30T20:49:08.176Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2645,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous"
+  ],
+  "notes": "The Spotify bio states: \"Creating laid-back groove & hip hop playlists with AI-made tracks.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4MTxbWBI7q4w2NhKvEm8nv",
+  "apple": "1857194346",
+  "amazon": "B0G4HBSH44",
+  "youtube": "UCBfrb7uxrP9blQKWsdjD7dw",
+  "tiktok": "@grgr_playlist",
+  "instagram": "grgr_playlist"
+}

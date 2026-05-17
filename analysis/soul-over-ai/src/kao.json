@@ -1,0 +1,26 @@
+{
+  "id": "kao",
+  "name": "KAO",
+  "dateAdded": "2025-12-09T22:42:30.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "78kImooBfNPeEVkx1MLOdn",
+  "apple": "1738600666",
+  "amazon": "B0D96SRNLX",
+  "youtube": null,
+  "tiktok": null,
+  "instagram": null
+}

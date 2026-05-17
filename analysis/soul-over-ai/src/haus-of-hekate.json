@@ -1,0 +1,27 @@
+{
+  "id": "haus-of-hekate",
+  "name": "Haus of Hekate",
+  "dateAdded": "2026-01-04T16:56:27.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": "SubmitHub detects strong AI characteristics in their music.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7xsk8KDvs66QzEwvGekZKO",
+  "apple": "1831532242",
+  "amazon": "B0DLMQ233L",
+  "youtube": "UCVd-JzT_K4SFnarqVIS9w3A",
+  "tiktok": "@haus.of.hekate1",
+  "instagram": null
+}

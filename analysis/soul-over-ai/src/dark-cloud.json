@@ -1,0 +1,27 @@
+{
+  "id": "dark-cloud",
+  "name": "dark_cloud",
+  "dateAdded": "2025-12-08T10:34:43.000Z",
+  "dateUpdated": "2026-01-25T18:58:55.977Z",
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"I'll be using this channel to publish all the lyrics and poetry that I've written over the years. Thanks to advances in AI, it's now possible to use services like Suno to finally put these words to music.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1J8PIKDtlSTIvOU4d11pt5",
+  "apple": "1762888685",
+  "amazon": "B0DD5TP69X",
+  "youtube": "UC4K_JabqZsGq8LoKeIvtxnA",
+  "tiktok": null,
+  "instagram": null
+}

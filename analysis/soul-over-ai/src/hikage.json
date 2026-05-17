@@ -1,0 +1,26 @@
+{
+  "id": "hikage",
+  "name": "Hikage",
+  "dateAdded": "2026-01-02T13:32:46.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"The lyrics were written and composed by AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5CND4LWfH3CJF8XBtVMIbM",
+  "apple": "1815822601",
+  "amazon": "B0BPRD92ZP",
+  "youtube": "UCPzzulq0tTvZbiIch4Zya1w",
+  "tiktok": null,
+  "instagram": null
+}

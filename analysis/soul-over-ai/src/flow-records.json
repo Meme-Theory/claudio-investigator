@@ -1,0 +1,27 @@
+{
+  "id": "flow-records",
+  "name": "FLOW RECORDS",
+  "dateAdded": "2025-12-22T15:43:04.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "AI record label with multiple sub-labels that post Brazilian/Portuguese Christian music in various genres. Has videos with up to 860k+ views  and 400k+ monthly users on Spotify at time of writing.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1XP3YN6EDUIJ5r4Z3nXEsH",
+  "apple": "1828608209",
+  "amazon": "B018J72YWC",
+  "youtube": "UCj8zzPy7R5duGI9232VfJUA",
+  "tiktok": "@flowrecords.br",
+  "instagram": "flowrecords.br"
+}

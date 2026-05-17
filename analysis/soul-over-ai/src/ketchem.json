@@ -1,0 +1,26 @@
+{
+  "id": "ketchem",
+  "name": "Ketchem",
+  "dateAdded": "2026-01-23T23:40:43.022Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The label name, \"10227924 Records DK,\" is a default placeholder assigned by DistroKid when no label is specified. It is frequently linked to AI-generated, rapidly-produced, or low-quality spam releases.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5Bm9HPrrHYmWt4fwiulS3u",
+  "apple": "1837109638",
+  "amazon": null,
+  "youtube": "UC4j78FMbN_xla-yOw98iVMQ",
+  "tiktok": null,
+  "instagram": null
+}

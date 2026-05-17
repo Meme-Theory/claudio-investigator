@@ -1,0 +1,28 @@
+{
+  "id": "deathly-hours",
+  "name": "Deathly Hours",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-01-27T23:14:13.631Z",
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The person running their YouTube channel deletes comments alluding to AI.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "07XIuuPrpw0kcGrJApsbQp",
+  "apple": "1816210423",
+  "amazon": "B0F9Q1V8CL",
+  "youtube": "UCtLnTncVauqAouXZXABQP6Q",
+  "tiktok": "@deathly_hours",
+  "instagram": "deathly_hours"
+}

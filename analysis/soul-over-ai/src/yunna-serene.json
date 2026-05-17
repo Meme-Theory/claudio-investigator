@@ -1,0 +1,26 @@
+{
+  "id": "yunna-serene",
+  "name": "Yunna Serene",
+  "dateAdded": "2025-12-26T19:45:59.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "Very high output from a sudden, previously unknown project, accompanied by a large following.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2cSG7qVtrHAKv6G9R4kQYm",
+  "apple": "1855396505",
+  "amazon": "B0G3P3PCJZ",
+  "youtube": "UCuZv5lg1eeO5FBWfxb9O5iw",
+  "tiktok": "@yunnaserene",
+  "instagram": "yunnaserene"
+}

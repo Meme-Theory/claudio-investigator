@@ -1,0 +1,28 @@
+{
+  "id": "kuroge",
+  "name": "Kuroge",
+  "dateAdded": "2026-01-23T10:38:28.626Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4CwGTdFETLmTeb9Up0zndS",
+  "apple": "1848245287",
+  "amazon": "B0FXLBVYPL",
+  "youtube": "UC9PaXbupcCMpC2-NvG4TE2Q",
+  "tiktok": "@kurogemusic",
+  "instagram": null
+}

@@ -1,0 +1,25 @@
+{
+  "id": "otto",
+  "name": "Otto",
+  "dateAdded": "2026-01-23T11:02:41.709Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals"
+  ],
+  "notes": "The YouTube bio states \"We are distributing original songs created by AI.\" (translated from Japanese)",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6k2h7cAuvLNIIERuHfJTdB",
+  "apple": "1420058461",
+  "amazon": null,
+  "youtube": "UCloU2GnUbbZsyc-JNbezH4Q",
+  "tiktok": null,
+  "instagram": null
+}

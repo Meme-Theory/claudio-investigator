@@ -1,0 +1,30 @@
+{
+  "id": "one-project",
+  "name": "ONE PROJECT",
+  "dateAdded": "2026-02-03T18:28:57.387Z",
+  "dateUpdated": "2026-02-12T08:28:49.234Z",
+  "removed": false,
+  "issue": 2824,
+  "disclosure": "partial",
+  "disclosureTypes": [
+    "vocals"
+  ],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "Many of their videos have credited vocals to the entity \"JUN (Ai).\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2VIZDPesAdDk0zppWuy70U",
+  "apple": "1510184184",
+  "amazon": "B087P8QBL4",
+  "youtube": "UC_yKp9qlR8xXQ-CVsv2VjPQ",
+  "tiktok": null,
+  "instagram": null
+}

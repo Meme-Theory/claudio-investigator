@@ -1,0 +1,27 @@
+{
+  "id": "einarsson",
+  "name": "Einarsson",
+  "dateAdded": "2026-01-23T10:35:30.532Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Spotify bio states: \"Einarsson is an AI-based artist who writes lyrics and creates music using artificial intelligence.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3dosGgkIX23viQnzYVTPrH",
+  "apple": null,
+  "amazon": null,
+  "youtube": "UCpGbB3ywunq5RX_e9-PO5hw",
+  "tiktok": "@.einarsson",
+  "instagram": null
+}

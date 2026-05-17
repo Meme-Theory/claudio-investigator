@@ -12,25 +12,33 @@ than executing it — see `agent.py`.
 from __future__ import annotations
 
 # --- Signal taxonomy --------------------------------------------------------
-# Order = rough confidence of impact (most discriminating first), per the
-# Soul Over AI EDA in Phase 0. UPDATE THIS LIST AFTER PHASE 0 if the data
-# disagrees with the priors below.
+# Order: most empirically discriminating first.
+#
+# Markers tested against the Soul Over AI corpus in Phase 0 EDA carry their
+# observed lift ratio in the comment (lift = freq_when_disclosed / freq_when_undisclosed).
+# Untested markers are positioned by the dev plan's prior; their empirical
+# rank will land after Phase 2 calibration runs.
+#
+# SOA-name compatibility: two markers were renamed in Phase 0 so our taxonomy
+# directly matches SOA's enum — `synthetic-album-art` → `ai-visuals` (broader
+# scope: any AI-generated visual asset, not just album art) and
+# `anonymous-project` → `anonymous`. See docs/CALIBRATION_NOTES.md.
 
 SIGNAL_MARKERS: list[str] = [
-    "no-musicbrainz",          # absence in MusicBrainz — strong AI tell
-    "high-output",             # >12 releases/year, no historical baseline
-    "2024-onwards",            # entire catalog post-2024 with no earlier trace
-    "anonymous-project",       # no individual humans named or linked
-    "synthetic-album-art",     # vision-pass flags AI generation
-    "suno-duration-cap",       # track durations cluster near 2:00–2:30
-    "popularity-follower-mismatch",  # Spotify popularity high vs. follower base
-    "no-physical-release",     # no Discogs entry for any physical media
-    "thin-cross-platform",     # absent from niche/community platforms
-    "placeholder-bio",         # missing, AI-template, or boilerplate bio
-    "recent-only-listener-history",  # Last.fm listener curve is a step function
-    "gpt-lyric-patterns",      # semantic loops / GPT rhyme tells
-    "no-live-presence",        # no Songkick/Bandsintown listings or venue tags
-    "inconsistent-style",      # wild genre swings across catalog
+    "2024-onwards",                  # SOA lift 1.87 — strongest empirical SOA marker
+    "ai-visuals",                    # SOA lift 1.32 — high volume + decent lift
+    "no-musicbrainz",                # untested in SOA; dev-plan claim of strong absence signal
+    "no-physical-release",           # untested in SOA; Discogs absence signal
+    "inconsistent-style",            # SOA lift 1.19
+    "suno-duration-cap",             # untested in SOA; 2:00–2:30 cluster
+    "popularity-follower-mismatch",  # untested in SOA; Spotify popularity vs. follower-base
+    "placeholder-bio",               # untested in SOA
+    "gpt-lyric-patterns",            # untested in SOA; LLM-tell text patterns
+    "recent-only-listener-history",  # untested in SOA; Last.fm step-function curve
+    "thin-cross-platform",           # untested in SOA
+    "high-output",                   # SOA lift 1.07 — weak alone; cluster-mate of ai-visuals
+    "no-live-presence",              # untested in SOA
+    "anonymous",                     # SOA lift 1.00 — does NOT discriminate alone; keep as cluster-mate only
 ]
 
 

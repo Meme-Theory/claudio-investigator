@@ -1,0 +1,27 @@
+{
+  "id": "the-wandering-innkeeper",
+  "name": "The Wandering Innkeeper",
+  "dateAdded": "2026-01-07T15:01:21.695Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Openly discloses use of AI. Their Spotify profile describes them as a \"synthetic project\" and states that their \"content is altered with the use of AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4pXA4ngwZpbCZr5ZJzDrXI",
+  "apple": "1845302941",
+  "amazon": "B0FVNXYV52",
+  "youtube": "UCnFcrTrBXxSvYk0td3Q9YWg",
+  "tiktok": "@the.wandering.innkeeper",
+  "instagram": null
+}

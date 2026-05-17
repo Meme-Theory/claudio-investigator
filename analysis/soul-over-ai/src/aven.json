@@ -1,0 +1,28 @@
+{
+  "id": "aven",
+  "name": "Aven",
+  "dateAdded": "2026-01-23T17:17:07.552Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2rvnBchzrPtuue6hfHElmM",
+  "apple": "1785715597",
+  "amazon": "B001FC4WAQ",
+  "youtube": "UCSr9B06NCfbN58r0SAljFug",
+  "tiktok": "@aven.wav",
+  "instagram": null
+}

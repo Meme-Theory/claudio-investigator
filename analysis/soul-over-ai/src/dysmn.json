@@ -1,0 +1,28 @@
+{
+  "id": "dysmn",
+  "name": "Dysmn",
+  "dateAdded": "2025-12-27T12:46:09.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "YouTube comments along with those on the artist's website indicate confirmation that the project is a blend of AI and human work.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4m6gJ1ZMwIiUUveRuKg65h",
+  "apple": "1766557987",
+  "amazon": "B0DFZNCN2F",
+  "youtube": "UCBdxXQRUwjfiL0SfVyhkauw",
+  "tiktok": "@dysmn.music",
+  "instagram": "dysmn.exe"
+}

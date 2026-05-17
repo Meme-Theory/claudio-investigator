@@ -1,0 +1,25 @@
+{
+  "id": "glorb",
+  "name": "Glorb",
+  "dateAdded": "2026-01-01T15:59:15.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals"
+  ],
+  "notes": "Uses AI-generated voices to emulate cartoon characters while performing original lyrics. Cover artwork also appears to be AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6YeB9qnbI47owfAXWhctih",
+  "apple": "1691918007",
+  "amazon": "B0C7LLK18R",
+  "youtube": "UCiMm5csnl5xQHZ1i9ykueQQ",
+  "tiktok": "@glorbworldwide",
+  "instagram": "glorbworldwide"
+}

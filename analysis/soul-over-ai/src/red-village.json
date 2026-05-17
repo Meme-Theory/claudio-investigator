@@ -1,0 +1,26 @@
+{
+  "id": "red-village",
+  "name": "Red Village",
+  "dateAdded": "2025-12-22T21:54:55.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "inconsistent-style"
+  ],
+  "notes": "Self-declared as AI.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0peThqnLn0V2rxo8pKsMPv",
+  "apple": "1850036710",
+  "amazon": "B0FVSVC8P7",
+  "youtube": "UCkx5Prrlh3-m0RyfzOnYu-w",
+  "tiktok": null,
+  "instagram": null
+}

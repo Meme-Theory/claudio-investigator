@@ -1,0 +1,27 @@
+{
+  "id": "poisonpop-candy",
+  "name": "POISONPOP Candy",
+  "dateAdded": "2026-01-13T21:39:15.245Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "YouTube channel bio states: \"All music and illustrations on this channel are original works created using AI technology.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1ORh5hGL8aCx1wDAi8242s",
+  "apple": "1833943627",
+  "amazon": "B0FMSRP3XD",
+  "youtube": "UC8qGpw8GUxcQZftXQeFavXw",
+  "tiktok": null,
+  "instagram": null
+}

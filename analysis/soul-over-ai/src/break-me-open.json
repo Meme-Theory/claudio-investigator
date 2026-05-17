@@ -1,0 +1,27 @@
+{
+  "id": "break-me-open",
+  "name": "Break Me Open",
+  "dateAdded": "2025-12-23T15:06:03.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Stereotypical sound and visuals, found on station playlist made up exclusively of other AI \"artists\".  Cover art has the telltale signs, no band socials, no background or previous history.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "44cdc5PhT5bCqd8PJxywac",
+  "apple": "1859406993",
+  "amazon": "B0G5LFFFXB",
+  "youtube": "UCq0HN8J9iAikbjisrGyw2ww",
+  "tiktok": null,
+  "instagram": null
+}

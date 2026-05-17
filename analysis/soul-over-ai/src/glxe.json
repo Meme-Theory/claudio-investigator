@@ -1,0 +1,26 @@
+{
+  "id": "glxe",
+  "name": "GLXE",
+  "dateAdded": "2026-01-23T10:51:26.598Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The TikTok bio states: \"AI KPop Group.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0DgpEL50vBHaokDjDJHiN4",
+  "apple": "1858501699",
+  "amazon": null,
+  "youtube": "UClt_TuCfI5r4Qh5Q_dYrszA",
+  "tiktok": "@glxe.official",
+  "instagram": null
+}

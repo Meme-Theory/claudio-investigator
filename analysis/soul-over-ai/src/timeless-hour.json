@@ -1,0 +1,26 @@
+{
+  "id": "timeless-hour",
+  "name": "Timeless Hour",
+  "dateAdded": "2026-01-04T11:08:07.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Numerous different vocalists, and consistently low audio quality. SubmitHub analysis flags strong characteristics associated with AI-generated music.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "21SBzvBLZB09Z2iiyB4i44",
+  "apple": "1823526250",
+  "amazon": "B00HPNP2NA",
+  "youtube": "UCH5nq8uHs9I2fgzTmlOa75g",
+  "tiktok": "@timelesshour.official",
+  "instagram": "timelesshour.official"
+}

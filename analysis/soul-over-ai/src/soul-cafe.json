@@ -1,0 +1,28 @@
+{
+  "id": "soul-cafe",
+  "name": "Soul Cafe",
+  "dateAdded": "2026-01-27T15:37:29.847Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "Multiple videos on their YouTube channel have a description that states: \"All Songs & Image Created by Soul Cafe with AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2sWjOfINK4Fl34BU9MLSQM",
+  "apple": "1837868625",
+  "amazon": null,
+  "youtube": "UCVccRmiLPePBoImWKXdIaAQ",
+  "tiktok": null,
+  "instagram": null
+}

@@ -1,0 +1,27 @@
+{
+  "id": "b-twizzy",
+  "name": "B Twizzy",
+  "dateAdded": "2026-01-18T12:38:05.804Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The artist has acknowledged the use of AI via their Twitch and Discord channels. Also states that their lyrics are human written.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5fxAD2CEglwSsAFp0eBP8q",
+  "apple": null,
+  "amazon": "B0DBXKWDN1",
+  "youtube": "UCUNYr073ETrfMOqspGzijJw",
+  "tiktok": null,
+  "instagram": null
+}

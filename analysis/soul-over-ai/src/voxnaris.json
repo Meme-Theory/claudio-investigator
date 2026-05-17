@@ -1,0 +1,26 @@
+{
+  "id": "voxnaris",
+  "name": "Voxnaris",
+  "dateAdded": "2026-01-12T13:31:42.049Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The Spotify bio states: \"Voxnaris is a medieval ai music project.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "08UoIrS9YvVH0fS0CukKwN",
+  "apple": "1836035863",
+  "amazon": "B0FP11BYHK",
+  "youtube": "UCS_Em3LMptD5ACd_xx0tXMA",
+  "tiktok": null,
+  "instagram": null
+}

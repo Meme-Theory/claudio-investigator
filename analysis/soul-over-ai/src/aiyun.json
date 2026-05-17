@@ -1,0 +1,26 @@
+{
+  "id": "aiyun",
+  "name": "Aiyun",
+  "dateAdded": "2025-12-25T23:26:41.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The YouTube bio acknowledges the use of AI-generated content, and the name itself is suggestive of an AI-based project.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4dSpK6RQ66rjinHJxA5P8s",
+  "apple": "1772043417",
+  "amazon": "B0DJFRMBFX",
+  "youtube": "UCENgm_VduV3UxaSfSEGtGgQ",
+  "tiktok": null,
+  "instagram": null
+}

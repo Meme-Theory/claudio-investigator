@@ -1,0 +1,32 @@
+{
+  "id": "decayed-souls",
+  "name": "Decayed Souls",
+  "dateAdded": "2025-12-18T10:08:03.000Z",
+  "dateUpdated": "2026-02-04T10:44:09.654Z",
+  "removed": false,
+  "issue": 2995,
+  "disclosure": "partial",
+  "disclosureTypes": [
+    "instrumentation",
+    "mastering",
+    "mixing",
+    "vocals"
+  ],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "ai-visuals",
+    "2024-onwards"
+  ],
+  "notes": "The TikTok bio states: \"I‘m Zane who loves to create music! Booktok, gamer and more! Lyrics are real, sing/hum/drum and let AI build it.\" Has duplicate artist profiles on Spotify. AI cover art.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1zT2nzyToiqL6OxLrlH2QN",
+  "apple": "1855732645",
+  "amazon": "B0G3VR5BPP",
+  "youtube": "UCsADRXEuMIGdw8rodYNwsFg",
+  "tiktok": "@decayed.souls",
+  "instagram": "decayed.souls"
+}

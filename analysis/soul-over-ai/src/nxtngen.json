@@ -1,0 +1,28 @@
+{
+  "id": "nxtngen",
+  "name": "NXTNGen",
+  "dateAdded": "2026-01-01T16:02:32.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "Multiple songs feature different vocalists, with AI-generated single artwork throughout. No singers are credited, and the release frequency is unusually high for conventional recording or production processes.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "27oneELA1cTFA8ZMN6poyZ",
+  "apple": "1844787858",
+  "amazon": "B0FSX911GP",
+  "youtube": "UC7V4eneQNw3jvmvej4cWMFQ",
+  "tiktok": null,
+  "instagram": null
+}

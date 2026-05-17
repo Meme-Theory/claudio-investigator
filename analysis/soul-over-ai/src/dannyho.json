@@ -1,0 +1,28 @@
+{
+  "id": "dannyho",
+  "name": "DannyHO",
+  "dateAdded": "2026-01-16T13:41:32.889Z",
+  "dateUpdated": "2026-02-12T20:07:55.236Z",
+  "removed": false,
+  "issue": 3399,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The YouTube bio states: \"Yes, I use AI - the same way a producer uses synths, drum machines, or new studio tools.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2JbSO56Km4UNAcnzcgcm0D",
+  "apple": "1726143563",
+  "amazon": null,
+  "youtube": "UCqfrzgXGVsX4M1At3laTQLA",
+  "tiktok": null,
+  "instagram": null
+}

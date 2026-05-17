@@ -1,0 +1,27 @@
+{
+  "id": "riley77",
+  "name": "Riley77",
+  "dateAdded": "2026-01-18T14:44:11.454Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states that the artist \"is an AI-assisted music creator.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4OldnCpGsCb001OGLIx6RH",
+  "apple": "1851132071",
+  "amazon": "B0G13DZS29",
+  "youtube": "UCK6uu5Tnm16eTFWBGTVw4_w",
+  "tiktok": null,
+  "instagram": null
+}

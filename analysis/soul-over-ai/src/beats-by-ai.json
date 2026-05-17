@@ -1,0 +1,28 @@
+{
+  "id": "beats-by-ai",
+  "name": "Beats By AI",
+  "dateAdded": "2026-01-24T17:52:50.433Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The username acknowledges the use of AI-generated content.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2VL0G8nTevMkOCc1cPWu5i",
+  "apple": "1740581427",
+  "amazon": "B0D1FMN7QT",
+  "youtube": "UC_XhaNIPaqmmbKLrm4kAVZQ",
+  "tiktok": null,
+  "instagram": "beatsby.ai"
+}

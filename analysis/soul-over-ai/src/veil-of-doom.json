@@ -1,0 +1,28 @@
+{
+  "id": "veil-of-doom",
+  "name": "Veil of Doom",
+  "dateAdded": "2026-02-01T11:27:53.598Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2547,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output",
+    "2024-onwards"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0SZLZwOe5pA6l5wwbDKCG7",
+  "apple": "1808276602",
+  "amazon": "B0F4PTQ5GH",
+  "youtube": null,
+  "tiktok": null,
+  "instagram": null
+}

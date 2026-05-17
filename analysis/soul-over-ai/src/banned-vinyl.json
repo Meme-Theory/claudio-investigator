@@ -1,0 +1,27 @@
+{
+  "id": "banned-vinyl",
+  "name": "Banned Vinyl",
+  "dateAdded": "2025-12-19T11:18:51.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "AI-generated artwork and videos. Extremely crude lyrics.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "42t4hWS8aGwWNQhutNCl9c",
+  "apple": "1744543789",
+  "amazon": "B0D384BTSM",
+  "youtube": "UC12pzVnL77E9CUHreiRWdEg",
+  "tiktok": "@bannedvinyl",
+  "instagram": "bannedvinylcollection"
+}

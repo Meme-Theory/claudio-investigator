@@ -1,0 +1,27 @@
+{
+  "id": "trollvarg",
+  "name": "Trollvarg",
+  "dateAdded": "2026-01-02T11:20:38.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The audio sounds synthetic, with sudden releases of singles and an album appearing without prior history. All visuals appear AI-generated, with no identifiable human presence.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3cfL1kXBNThhxLKBk5QKkX",
+  "apple": "1859420528",
+  "amazon": "B0G6DX6J2W",
+  "youtube": "UCs4kagEDNzKXKvFaoGrsr7g",
+  "tiktok": "@trollvarg",
+  "instagram": "trollvarg"
+}

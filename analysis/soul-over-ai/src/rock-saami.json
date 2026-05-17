@@ -1,0 +1,28 @@
+{
+  "id": "rock-saami",
+  "name": "ROCK SAAMI",
+  "dateAdded": "2026-02-07T00:02:55.833Z",
+  "dateUpdated": null,
+  "removed": true,
+  "issue": 3141,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "ai-visuals",
+    "2024-onwards",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"As Sri Lanka’s first AI artist his presence challenges old definitions of what it means to be “real” in rock.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3ljIzxnLXyWxjbiGNp5BQY",
+  "apple": null,
+  "amazon": "B0FVRCGH1V",
+  "youtube": "UCAd1_DwT2iKc8s7rH6Af9lA",
+  "tiktok": "@rocksaami",
+  "instagram": null
+}

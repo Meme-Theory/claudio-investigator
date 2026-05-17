@@ -1,0 +1,27 @@
+{
+  "id": "chrome-vultures",
+  "name": "Chrome Vultures",
+  "dateAdded": "2026-01-12T10:54:21.488Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4PQ5sbaZJmQMG5XtwxvVrL",
+  "apple": "1852852246",
+  "amazon": "B0G2QGY1GD",
+  "youtube": "UCr3YBefTBpxFt0ZysWzNhEQ",
+  "tiktok": "@chromevultures",
+  "instagram": "chromevultures"
+}

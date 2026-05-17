@@ -1,0 +1,33 @@
+{
+  "id": "ryker-ashford",
+  "name": "Ryker Ashford",
+  "dateAdded": "2026-02-01T22:39:50.256Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2733,
+  "disclosure": "partial",
+  "disclosureTypes": [
+    "instrumentation",
+    "mastering",
+    "mixing",
+    "vocals"
+  ],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Spotify bio states: \"While I collaborate with AI to craft the music, every word and emotion is authentically my own.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5wisI9hqYVfpfmccg9Zmbe",
+  "apple": "1791439194",
+  "amazon": "B0DRCB8CYG",
+  "youtube": "UCPY8h9bjRoAKqBZvdtkm4qw",
+  "tiktok": "@ryker_ashford",
+  "instagram": null
+}

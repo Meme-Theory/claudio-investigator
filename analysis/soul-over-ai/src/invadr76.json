@@ -1,0 +1,28 @@
+{
+  "id": "invadr76",
+  "name": "INVADR76",
+  "dateAdded": "2026-02-03T13:51:11.425Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2788,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": "Appears to be one of many AI side projects of Jülz, a member of the band Rev Theory. https://www.reddit.com/r/numetal/comments/1c8yzdu/is_rev_theory_passing_off_ai_music_as_new_songs/",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3KjQDMDK4Zc08VmXnAGAiX",
+  "apple": "1784305653",
+  "amazon": "B0DPLPTR2H",
+  "youtube": "UCMzm9LyvZan_IiOupTIsbLg",
+  "tiktok": null,
+  "instagram": null
+}

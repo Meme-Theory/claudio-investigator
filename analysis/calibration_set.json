@@ -1,0 +1,2800 @@
+[
+  {
+    "id": "da-soul-orchestra",
+    "name": "Da Soul Orchestra",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4TjVrvgka2iJR9GCbjKfLj",
+    "apple": null,
+    "youtube": "UCN2qsPHgXf5uJOIA_81u_og"
+  },
+  {
+    "id": "colter-rayne",
+    "name": "COLTER RAYNE",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "544Hd2Ja1526AqcftSnBQc",
+    "apple": "1826823823",
+    "youtube": "UC8q2CZmwb09L_IResRrv6dA"
+  },
+  {
+    "id": "krahbicht",
+    "name": "KraHbichT",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6BviIFP7ZRxpgu79x7Y8a8",
+    "apple": "1771092978",
+    "youtube": "UC0B4nGuC_Z3O7vWNEZJUbGA"
+  },
+  {
+    "id": "zayen",
+    "name": "Zayen",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "1U8rBGLGcsDcuc5O51Hb27",
+    "apple": "526253982",
+    "youtube": "UCi-t-oP9Ct01F2Bnwy0vXag"
+  },
+  {
+    "id": "let-babylon-burn",
+    "name": "Let Babylon Burn",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "469QwZuyXGWnZqBN07zzt5",
+    "apple": "1828704600",
+    "youtube": "UC28wfEMsuOvbOF874XwYmWg"
+  },
+  {
+    "id": "glxe",
+    "name": "GLXE",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "0DgpEL50vBHaokDjDJHiN4",
+    "apple": "1858501699",
+    "youtube": "UClt_TuCfI5r4Qh5Q_dYrszA"
+  },
+  {
+    "id": "nick-hustles",
+    "name": "Nick Hustles",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "4y6CMS7tqBf8ubmUuP9SQI",
+    "apple": "1783102464",
+    "youtube": "UC0SXzhrt2zMyE9ifTt3iiSg"
+  },
+  {
+    "id": "404-breakcore",
+    "name": "404 Breakcore",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "7bE3SluIg1wlFO80i0cmRl",
+    "apple": "1858624828",
+    "youtube": "UCmP7Zo4xw3IjbDl1L3CFz8g"
+  },
+  {
+    "id": "angelina-mormando",
+    "name": "Angelina Mormando",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "4rYruNinsmb8uS86TM2qGX",
+    "apple": "1832348763",
+    "youtube": "UCDP-EeKBA3NGWEfV5hTLaIg"
+  },
+  {
+    "id": "ghosts-of-american-intellects",
+    "name": "Ghosts of American Intellects",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "1c5wJinJJP8T7GTIkiNSNd",
+    "apple": "1845723235",
+    "youtube": "UC2nulBnj6AR_RGdcmQcZEmw"
+  },
+  {
+    "id": "ai-emo-kids",
+    "name": "AI Emo Kids",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "2PsmPReKNBeUB3iY8REpPA",
+    "apple": null,
+    "youtube": "UC3ABrCgwrO_juPMnYCOM7vA"
+  },
+  {
+    "id": "son-of-the-dead-sun",
+    "name": "Son of the Dead Sun",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4G98NlkANp6G8xA7YekcfT",
+    "apple": "1828462323",
+    "youtube": "UC6blRMh9jg022vRotUVOJSQ"
+  },
+  {
+    "id": "b-twizzy",
+    "name": "B Twizzy",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "5fxAD2CEglwSsAFp0eBP8q",
+    "apple": null,
+    "youtube": "UCUNYr073ETrfMOqspGzijJw"
+  },
+  {
+    "id": "zancrowstudio",
+    "name": "ZancrowStudio",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "4zmP9hFN6enx7MB0DAqWqc",
+    "apple": null,
+    "youtube": "UCmkOHhd1spszyuxirwheKCw"
+  },
+  {
+    "id": "bad-apples",
+    "name": "Bad Apples",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "1s7brFQBWfA9z2YR7bl9nh",
+    "apple": "1840951325",
+    "youtube": "UC-Tpu2gspo0jE2F_BdOph4Q"
+  },
+  {
+    "id": "vengeful",
+    "name": "VENGEFUL",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "3Z3VNM5xgRCE5zCzENrQEz",
+    "apple": "1776684207",
+    "youtube": "UCmga7AegiORoj6i2073HZLg"
+  },
+  {
+    "id": "alarm-clock-hero",
+    "name": "Alarm Clock Hero",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style",
+      "high-output"
+    ],
+    "spotify": "3b4epb94BqwtfRvKLgHI4B",
+    "apple": "1791097242",
+    "youtube": "UCatap3-5i6DmLhOvi6ew8Vg"
+  },
+  {
+    "id": "aschensturm",
+    "name": "Aschensturm",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "06QiQryte5FfPd9L7zHKLA",
+    "apple": null,
+    "youtube": "UCtkbAdEnblkOJFwZODneKlQ"
+  },
+  {
+    "id": "polskai",
+    "name": "POLSKAi",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "7bNwfQsUzcgqf7Y9P8xIe6",
+    "apple": "1868200670",
+    "youtube": "UCf3ElZJiHx7uRD4qAypt9yA"
+  },
+  {
+    "id": "theskeletonslibrary",
+    "name": "TheSkeletonsLibrary",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "49yWNU05MepSpoYQTKADro",
+    "apple": "1856929698",
+    "youtube": "UCLMbY1s9n-wnqpbwEyBZZnQ"
+  },
+  {
+    "id": "enlly",
+    "name": "Enlly",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4hm3WsEjU56qjJHY9vL9Jd",
+    "apple": null,
+    "youtube": "UCC2S5MPy82xEZQygvrIpQ2w"
+  },
+  {
+    "id": "steph-stephens",
+    "name": "Steph Stephens",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "5d1D5NNYFbqUqm1XmnYg05",
+    "apple": null,
+    "youtube": "UC7qPQL70PHEIS_grfFvGfZw"
+  },
+  {
+    "id": "rootsman-rebel",
+    "name": "Rootsman Rebel",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "5QuTMNt5qUBsbk8geIrKRF",
+    "apple": "1828467509",
+    "youtube": "UCXMgo9JG80vC3VRpcmB5FKQ"
+  },
+  {
+    "id": "valkorai",
+    "name": "Valkorai",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "5plnxQGfe4jfQE6wUETonC",
+    "apple": "1823748191",
+    "youtube": "UCs6GbF7_PxXnkSvgwt-NEMQ"
+  },
+  {
+    "id": "ai-music-matrix",
+    "name": "AI MUSIC MATRIX",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "2024-onwards"
+    ],
+    "spotify": "2q8l7EDyOchwz4biw4uIiW",
+    "apple": "1759727596",
+    "youtube": "UC4eEg9prJU6ApDrfsRwV1bw"
+  },
+  {
+    "id": "kiirelia",
+    "name": "Kiirelia",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "3a8oNNSSpypCdSSNsoI6Pj",
+    "apple": null,
+    "youtube": "UCH1V65k0jP6hfBHw8FaoI7Q"
+  },
+  {
+    "id": "blow-records",
+    "name": "BLOW RECORDS",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "6N5PRAVXd4vXyXmKseP3jq",
+    "apple": "1760229976",
+    "youtube": "UCJHVp5FTzNyz99_sJ45GQlg"
+  },
+  {
+    "id": "manifested-dreams",
+    "name": "Manifested Dreams",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4wppf2VUZmaZ6SQK2UXpVT",
+    "apple": "1841650523",
+    "youtube": "UCtBjzKt0XZA0C2eM5032ZLA"
+  },
+  {
+    "id": "the-burning-curse",
+    "name": "The Burning Curse",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "full",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "6wiCz0jMZy8p8r0FMQLTWI",
+    "apple": "1861568308",
+    "youtube": "UCRKhLnhxV_HIQrX_1eFzB7w"
+  },
+  {
+    "id": "the-velvet-sunrise",
+    "name": "The Velvet Sunrise",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "5XK6JWZScTSRIdn9yVEU8M",
+    "apple": "1825433983",
+    "youtube": "UCfYZaizcKDwhCycJa4SeXFQ"
+  },
+  {
+    "id": "themidnightblackout",
+    "name": "TheMidnightBlackout",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "1hQGQ512RxMvjhfZbrdFDu",
+    "apple": "1846337628",
+    "youtube": "UC66nXM-eXp4m8fqq-mSbYwA"
+  },
+  {
+    "id": "dark-blues-yt",
+    "name": "Dark Blues YT",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "0VD8mh1qWxnA7QanglU9DU",
+    "apple": "1869917905",
+    "youtube": "UCLElIekh6VVbqkZYo--gklA"
+  },
+  {
+    "id": "total-metal-destruction",
+    "name": "Total Metal Destruction",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6kXvDQRAm20UUEq4SuBAzp",
+    "apple": "1799559717",
+    "youtube": "UC3VEBtil9f7Ig-G4-JyvSEQ"
+  },
+  {
+    "id": "coco-expressions",
+    "name": "Coco Expressions",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals"
+    ],
+    "spotify": "5CxbLeA2tZMI77mfqx1j4M",
+    "apple": "1822070469",
+    "youtube": "UCbUm0X5xRaZRz93T5kJGJbg"
+  },
+  {
+    "id": "rowan-lewgalon",
+    "name": "Rowan Lewgalon",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "26RiOpRrXc5Hea8zgpQnmG",
+    "apple": "1772996908",
+    "youtube": "UC-PseivR8qfJigPPkzUYWHg"
+  },
+  {
+    "id": "artificial-soul",
+    "name": "Artificial Soul",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "4xKvwG0r26YvoddWvisGb9",
+    "apple": null,
+    "youtube": "UC0GQKegv90KuqvapFghjpKw"
+  },
+  {
+    "id": "mightyw-project",
+    "name": "MightyW Project",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "6WXmNu9tMCJZIMipvgbxgw",
+    "apple": "1741954514",
+    "youtube": "UCYJLXxVwqTzVznd3N_q2wwg"
+  },
+  {
+    "id": "full-metal-patriot",
+    "name": "Full Metal Patriot",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "0Yv8vhih8fGBPB4XgARXo1",
+    "apple": "1816191618",
+    "youtube": "UC9JT4lu1A6VA5LQiPtAOSMg"
+  },
+  {
+    "id": "soul-cafe",
+    "name": "Soul Cafe",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "2sWjOfINK4Fl34BU9MLSQM",
+    "apple": "1837868625",
+    "youtube": "UCVccRmiLPePBoImWKXdIaAQ"
+  },
+  {
+    "id": "angelbaby",
+    "name": "angelbaby",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "6g4ZsQkAV0t8qDAYlB5QGr",
+    "apple": "1671865109",
+    "youtube": "UCQFVhawSgdSxUi76KpSCvyQ"
+  },
+  {
+    "id": "mithiclegend",
+    "name": "MithicLegend",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "2u9DBykBhHajtzxQKKN8ye",
+    "apple": "1776025067",
+    "youtube": "UCycLdg4Al6qkrGgjRP1qlFw"
+  },
+  {
+    "id": "obsidian-swing",
+    "name": "Obsidian Swing",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "6ydIK3fZelJNbF5KwgZUga",
+    "apple": "1812243634",
+    "youtube": "UCFn4m_PRNIJNGBJCW9n9xlw"
+  },
+  {
+    "id": "astral-bards",
+    "name": "Astral Bards",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "650I9wGNnZKUQBZHsFtRKC",
+    "apple": "1780180186",
+    "youtube": "UChFql2hSBFPBcoQ0G6oD0vg"
+  },
+  {
+    "id": "vowless",
+    "name": "Vowless",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "7tySWxsUMoqeioehmcy0Ps",
+    "apple": "1855836114",
+    "youtube": "UCT80y8yCDaKG4uPj53s90QA"
+  },
+  {
+    "id": "lee-vyborny",
+    "name": "Lee Vyborny",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "full",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "7pdAlDbg3tCRW27aqGCQBW",
+    "apple": "1767007305",
+    "youtube": "UC1W8uFYW_PRGA3CGpI6bspQ"
+  },
+  {
+    "id": "l-aurah",
+    "name": "L'aurah",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6jhtibfsJUEtyv38EJomqd",
+    "apple": "1847923816",
+    "youtube": "UCsktnRWTDBcPrdMwdMCiNLQ"
+  },
+  {
+    "id": "grgr-playlist",
+    "name": "grgr_playlist",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "4MTxbWBI7q4w2NhKvEm8nv",
+    "apple": "1857194346",
+    "youtube": "UCBfrb7uxrP9blQKWsdjD7dw"
+  },
+  {
+    "id": "starfreak-fm",
+    "name": "Starfreak FM",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "1HzexeRQd6gKNkdfk7VqlQ",
+    "apple": "1818456540",
+    "youtube": "UCJW8tM-PDDz2lfQvx21KFrg"
+  },
+  {
+    "id": "hellena-banner",
+    "name": "Hellena Banner",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "0Z6a7hGL1tkHfN0UW36RUt",
+    "apple": null,
+    "youtube": "UCjVemcM81dCtH2sZcLF7cUw"
+  },
+  {
+    "id": "daphne-rae-meyers",
+    "name": "Daphne Rae Meyers",
+    "source_tier": 1,
+    "expected_label": "ai",
+    "soa_disclosure": "confirmed",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "66rKvHV3Thj9w9XmrJG3WG",
+    "apple": "1818037045",
+    "youtube": "UCI-FoteIfJ9Q0siq6fMCDAQ"
+  },
+  {
+    "id": "repeattwicedaily",
+    "name": "RepeatTwiceDaily",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6gyYwtCJKWURUHWsAm76PZ",
+    "apple": "1814215145",
+    "youtube": "UC0u4LkLcLtCYtGmpisYm8cw"
+  },
+  {
+    "id": "echoes-of-skollborn",
+    "name": "Echoes Of Skollborn",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "1nXBnGAPhA4veMGmaaxFyL",
+    "apple": "1850111714",
+    "youtube": "UCqrGWUIQepR3ZupISaC21xA"
+  },
+  {
+    "id": "aiyun",
+    "name": "Aiyun",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4dSpK6RQ66rjinHJxA5P8s",
+    "apple": "1772043417",
+    "youtube": "UCENgm_VduV3UxaSfSEGtGgQ"
+  },
+  {
+    "id": "vibfy",
+    "name": "Vibfy",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "4qqOOXMEHaEcoCQRctbmoU",
+    "apple": "1789170925",
+    "youtube": "UCr0vGjpk4SlXWKSAIRzxsxQ"
+  },
+  {
+    "id": "echoesofvelandria",
+    "name": "EchoesOfVelandria",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "high-output",
+      "ai-visuals",
+      "2024-onwards"
+    ],
+    "spotify": "7vfaikWkQ79OwYJlKJoK7S",
+    "apple": "1781097096",
+    "youtube": "UCxqgYlJdwcsEWX1Nc86ar1A"
+  },
+  {
+    "id": "my-boy-arlo",
+    "name": "My Boy Arlo",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "7jnEJXIT7Ur1VLF1BC48eD",
+    "apple": "1848819247",
+    "youtube": "UCm5Yz51tYirN-MwDE5ssjAw"
+  },
+  {
+    "id": "veyna-ashford",
+    "name": "Veyna Ashford",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [],
+    "spotify": "1GsWRG8DFVvi4xMUoAYB4h",
+    "apple": "1799612271",
+    "youtube": "UC9MoaW-ig2q3ftE7p9_EbNw"
+  },
+  {
+    "id": "angelofanarchy",
+    "name": "AngelofAnarchy",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards"
+    ],
+    "spotify": "5dt8gRLDwIgSS0uwxvxqqJ",
+    "apple": "1808093854",
+    "youtube": "UCLe_ekqZr7043O-HxqPHqcg"
+  },
+  {
+    "id": "wake-up-falling",
+    "name": "WAKE UP FALLING",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6us2N9JGcLCU1LnWJ3oNYf",
+    "apple": "1858948625",
+    "youtube": "UCOCmEw8qvwde26SlgbnYX2g"
+  },
+  {
+    "id": "christian-music-creations",
+    "name": "Christian Music Creations",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "0EexfNs9ZfQ3lWDmO7Csm7",
+    "apple": "1834358222",
+    "youtube": "UCLlyfDzMK1uN5LRrjBJpSqw"
+  },
+  {
+    "id": "steel-legion",
+    "name": "Steel Legion",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "2024-onwards",
+      "anonymous"
+    ],
+    "spotify": "6TGRILNkRjenk3QbCeqYqQ",
+    "apple": "1834372352",
+    "youtube": "UCnfkKd-xvmpWkp4ehcEPY4A"
+  },
+  {
+    "id": "eufonia",
+    "name": "Eufonia",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "44zsVhmhrC1CcckYWtedO0",
+    "apple": null,
+    "youtube": "UC0UEL92P2uN72LrA_7tj2ow"
+  },
+  {
+    "id": "synaptic",
+    "name": "Synaptic",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "5r0wo7k5gWLEXouzxh1Ovk",
+    "apple": "1855521642",
+    "youtube": "UCohvZoa5onBaAYdMz5ygisQ"
+  },
+  {
+    "id": "numb-theory",
+    "name": "Numb Theory",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6EW6th7nNnqrZKwg4j7X00",
+    "apple": null,
+    "youtube": "UCaTQjAC9vQJHNKZxVUJZA7g"
+  },
+  {
+    "id": "neon-oni",
+    "name": "NEON ONI",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [],
+    "spotify": "13ONzC3gAhmuRU25I6saTm",
+    "apple": "1843440881",
+    "youtube": "UCX2Bil1Vb3rYUMn1Sk15-Pw"
+  },
+  {
+    "id": "zunraid",
+    "name": "ZUNRAID",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "7ACR6q1laDn6SB6Geyrucp",
+    "apple": "1791219353",
+    "youtube": "UCs8yemoRSmfBPHwF4D__q3A"
+  },
+  {
+    "id": "novaine",
+    "name": "NOVAINE",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "1Xr0xMO4dQ8SGVOeYHdC6n",
+    "apple": "1851386351",
+    "youtube": "UC3riFS1nfcbqyK-CH8Spr4w"
+  },
+  {
+    "id": "heftique",
+    "name": "Heftique",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [],
+    "spotify": "6JfSjQ1vd85jqczfDcQ2sH",
+    "apple": "1836431479",
+    "youtube": "UCvnb5w5n9oP3xhfo6c0IFdg"
+  },
+  {
+    "id": "broken-record-kids",
+    "name": "broken record kids",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "5ZHL8LqKjdLnanGhNI8rPQ",
+    "apple": "1824770747",
+    "youtube": "UCn6ijpSKvLgPg7wo4bhE_uw"
+  },
+  {
+    "id": "zrockph",
+    "name": "ZrockPH",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "high-output",
+      "ai-visuals"
+    ],
+    "spotify": "3zcyTHyUwQls9gJmwjRKau",
+    "apple": "1855203710",
+    "youtube": "UCugI-ipYnu7PEfGUvuGTyjw"
+  },
+  {
+    "id": "rose-ivy",
+    "name": "Rose Ivy",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "inconsistent-style"
+    ],
+    "spotify": "0dBENcQ1Eb25JAsQfetmxb",
+    "apple": null,
+    "youtube": null
+  },
+  {
+    "id": "until-nothing",
+    "name": "Until Nothing",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "6I3WXHs5Wty0NPyqQ8ob6c",
+    "apple": "1865075319",
+    "youtube": "UCm5YA9fpTyJWieuHbhNhIRg"
+  },
+  {
+    "id": "porcelain-hearts",
+    "name": "PORCELAIN HEARTS",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "1SaerF7QF5mxah84qBsCnG",
+    "apple": "1844020018",
+    "youtube": "UCAipmgXhXrPFtsM5r7gReBA"
+  },
+  {
+    "id": "ai-soundtracks",
+    "name": "AI Soundtracks",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "0vUjNUtyKibIVc0h6tcjmN",
+    "apple": null,
+    "youtube": "UCevOh86UVZAc3Y2h4DyNYMA"
+  },
+  {
+    "id": "reamped-covers",
+    "name": "ReAmped Covers",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "56N6exXvUyVfA129fDtGgE",
+    "apple": "1845657446",
+    "youtube": "UCJPZGPWABUcMPmdbSqhts2Q"
+  },
+  {
+    "id": "psyndicated-neo-n-pulse",
+    "name": "PSYndicated Neo-N-Pulse",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "2f86Ddt5fqIJJqnMsSbMCK",
+    "apple": "1745187505",
+    "youtube": "UCCdnRyY-Xh_Rao1DQ95qNZg"
+  },
+  {
+    "id": "the-singing-tavern",
+    "name": "The Singing Tavern",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "2024-onwards"
+    ],
+    "spotify": "3AGAEn9ANXY5pcvILQ7iNS",
+    "apple": "1864533146",
+    "youtube": "UCziCRQ5KnYAn_RfLOcLyhaA"
+  },
+  {
+    "id": "pink-paradox",
+    "name": "Pink Paradox",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "41RYrzskJoovYRHB07AQdh",
+    "apple": "1744163303",
+    "youtube": "UC5s_52aNSAsgG_gQlluH_PA"
+  },
+  {
+    "id": "pie-for-billy",
+    "name": "Pie For Billy",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "3djeIfXzxwOgWLOkkWzkHj",
+    "apple": "1818085990",
+    "youtube": "UCmCy_ldZThdJtVf7SMX6DXw"
+  },
+  {
+    "id": "lg0r",
+    "name": "lG0R",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "2jqyq4qkWVmYItaq6O3lwA",
+    "apple": null,
+    "youtube": "UCvr3Mr-piqGYhtsHVy3NHUg"
+  },
+  {
+    "id": "medieval-confessions",
+    "name": "Medieval Confessions",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [],
+    "spotify": "38ytM06M5Uzb0LXkbInz5I",
+    "apple": "1852081529",
+    "youtube": "UCUcUEv-HFTo-qv8IJMDaveg"
+  },
+  {
+    "id": "almost-metal",
+    "name": "Almost Metal",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "0ErHX9fB6k24Rd7q0Fd1Lv",
+    "apple": "1835141274",
+    "youtube": "UCBryXKiFfCxXdweTqdE59lQ"
+  },
+  {
+    "id": "lord-pecalon",
+    "name": "Lord Pecalon",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "2024-onwards",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "1laZHi5BgZWBEqK299361n",
+    "apple": "1773425288",
+    "youtube": "UCchSU8zf81mf2SQCRefynTA"
+  },
+  {
+    "id": "sybilanta",
+    "name": "Sybilanta",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "2024-onwards"
+    ],
+    "spotify": "32kJyv7Ov7lVdqgSUXvmuU",
+    "apple": "1839947627",
+    "youtube": "UCDT2EZWOQW58QhtP0H-h4kA"
+  },
+  {
+    "id": "mia-hipnosis",
+    "name": "Mia Hipnosis",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "1GT0TeqzWpapvXyWgPwu10",
+    "apple": "1841592866",
+    "youtube": "UCG4lNLg_XKr0Du1m-Dk4b-Q"
+  },
+  {
+    "id": "nomarkmore",
+    "name": "NOMARKMORE",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [],
+    "spotify": "2MWLcIknPfRiaIktptiPil",
+    "apple": "1847981909",
+    "youtube": "UC4J2uA-W7dPzZM4fm9qgK-w"
+  },
+  {
+    "id": "avenlis-sound",
+    "name": "Avenlis Sound",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "5Xnd20AR3j5BYhkpjvSYnx",
+    "apple": "1847166853",
+    "youtube": "UCPIcJBWUtpEcK6uoZWQxZ8Q"
+  },
+  {
+    "id": "the-obsoletes",
+    "name": "The Obsoletes",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "6sF6xkrFyEuy3j0OgHa7JZ",
+    "apple": "191908024",
+    "youtube": null
+  },
+  {
+    "id": "alices-ghosts",
+    "name": "Alice's Ghosts",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "26PTBF6dsky63ic7PVWDqN",
+    "apple": "1851766945",
+    "youtube": "UCesuWlswSAaCya4JxC7M6yw"
+  },
+  {
+    "id": "lyra-vesperi",
+    "name": "Lyra Vesperi",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "3SjOWNhqeaJ6B0d6KFpAeE",
+    "apple": "1844277874",
+    "youtube": "UCyKMXQn_Wd43N8mU9Nb7-5w"
+  },
+  {
+    "id": "david-sven",
+    "name": "David Sven",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "2024-onwards"
+    ],
+    "spotify": "3ar8IMCqAMrVPQoN6cBwok",
+    "apple": "1814703374",
+    "youtube": "UC77h58MpEmHOKGVhPsZm9ew"
+  },
+  {
+    "id": "warthogscl",
+    "name": "WarthogSCL",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "1zV38ouhyBDW46QqgAj0Wf",
+    "apple": "1745903893",
+    "youtube": "UCxrZOV4fKVgtF_sLlJHvbAw"
+  },
+  {
+    "id": "sunho974",
+    "name": "sunho974",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0qS1EtuA0bXifVAGog7i2F",
+    "apple": "1842840631",
+    "youtube": "UCWdYoELTuoqymXgBAdbmGEA"
+  },
+  {
+    "id": "sakura-yuki",
+    "name": "Sakura Yuki",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "7pvSKl3abgvoACznKIvbnR",
+    "apple": null,
+    "youtube": "UCZ7lWPcj6503SQtTIHHrppA"
+  },
+  {
+    "id": "room2breathe",
+    "name": "Room2Breathe",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "inconsistent-style",
+      "anonymous",
+      "ai-visuals",
+      "2024-onwards"
+    ],
+    "spotify": "4VTMsDbOCPE9qk1996daN6",
+    "apple": "1759490213",
+    "youtube": "UCUiIOtjPH6L7j2OvRldNysQ"
+  },
+  {
+    "id": "syraxsoul",
+    "name": "SyraxSoul",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "2024-onwards",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "4P92vZ4X2JcidL7sp4n5rL",
+    "apple": "1851249035",
+    "youtube": "UCHaxuPrur-VHEM2yW8fXNJg"
+  },
+  {
+    "id": "broken-oracle",
+    "name": "Broken Oracle",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "4qaRuUEio7d97qKXRc0eh0",
+    "apple": "1862346947",
+    "youtube": "UCjLseE0OnhCNghoqMNHWtrw"
+  },
+  {
+    "id": "black-mustang-defense",
+    "name": "Black Mustang Defense",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "inconsistent-style"
+    ],
+    "spotify": "6VNyMIYuc1bev0Xe8hIpia",
+    "apple": "1817250379",
+    "youtube": "UC-mQ6i_Mv4eYF9Ng2k3dddA"
+  },
+  {
+    "id": "mela-mirage",
+    "name": "Mela Mirage",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output"
+    ],
+    "spotify": "4xUvh9IpOF7oOpTiRn6YJT",
+    "apple": "1819577335",
+    "youtube": "UCgb7-1HfcNt_C1-IDLCguAw"
+  },
+  {
+    "id": "les-rock-n-rollos",
+    "name": "Les Rock'n'Rollos",
+    "source_tier": 2,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "partial",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "5zx9WIVEZN7Mo5m2G6DSzO",
+    "apple": "1870173378",
+    "youtube": "UCeHC-3bkYnMEsTlyOyzpZAQ"
+  },
+  {
+    "id": "amber-drift",
+    "name": "Amber Drift",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0ewhASYRY9oRACxwBkcBOD",
+    "apple": "1832151914",
+    "youtube": "UCOgawHmJsMJSaTdFVmQVsYQ"
+  },
+  {
+    "id": "thodins-path",
+    "name": "Thodins Path",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "anonymous",
+      "high-output",
+      "ai-visuals"
+    ],
+    "spotify": "4kwIJcwSXak3yrULH4FKnE",
+    "apple": "1845488054",
+    "youtube": "UCndaF7F3adYjrV9R5qaAGBA"
+  },
+  {
+    "id": "tess-mac-keen",
+    "name": "Tess Mac Keen",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "77mpUoVwkQ9qs9b4AQiDin",
+    "apple": "1770974859",
+    "youtube": "UCtvjHYsL5nGckco_8gMxs_w"
+  },
+  {
+    "id": "savanna-rae",
+    "name": "Savanna Rae",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "3jfEESOgtU9pb59SP4aRgd",
+    "apple": null,
+    "youtube": "UCeATPXFlLGz0DcBgSCpLyig"
+  },
+  {
+    "id": "midnight-lust",
+    "name": "Midnight Lust",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "4WvPcD7O2eDUKVvGOVyS16",
+    "apple": "1850830525",
+    "youtube": "UCTduhQ2JJkUEZDgec5j4tKw"
+  },
+  {
+    "id": "phantom-swing",
+    "name": "Phantom Swing",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0cNihMer7NrlB8ULkVD0HB",
+    "apple": "1816370146",
+    "youtube": "UCfzkkqjBu7QE7IzxYQQiDeg"
+  },
+  {
+    "id": "eon-veil",
+    "name": "Eon Veil",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "6QprMA46cBp02CwFSzGdQb",
+    "apple": "1844526760",
+    "youtube": "UCWyYmilkUl7lp83mwju54hw"
+  },
+  {
+    "id": "sunshine-girl",
+    "name": "Sunshine Girl",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "5QAEXliAnfHRCE8QnLzrWl",
+    "apple": "1849661297",
+    "youtube": "UC2ag-8wDTY_nT1rWUCJEIqg"
+  },
+  {
+    "id": "video-girl",
+    "name": "Video Girl",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "3M4lW4QlOqVOiaEpggbQwL",
+    "apple": "1845013853",
+    "youtube": "UC16U5xcHCdTMZqJGkQMgCig"
+  },
+  {
+    "id": "broken-trails",
+    "name": "Broken Trails",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "4xx3ItNSXI7tUcCYU3St08",
+    "apple": "1850428773",
+    "youtube": "UC5H9cY2J4fCyHriG8vb7LRw"
+  },
+  {
+    "id": "wren-and-the-daughters-of-the-bear",
+    "name": "Wren and the Daughters of the Bear",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "4HUDgXXP7u2kzmwXZSUsaE",
+    "apple": "1845705297",
+    "youtube": "UCnT7xRmI4jojr-Z_9X1agrg"
+  },
+  {
+    "id": "eldrheim",
+    "name": "ELDRHEIM",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0Yn0jPGfMW8IpPwK1MlPXg",
+    "apple": "1856887574",
+    "youtube": "UCH3euEQJqWMAAjtoU0RKZFQ"
+  },
+  {
+    "id": "ayla-chan",
+    "name": "Ayla - Chan",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "2QKHU2aU2m7dW6fBPuwZGa",
+    "apple": "1798849480",
+    "youtube": "UCT-aQt-dNX-QGk8wEYKKIVg"
+  },
+  {
+    "id": "50-mark-club",
+    "name": "50 Mark Club",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "6a57wAiGT8CZJKz7eCmEPd",
+    "apple": "1778958704",
+    "youtube": "UCcjnPAMrcw3fmuHMjo6cM-A"
+  },
+  {
+    "id": "roadkill-pickers",
+    "name": "Roadkill Pickers",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "6DhOO3dOrsRRt13lkPrIiy",
+    "apple": "1753401490",
+    "youtube": "UCxGxCKv_aqEHeBhkjATevuQ"
+  },
+  {
+    "id": "rumbiahouse",
+    "name": "RumbiaHouse",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "2024-onwards",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "5YzAWmDDMIcGKFEY0K4Pjt",
+    "apple": "1856221903",
+    "youtube": "UCQmz0wdXEqvSOW87mxSnY9Q"
+  },
+  {
+    "id": "sublime-vocal",
+    "name": "Sublime Vocal",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "07bdt2A9YDQmoL8MXnenHv",
+    "apple": null,
+    "youtube": "UCeLx065p_10O3_dqKvDdZ3g"
+  },
+  {
+    "id": "velcheva-vibe",
+    "name": "VELCHEVA VIBE",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "2YS32rdok3MAzXbgIlZzzl",
+    "apple": "1861732439",
+    "youtube": "UCyDntyiDcta8FUtjhP2s4YQ"
+  },
+  {
+    "id": "tunes-of-the-future",
+    "name": "Tunes of the Future",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "2GfgxK9cwdcQrL8S8SlACI",
+    "apple": "1764609011",
+    "youtube": "UCjIfY5pEGaWl3KLOC2qG60Q"
+  },
+  {
+    "id": "izzy-byrne",
+    "name": "Izzy Byrne",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output",
+      "2024-onwards",
+      "anonymous"
+    ],
+    "spotify": "6djzLHd3BUw3zHklHN7qbO",
+    "apple": "1827095766",
+    "youtube": "UCQzochjD-C4QyB7mThxmzZg"
+  },
+  {
+    "id": "saint-vice",
+    "name": "Saint Vice",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "179nZs7X7xadeJELC8QVsn",
+    "apple": "1857491837",
+    "youtube": "UCwMIELXvDpsVKzROn7-5PoQ"
+  },
+  {
+    "id": "vargvegr",
+    "name": "Vargvegr",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "4Bhqo7CDUZT8CW9hGRq7Yy",
+    "apple": "1838472606",
+    "youtube": "UCV5n-2GK4GkSZBdoMyYxCKw"
+  },
+  {
+    "id": "minako",
+    "name": "Minako",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "3cZsAKBrqjtook9HekB5Uy",
+    "apple": "411853702",
+    "youtube": "UCW9JEdw-kZtFRZ6XLP3nClg"
+  },
+  {
+    "id": "eichenherz",
+    "name": "Eichenherz",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0ULLHKNtfdVc59rs5MOlpr",
+    "apple": "1838265545",
+    "youtube": "UChQZesRU2CpUdEMLjvvXt5Q"
+  },
+  {
+    "id": "schlagermelle",
+    "name": "Schlagermelle",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "23C9ZhKXLGKBdEmPstn91o",
+    "apple": "1769901522",
+    "youtube": "UCERF_YHo5N5bwu-YbsgKBkg"
+  },
+  {
+    "id": "booktok",
+    "name": "BookTok",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "3XhzIq3xGVsEIcPf5gz1Cm",
+    "apple": "1842691484",
+    "youtube": "UCANDqNI2amhhJfuYhcg7qAg"
+  },
+  {
+    "id": "hallucinophonics",
+    "name": "Hallucinophonics",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "1Xn2Xs80B7ZpGG633ai071",
+    "apple": "1818492774",
+    "youtube": "UCG4DkeyoeoNc8wSjgB5gE-A"
+  },
+  {
+    "id": "project-vii",
+    "name": "Project VII",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "60OpTP3KX9BfczqDN08v5t",
+    "apple": "1840523376",
+    "youtube": "UCgQgh0-HaDhTMbG3ja9ug-w"
+  },
+  {
+    "id": "soulful-sounds-trio",
+    "name": "Soulful Sounds Trio",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "3piy636301G1jrxYZBCbN8",
+    "apple": "1749076565",
+    "youtube": "UCWfFj6ozWZJHVwfNi8zHMCg"
+  },
+  {
+    "id": "mando-viking-music",
+    "name": "Mando Viking Music",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "2RpduBhIozg8wuYgGyJOJx",
+    "apple": "1851836037",
+    "youtube": "UCV6-e7BZz1lgtuC6fnlpknA"
+  },
+  {
+    "id": "kealux",
+    "name": "Kealux",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "3WTRGOdgo9ZUwqRzvObalK",
+    "apple": "1818915109",
+    "youtube": "UCi25kcC9luuPwe5kBLghb4w"
+  },
+  {
+    "id": "wyrmship",
+    "name": "Wyrmship",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "2024-onwards",
+      "anonymous"
+    ],
+    "spotify": "1fNGfx13SYscLWdXyDxJ1m",
+    "apple": "1842883088",
+    "youtube": "UC2gcznSaHbzaBtKuaEzX8lw"
+  },
+  {
+    "id": "deadluve",
+    "name": "DEADLUVE",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous"
+    ],
+    "spotify": "3CwHxE8HXuezwO8DobgbiM",
+    "apple": "1838822179",
+    "youtube": "UCOFDJM_SFgN1AT9a7v7ftog"
+  },
+  {
+    "id": "euryeth",
+    "name": "Euryeth",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "0FF21wGknM6ELK0speTD5W",
+    "apple": "1554376243",
+    "youtube": "UCKGGXrmzCmve7sQNhPmi2og"
+  },
+  {
+    "id": "hexxenmind",
+    "name": "HEXXENMIND",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "29GuyTDTPnxeRQhEdbmGLn",
+    "apple": "1842454144",
+    "youtube": "UC-RtoZXWbHJO8SO3d51Oiow"
+  },
+  {
+    "id": "dayseye",
+    "name": "DaysEye",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "5xXNSdXlFulKXyuOxHeIwW",
+    "apple": "699739007",
+    "youtube": "UCL09ODO_x3g16dQk5GQykWQ"
+  },
+  {
+    "id": "vahid-beats",
+    "name": "Vahid Beats",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "71IxvOUJxeBpEtKiOLxLIm",
+    "apple": "1772535317",
+    "youtube": "UC9UFtPC-I1TJ3HLwNXYSWvw"
+  },
+  {
+    "id": "seidr",
+    "name": "SEIDR",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "7obewUjFfz4BmXS8NheWhO",
+    "apple": "1834372859",
+    "youtube": "UCFQlgK-kYwGIpfJUhoCBEBQ"
+  },
+  {
+    "id": "chrome-vultures",
+    "name": "Chrome Vultures",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "4PQ5sbaZJmQMG5XtwxvVrL",
+    "apple": "1852852246",
+    "youtube": "UCr3YBefTBpxFt0ZysWzNhEQ"
+  },
+  {
+    "id": "generated",
+    "name": "GENERATED",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "3tnTz9WCaghp3PJPSsTxQW",
+    "apple": "1733910368",
+    "youtube": null
+  },
+  {
+    "id": "howlin-jackson",
+    "name": "Howlin Jackson",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "2oYgK16iRwQMrKS8Hr2S66",
+    "apple": "1818899197",
+    "youtube": "UCCcaNczLrQuKHbCqf4RmL5g"
+  },
+  {
+    "id": "woywoyboy",
+    "name": "WoyWoyBoy",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0FzX1vNyDhtncPq8NNK1Li",
+    "apple": "1747607694",
+    "youtube": "UCjXJ_HVGHPbj-po3FRChhHQ"
+  },
+  {
+    "id": "deathly-hours",
+    "name": "Deathly Hours",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output",
+      "inconsistent-style"
+    ],
+    "spotify": "07XIuuPrpw0kcGrJApsbQp",
+    "apple": "1816210423",
+    "youtube": "UCtLnTncVauqAouXZXABQP6Q"
+  },
+  {
+    "id": "atlas-untamed",
+    "name": "Atlas Untamed",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "2acVNiatfP3p96tKG8qH9U",
+    "apple": "1813647161",
+    "youtube": "UCbI1VpTLAoL1wWlgqbmedJw"
+  },
+  {
+    "id": "intimate-vibes",
+    "name": "Intimate Vibes",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "0m2ZWklF7gejc0Q9GzxACb",
+    "apple": "1823929917",
+    "youtube": "UCPzwot91OpxPs439NSneQ4g"
+  },
+  {
+    "id": "daimon-noir",
+    "name": "Daimon Noir",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "5UnlNwwsBNIq3TSHYar3Yz",
+    "apple": "1836844199",
+    "youtube": "UCru7bnmWNGUQuGupxAd1LZw"
+  },
+  {
+    "id": "blank-souls",
+    "name": "BLANK SOULS",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "6AdnBj2BwayvTnH7pLwEg1",
+    "apple": "1849791085",
+    "youtube": "UCyzrEJ5QcC2EnxG7RX8Hc-g"
+  },
+  {
+    "id": "free-fusions",
+    "name": "Free Fusions",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards",
+      "ai-visuals",
+      "anonymous",
+      "high-output"
+    ],
+    "spotify": "4PeU2e1zkESash9T7bc6Ha",
+    "apple": "1750281554",
+    "youtube": "UCtUJ9-HQ7IFQqzKtOVA-tyQ"
+  },
+  {
+    "id": "the-medieval-inn",
+    "name": "The Medieval Inn",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "high-output",
+      "anonymous"
+    ],
+    "spotify": "0WVhflO5EK9M4mNxftcepi",
+    "apple": "1864377036",
+    "youtube": "UC_3MqMmAryYGhL057jJ01zw"
+  },
+  {
+    "id": "beat-drift",
+    "name": "Beat Drift",
+    "source_tier": 3,
+    "expected_label": "likely_ai",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals",
+      "anonymous",
+      "inconsistent-style"
+    ],
+    "spotify": "3X3coPEx339cDpfSp2H36M",
+    "apple": "1792445101",
+    "youtube": "UC1DL_GGzZW155j5ev9yXoxg"
+  },
+  {
+    "id": "davian-blake",
+    "name": "Davian Blake",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "1kAelaBTwLYFCkelExGjwk",
+    "apple": "1798378516",
+    "youtube": "UCVQDURzGn0oFxohbfG5f9jA"
+  },
+  {
+    "id": "bardstrike",
+    "name": "BardStrike",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "1WuGn0jCPDAovbnnia18hk",
+    "apple": "1762475451",
+    "youtube": "UCa9nFNtbI3zTZfPLx7QExiA"
+  },
+  {
+    "id": "drunken-night",
+    "name": "drunken night",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "4CiXdtqTmDzH1jGZVTDJWL",
+    "apple": "1851836333",
+    "youtube": "UCqIIYkiiW2ZrzC25jpynHwA"
+  },
+  {
+    "id": "ricardo-abyssal",
+    "name": "Ricardo Abyssal",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "47s2i6XVeEU4bk6nAcOwUb",
+    "apple": "1734747935",
+    "youtube": null
+  },
+  {
+    "id": "rune-skald",
+    "name": "Rune Skald",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "5NI0Rs5LbLJnIUzwyKMRZO",
+    "apple": "1815395624",
+    "youtube": null
+  },
+  {
+    "id": "badger-sounds",
+    "name": "Badger Sounds",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "64XVZA95MFE7smlQOsEQX4",
+    "apple": null,
+    "youtube": "UC5TcQcGhxhHS0ThUqzjLC5g"
+  },
+  {
+    "id": "may-bee",
+    "name": "MAY BEE",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "6TmwDtmYEIv8hYGRnskk7Z",
+    "apple": "1857063975",
+    "youtube": "UCdro7o5W5GpKG0LEEE6DDyQ"
+  },
+  {
+    "id": "moon-soul",
+    "name": "Moon Soul",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "48IWhckCqdKLfS7hFw20x5",
+    "apple": "1700485374",
+    "youtube": "UC3sbO_2_woyDOyVgf6V-Rlw"
+  },
+  {
+    "id": "apexwolf-beats",
+    "name": "Apexwolf Beats",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "44gGAv89M1zRgttLVdjrR1",
+    "apple": "1853166866",
+    "youtube": "UCoHGTf8U4HgKsoCteJOSLWQ"
+  },
+  {
+    "id": "good-mourning",
+    "name": "Good Mourning",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "0w6HLRyWtF9lvvK1HsUVmB",
+    "apple": "1856886018",
+    "youtube": null
+  },
+  {
+    "id": "copperplate",
+    "name": "copperplate",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "33gqAcq77ntKPjmks6HLGD",
+    "apple": "1752458561",
+    "youtube": "UCHp9OhzgWDY4ZpeNGWiRaxA"
+  },
+  {
+    "id": "empty-skyline",
+    "name": "Empty Skyline",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "3KKr6gwQu7rMNK66xYPEoc",
+    "apple": "1858634133",
+    "youtube": "UCT8_hnMQTJcMylZuwPfJRTw"
+  },
+  {
+    "id": "velvet-desires",
+    "name": "velvet desires",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "5xTlKmwStlbbmASPg7u3zr",
+    "apple": "1842949813",
+    "youtube": "UCpji-HG-cg18GTd2iwOTBJw"
+  },
+  {
+    "id": "sonara",
+    "name": "Sonara",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "4Vic5aPqZkamOsNfW4oee9",
+    "apple": "1843406328",
+    "youtube": "UCbr45BufRuRSK-GfBLbTdLg"
+  },
+  {
+    "id": "mystic-riffs",
+    "name": "Mystic Riffs",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "6vESiai7KVad4r1YbNMVjR",
+    "apple": "1765740083",
+    "youtube": "UCm6P2RD9vmNL72f3SZ3dGRA"
+  },
+  {
+    "id": "j-bumi",
+    "name": "J Bumi",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "04KukyCGwGzV7OphBeN5qa",
+    "apple": "1836746445",
+    "youtube": null
+  },
+  {
+    "id": "black-mewtal",
+    "name": "Black Mewtal",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "4pD9k5kwc8iYX2spxUBGeu",
+    "apple": "1848667583",
+    "youtube": "UCq1cNtV6zcvlGZ5rYguyzcQ"
+  },
+  {
+    "id": "endless-taverns",
+    "name": "Endless Taverns",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "4J8rnLuoQLnT09osjqGsIr",
+    "apple": "1736164110",
+    "youtube": "UCsmQCNC5jpHZo1VagFe8-gQ"
+  },
+  {
+    "id": "lunatick",
+    "name": "Lunatick",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "3lOaRDpJxenuwREjjYkfLF",
+    "apple": "1840011270",
+    "youtube": "UC6yML89BTI4Gsxi9mx7pU_g"
+  },
+  {
+    "id": "aeriel",
+    "name": "Aeriel",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "2PD0BR1xfo5KhUYni6hU7R",
+    "apple": "1839305277",
+    "youtube": null
+  },
+  {
+    "id": "sol-umbra",
+    "name": "SOL UMBRA",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "18ej5S8e7A30yJ3AbM9ilp",
+    "apple": "1847020066",
+    "youtube": "UCAy0FOCn3QfkW2wgo-dbRYA"
+  },
+  {
+    "id": "raven-fell",
+    "name": "Raven+Fell",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "27TqMlIjvKlvIa3cdFWNoM",
+    "apple": "1825232463",
+    "youtube": "UCRWYpx9OVlKjlp0TQ2CGdbw"
+  },
+  {
+    "id": "lolita",
+    "name": "Lolita",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "74DHTAvzuTLZNZ6XBVY4Od",
+    "apple": "1861271018",
+    "youtube": "UCr1qMIeABloJxz0VhzaX3gw"
+  },
+  {
+    "id": "solarshard",
+    "name": "SolarShard",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "4sdaHYfDH8MwHc1gsIHOVI",
+    "apple": "1804448990",
+    "youtube": "UCGIFgMN67R9YrRDx32ilLNA"
+  },
+  {
+    "id": "equrnaz",
+    "name": "EQurnaz",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "5jKGaookPozBP99M72GN4O",
+    "apple": "718674037",
+    "youtube": "UCyFN0IVE6dqGD7DAFciqGcg"
+  },
+  {
+    "id": "tapas",
+    "name": "Tapas",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "7MQmLVhtOlZH1g5F9Qpxyz",
+    "apple": "1767121833",
+    "youtube": null
+  },
+  {
+    "id": "cyndr",
+    "name": "Cyndr",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "4q15WBVnHDTs8iNVQQRSSj",
+    "apple": "1847334086",
+    "youtube": "UC4lXG3nnhjhq69N-piN-VCQ"
+  },
+  {
+    "id": "souls-divided",
+    "name": "Souls Divided",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "1N6y7GzUt4woDtRRYhvkaF",
+    "apple": "1751412565",
+    "youtube": "UCzekvoQrWFXw65uttM2lfvQ"
+  },
+  {
+    "id": "micolai",
+    "name": "Micolai",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "1y8XjeWocHH0tLaftNFtab",
+    "apple": "1851121225",
+    "youtube": "UCVfhhhXn9uIVqEK_dLq_CnQ"
+  },
+  {
+    "id": "mythborne",
+    "name": "Mythborne",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "5GK5bjfOBUflGBrOjAQ5wp",
+    "apple": "1851805725",
+    "youtube": "UCWXJrT98HLhQPRddHzqaxlg"
+  },
+  {
+    "id": "melodial",
+    "name": "Melodial",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "77t1xeeYZDBTsfXqTntmwO",
+    "apple": "1824826550",
+    "youtube": null
+  },
+  {
+    "id": "luna-sole",
+    "name": "Luna Sole",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "0BH88qkQDiF94pwddp3l42",
+    "apple": "1845548040",
+    "youtube": "UCz7O32FFvmPoWehFOLg2suA"
+  },
+  {
+    "id": "olivia-baynton",
+    "name": "Olivia Baynton",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "2iPSM4g1ILRqdu230ae2Gr",
+    "apple": "1808939897",
+    "youtube": "UCp1gqFA_ZWOcmEyyTkQG9ig"
+  },
+  {
+    "id": "finlay-walker",
+    "name": "Finlay Walker",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "ai-visuals"
+    ],
+    "spotify": "5trdpMHQ5gmsMHDQ7Bw5bs",
+    "apple": "1842332580",
+    "youtube": "UCxF54QRMEOd72KNIhb6OvXQ"
+  },
+  {
+    "id": "phantom-veil",
+    "name": "Phantom Veil",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "38VxxXFe30VFUMpK2PhBMA",
+    "apple": "1776427470",
+    "youtube": "UCC16KHdNskt1PU_VUXbz09A"
+  },
+  {
+    "id": "j-cognitto",
+    "name": "J. Cognitto",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "19770aFQnsVbdMJQYngSmA",
+    "apple": "1789024741",
+    "youtube": "UCZI4S2yxuVMd0XE85u519zw"
+  },
+  {
+    "id": "stellar-cruise",
+    "name": "Stellar Cruise",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "2R6kG4jQJoWlGEZVDKkx4z",
+    "apple": "1797444819",
+    "youtube": "UC29ydnpCEKKmYjy6nPMq8sw"
+  },
+  {
+    "id": "kuroi-riquid",
+    "name": "Kuroi Riquid",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "4oWo3YZqtxbZWOgpp6JR3o",
+    "apple": "1745264593",
+    "youtube": "UCwzmKxpeNtf3yyR3OX_7lUw"
+  },
+  {
+    "id": "breaking-rust",
+    "name": "Breaking Rust",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "3h9rLaviiFj1TeEhdIRpP5",
+    "apple": "1845441331",
+    "youtube": "UCODbKiVoR8lWDPl39uf803Q"
+  },
+  {
+    "id": "ronnie-obriant",
+    "name": "Ronnie OBriant",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "6h6bTqCMdM3wskSzhxLJDQ",
+    "apple": "1845617416",
+    "youtube": "UCg8e-W8LhQl3UeC_OJRzbFA"
+  },
+  {
+    "id": "katherine-jayne",
+    "name": "Katherine Jayne",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "inconsistent-style"
+    ],
+    "spotify": "4miFlZJ2yAE7OqtwklQVOK",
+    "apple": "1749933748",
+    "youtube": "UCxmw1m2CUJ0J30ZETu9jbLQ"
+  },
+  {
+    "id": "invictus",
+    "name": "Invictus",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "5rYgnIcAHaJXh359SMpXwI",
+    "apple": "1827708774",
+    "youtube": null
+  },
+  {
+    "id": "matthews-silent-chapter",
+    "name": "Matthew's Silent Chapter",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "2024-onwards"
+    ],
+    "spotify": "2JUTGg9txxR3B3acyTlFp7",
+    "apple": "1789870492",
+    "youtube": "UClzMmb5fbOcZNbcOujy61nQ"
+  },
+  {
+    "id": "deadstate",
+    "name": "DEADSTATE",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "2kH4qyiwPbwUVALfqnKHWf",
+    "apple": "1859824103",
+    "youtube": "UCoLdiv1O8Oa2QgY6pCTuTCg"
+  },
+  {
+    "id": "pirates-of-the-horizon",
+    "name": "Pirates of the Horizon",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "1Rf7kz5LxseEixxKRizCdt",
+    "apple": "1784013546",
+    "youtube": "UCz-X8GGLYArXHe0q5nhmYtA"
+  },
+  {
+    "id": "nina-blaze",
+    "name": "Nina Blaze",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "high-output"
+    ],
+    "spotify": "3ZqJbUCCCgtTCgGhWgrEOq",
+    "apple": "1834569227",
+    "youtube": "UCpvkuq0xi6gce3wVnQ4Kb9w"
+  },
+  {
+    "id": "zen-decoys",
+    "name": "Zen Decoys",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "0zN1m4T77JxT1eqvi7EPBv",
+    "apple": null,
+    "youtube": "UCOCraahynU7FAYk6O9V4UAw"
+  },
+  {
+    "id": "rezon8",
+    "name": "REZ\u00d8N8",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "1BdzBfitKmsHs4ylI7MCUv",
+    "apple": "1847389221",
+    "youtube": "UCjJckzOnw2xHRjIPXzEoWPw"
+  },
+  {
+    "id": "neytan",
+    "name": "Neytan",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [],
+    "spotify": "29sDg3OXbYCg0SDuYBqP2G",
+    "apple": "1840918659",
+    "youtube": null
+  },
+  {
+    "id": "lyryxx",
+    "name": "LYRYXX",
+    "source_tier": 4,
+    "expected_label": "unclear",
+    "soa_disclosure": "none",
+    "soa_markers": [
+      "anonymous"
+    ],
+    "spotify": "31SVvG3RROXlN03ez3h7F3",
+    "apple": null,
+    "youtube": "UC4DATTYt0_1Sugh1XwmnCeQ"
+  }
+]

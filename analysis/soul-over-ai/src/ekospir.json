@@ -1,0 +1,27 @@
+{
+  "id": "ekospir",
+  "name": "EKOSPIR",
+  "dateAdded": "2026-01-03T14:14:56.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "SubmitHub analysis indicates the music exhibits typical AI generation patterns but with some uncertainty.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4rCWHvHNo6YpPeLhCnIxS5",
+  "apple": "1847994867",
+  "amazon": "B0FXDGXN82",
+  "youtube": "UCK4SPb4qlaFUHp6Jwso5pkg",
+  "tiktok": "@ekospir",
+  "instagram": null
+}

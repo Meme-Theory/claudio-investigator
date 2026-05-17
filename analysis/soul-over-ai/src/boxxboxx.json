@@ -1,0 +1,26 @@
+{
+  "id": "boxxboxx",
+  "name": "BoxxBoxx",
+  "dateAdded": "2026-01-06T19:50:52.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "Spotify bio explicitly confirms AI use, stating the project is an AI influencer that creates music and content for Formula 1 fans.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0LBJ6HOlSOhDtS1kTqVMz1",
+  "apple": "1839454633",
+  "amazon": "B0FQX4FV54",
+  "youtube": "UC9icCwnRAhqN-Jv3_R1kyiA",
+  "tiktok": null,
+  "instagram": "boxxboxx.official"
+}

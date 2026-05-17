@@ -1,0 +1,26 @@
+{
+  "id": "promptgenix",
+  "name": "promptgenix",
+  "dateAdded": "2026-01-26T14:33:52.622Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "Prompt is in the 'band' name, and they have acknowledged the use of AI on Reddit.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5P3dOgV9xFmRFfuuxi1I0O",
+  "apple": "1840464671",
+  "amazon": null,
+  "youtube": "UCVohDTn3JHRDlM3YDPCDm_Q",
+  "tiktok": "@promptgenix",
+  "instagram": "promptgenix_"
+}

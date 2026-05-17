@@ -1,0 +1,26 @@
+{
+  "id": "xania-monet",
+  "name": "Xania Monet",
+  "dateAdded": "2026-01-03T18:17:49.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The Apple Music bio describes the artist as \"an AI figure presented as a contemporary R&B vocalist.\" It also indicates that Telisha Nikki Jones is behind the project, writing the lyrics and using generative AI to produce the songs.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0YIEJNJUCsjzeWwj8Xh2LD",
+  "apple": "1827735211",
+  "amazon": "B0FJ6Y7ZK8",
+  "youtube": "UCb6ymSf0Tfhv4zxZ5kjsaKQ",
+  "tiktok": "@xania_monet",
+  "instagram": "xania_monet"
+}

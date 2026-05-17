@@ -1,0 +1,26 @@
+{
+  "id": "zero-code",
+  "name": "Zero Code",
+  "dateAdded": "2025-12-29T20:25:20.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "AI-generated YouTube videos with no discernible information about band members.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "30NOquteSyafnk036kEghP",
+  "apple": "1492242541",
+  "amazon": "B07QHZMVF4",
+  "youtube": "UCJrTm7GB5p7phTXaJu34lhg",
+  "tiktok": null,
+  "instagram": null
+}

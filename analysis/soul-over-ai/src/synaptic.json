@@ -1,0 +1,26 @@
+{
+  "id": "synaptic",
+  "name": "Synaptic",
+  "dateAdded": "2026-01-18T12:43:12.976Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5r0wo7k5gWLEXouzxh1Ovk",
+  "apple": "1855521642",
+  "amazon": null,
+  "youtube": "UCohvZoa5onBaAYdMz5ygisQ",
+  "tiktok": "@itssynaptic",
+  "instagram": "itssynaptic"
+}

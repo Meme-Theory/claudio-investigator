@@ -1,0 +1,27 @@
+{
+  "id": "i-needed-this-dave",
+  "name": "I Needed This Dave",
+  "dateAdded": "2026-01-03T17:27:08.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Some of the author's Instagram posts reference the use of AI-generated music tools, including Suno.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1atTAZjHUqisi3Kavz7ADA",
+  "apple": "1839168108",
+  "amazon": "B0FQPDDW3F",
+  "youtube": "UCPuXldcePE1ULDTBCPrc--A",
+  "tiktok": "@needthisdave",
+  "instagram": "neededthisdave"
+}

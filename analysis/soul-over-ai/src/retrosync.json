@@ -1,0 +1,26 @@
+{
+  "id": "retrosync",
+  "name": "Retrosync",
+  "dateAdded": "2026-01-11T20:01:11.670Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4y8hhwAGbhvDxwbs8nQq7Y",
+  "apple": "669422490",
+  "amazon": "B0FD43SW7Q",
+  "youtube": "UCgMOOhp8UkDLpjpOq5gEvUQ",
+  "tiktok": null,
+  "instagram": null
+}

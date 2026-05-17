@@ -1,0 +1,26 @@
+{
+  "id": "dzbogel",
+  "name": "dzbogel",
+  "dateAdded": "2026-01-07T09:44:15.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "Spot-if-AI indicates the songs as AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3a2sL4BUXiFYyZfN7CT5Jz",
+  "apple": null,
+  "amazon": "B0BBSTRW49",
+  "youtube": "UC5wZPVXPbVMYsEzi7cBVCsg",
+  "tiktok": null,
+  "instagram": null
+}

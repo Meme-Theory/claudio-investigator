@@ -1,0 +1,27 @@
+{
+  "id": "kid-icarus",
+  "name": "Kid Icarus",
+  "dateAdded": "2026-01-05T16:14:22.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": "Released via Fifty Five Music Group, which is known for hosting AI-based projects. The singer's voice changes noticeably between tracks, suggesting synthetic or generative vocal use.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "28J2NLFuDmTpkAZM8ExH2Z",
+  "apple": "1830617807",
+  "amazon": "B0010SKIQC",
+  "youtube": "UCFpUfvQuXJZeGAgv_AnxAuA",
+  "tiktok": null,
+  "instagram": null
+}

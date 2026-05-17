@@ -1,0 +1,26 @@
+{
+  "id": "antikaa",
+  "name": "Antikaa",
+  "dateAdded": "2026-01-14T21:23:43.457Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The Instagram bio states: \"Lyricist meets AI generated music.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2xXk03CJgMNJRB6CXzctgz",
+  "apple": "1826611521",
+  "amazon": "B0FHJFPGJH",
+  "youtube": "UCB7Q9hrrAuBLQTj7gZRYdrg",
+  "tiktok": null,
+  "instagram": "antikaaofficial"
+}

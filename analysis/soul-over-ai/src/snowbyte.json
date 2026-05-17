@@ -1,0 +1,26 @@
+{
+  "id": "snowbyte",
+  "name": "SNOWBYTE",
+  "dateAdded": "2026-01-23T14:16:41.703Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The YouTube bio states that the project is an : \"AI entity.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0vuR37QvfLSJmmRrbh0Gtz",
+  "apple": "1857695279",
+  "amazon": null,
+  "youtube": "UC3csUrrAauLxjOSp-EfV_Vw",
+  "tiktok": "@snowbyte.official",
+  "instagram": null
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ava-veex",
+  "name": "Ava Veex",
+  "dateAdded": "2025-12-27T12:49:47.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The sound resembles Luna Veex, another artist suspected to be AI-generated. Both have similar Spotify bio descriptions, and the YouTube channel is linked to the Luna Veex TikTok account.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1TjyGerbNRYiAw7AHQg8eh",
+  "apple": "1840826883",
+  "amazon": "B0FRSL6VQH",
+  "youtube": "UCbkt6eyVwnTX6bEPISoOzRQ",
+  "tiktok": "@avaveex",
+  "instagram": null
+}

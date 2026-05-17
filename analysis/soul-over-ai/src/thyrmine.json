@@ -1,0 +1,26 @@
+{
+  "id": "thyrmine",
+  "name": "Thyrmine",
+  "dateAdded": "2025-12-11T10:01:07.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3H4z03ujvv9VgZot2Abd6i",
+  "apple": "1750117864",
+  "amazon": "B0D61Z8D23",
+  "youtube": "UC0TPoidxwW1gJm1uDpcwWwA",
+  "tiktok": null,
+  "instagram": null
+}

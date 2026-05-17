@@ -1,0 +1,26 @@
+{
+  "id": "grotestique",
+  "name": "GROTESTIQUE",
+  "dateAdded": "2026-01-03T18:31:16.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The Spotify and YouTube pages state that \"the band primarily consists of five fictional members\" and their \"music is created utilizing various methods of production, from digital DAWs, recording & AI implementation.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7tW7yJ6MhJjdTy8yNbdhaE",
+  "apple": "1746320260",
+  "amazon": "B0D462HFZ2",
+  "youtube": "UCGYnKzmPv4sgzQ1Dkle5BhA",
+  "tiktok": null,
+  "instagram": "grotestique.official"
+}

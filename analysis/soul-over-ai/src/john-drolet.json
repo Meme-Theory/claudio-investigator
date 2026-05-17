@@ -1,0 +1,27 @@
+{
+  "id": "john-drolet",
+  "name": "John Drolet",
+  "dateAdded": "2026-01-08T16:05:02.513Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3hwAhyDHi5X9dMgaF7TOAf",
+  "apple": "1787511396",
+  "amazon": "B0DRY2GGT5",
+  "youtube": "UCpejTXe6ixgEJND1oZs1stQ",
+  "tiktok": null,
+  "instagram": null
+}

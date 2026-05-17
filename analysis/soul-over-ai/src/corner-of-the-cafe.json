@@ -1,0 +1,27 @@
+{
+  "id": "corner-of-the-cafe",
+  "name": "Corner of the Café",
+  "dateAdded": "2026-01-23T11:01:18.559Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"All content (both visuals and music) on \"Corner of the Café\" is generated using AI technology.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0Xpeg4XkaqBcuPDP76WDwX",
+  "apple": "1820486879",
+  "amazon": null,
+  "youtube": "UC0ekccGGE6cVu6ypjofGGkw",
+  "tiktok": null,
+  "instagram": null
+}

@@ -1,0 +1,27 @@
+{
+  "id": "feral-cry",
+  "name": "Feral Cry",
+  "dateAdded": "2026-01-14T09:52:31.569Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The Instagram bio states: \"AI Heavy Metal Music at it's best.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "33c1CjZH8vHeaOoqGWr4kp",
+  "apple": "1754239332",
+  "amazon": "B0D8499JSQ",
+  "youtube": "UCCZ-7j6iUTnjgOD2OExQtMg",
+  "tiktok": "@feralcry",
+  "instagram": "feralcry"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "housenatic",
+  "name": "Housenatic",
+  "dateAdded": "2025-12-26T19:30:20.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Artwork and SoundCloud descriptions appear AI-generated, with no Spotify bio. The project likely relies heavily on AI in its music. Vocals sometimes exhibit AI-related distortion, and has a high release count in 2025.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6oUMNHGrSiCvHQn1DdH70u",
+  "apple": "1857464249",
+  "amazon": "B0G4KYS8T5",
+  "youtube": "UCKOSSloBGYiOtsKiaygZUrg",
+  "tiktok": "@housenatic",
+  "instagram": "housenatic_edm"
+}

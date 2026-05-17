@@ -1,0 +1,27 @@
+{
+  "id": "mythictune",
+  "name": "MythicTune",
+  "dateAdded": "2026-01-12T11:09:26.036Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Their YouTube bio states: \"Music created with Suno Studio.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6V4JJLrCeqTibQajwfyMEi",
+  "apple": "1778154797",
+  "amazon": "B0DM57GW4J",
+  "youtube": "UCUxbZd2eD3hKFTDZFtWBogw",
+  "tiktok": "@mythictuneofficial",
+  "instagram": null
+}

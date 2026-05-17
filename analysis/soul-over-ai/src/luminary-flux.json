@@ -1,0 +1,26 @@
+{
+  "id": "luminary-flux",
+  "name": "Luminary Flux",
+  "dateAdded": "2026-01-02T14:15:12.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "AI-generated album artwork, with no visible presence or evidence of human involvement.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4xk4YzPhEw1csQwvRfs3Lh",
+  "apple": "1823338461",
+  "amazon": "B0FFYK5MM1",
+  "youtube": "UCPN3cw3X6aH1Cm98YN1j_7Q",
+  "tiktok": null,
+  "instagram": "luminary.flux"
+}

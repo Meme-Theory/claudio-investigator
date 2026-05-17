@@ -1,0 +1,26 @@
+{
+  "id": "katy-rivers",
+  "name": "Katy Rivers",
+  "dateAdded": "2026-01-03T20:04:55.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "AI-generated thumbnails are used, with real artists tagged on Spotify tracks - for example, \"Paradise\" lists \"Lappy\" as an artist. SubmitHub analysis indicates typical AI generation patterns but does not confirm with complete certainty.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2nrlL02f5cvQF06EDYCoSm",
+  "apple": "1768347244",
+  "amazon": "B0DGZXX4YQ",
+  "youtube": "UCk4LEclmcI5AnpOP-s-JVGQ",
+  "tiktok": null,
+  "instagram": "katyriversw"
+}

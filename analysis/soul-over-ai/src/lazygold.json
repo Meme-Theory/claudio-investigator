@@ -1,0 +1,27 @@
+{
+  "id": "lazygold",
+  "name": "LazyGold",
+  "dateAdded": "2026-01-13T11:29:36.505Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Their YouTube description states that the artist is a \"music band created by artificial intelligence.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4wC7i4a7xcnSV13Y2tOrgW",
+  "apple": "1832702109",
+  "amazon": "B0FM47CYQC",
+  "youtube": "UCTGM_R6vc1ixXvUqAMoH6SA",
+  "tiktok": "@lazygoldofficial",
+  "instagram": null
+}

@@ -1,0 +1,27 @@
+{
+  "id": "biscuit-beats",
+  "name": "Biscuit Beats",
+  "dateAdded": "2026-01-26T23:04:54.550Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"Hit Country Songs Made With AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7d0vajTzRZvHSQAlLxXwT2",
+  "apple": "1758667889",
+  "amazon": "B0D9VXVV5X",
+  "youtube": "UCuPNspBTRO-msvZ3rs2eJiw",
+  "tiktok": "@biscuitbeatsai",
+  "instagram": "biscuitbeatsai"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "kenke",
+  "name": "Kenke",
+  "dateAdded": "2026-01-03T19:10:04.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "High output of mostly cover songs, specifically nightcore versions, featuring a common AI vocal style-particularly noticeable in the screams. No biography is provided. SubmitHub detected strong AI characteristics in the tracks.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4xtHuFpCIm0x8S3lUga0dg",
+  "apple": "817379247",
+  "amazon": "B00IDDP9AM",
+  "youtube": "UCBVVFXMWtQJzneuuWOg6j4g",
+  "tiktok": null,
+  "instagram": null
+}

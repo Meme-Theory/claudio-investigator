@@ -1,0 +1,26 @@
+{
+  "id": "shift-to-abundance",
+  "name": "Shift to Abundance",
+  "dateAdded": "2026-01-04T16:39:25.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "No information exists about the creator. Instagram features AI-generated images and videos, with a large volume of songs released only in recent months. SubmitHub detected patterns typical of AI-generated music.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1ySrbBoYh0KYOI99w8cjMP",
+  "apple": "1852151320",
+  "amazon": "B0G1S7MGLR",
+  "youtube": "UCe1Ba27TYUgVlWZHvZlyyGA",
+  "tiktok": "@shifttoabundance",
+  "instagram": "shiftto_abundance"
+}

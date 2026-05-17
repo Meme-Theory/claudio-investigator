@@ -1,0 +1,27 @@
+{
+  "id": "pleasurian-pneumatikos",
+  "name": "Pleasurian Pneumatikos",
+  "dateAdded": "2025-12-28T23:51:00.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Discovered via an AI-artist related list on Spotify. Images appear AI-generated, with noticeable vocal artifacts. The project has a minimal bio and online presence, a relatively high output, and generic song titles.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6Yfi2pmvgD2hEFCttkwnM1",
+  "apple": "1808377795",
+  "amazon": "B0F4R3KDMP",
+  "youtube": "UCxm6ppl2juVYwPeqxrkiLKw",
+  "tiktok": null,
+  "instagram": null
+}

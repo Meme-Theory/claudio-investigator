@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Artist",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The unique identifier for the artist or band"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The name of the artist or band"
+    },
+    "dateAdded": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date this artist was added to the database (ISO 8601 UTC format)"
+    },
+    "dateUpdated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date this entry was last updated (ISO 8601 UTC format), or null if never updated"
+    },
+    "removed": {
+      "type": "boolean",
+      "description": "Whether this artist has been removed from the database"
+    },
+    "issue": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "GitHub issue number, or null if not available"
+    },
+    "disclosure": {
+      "type": "string",
+      "enum": ["confirmed", "full", "partial", "none"],
+      "description": "Whether the artist has self-disclosed AI usage: confirmed = yes without context, full = fully AI-generated, partial = uses AI for parts of their process, none = no disclosure"
+    },
+    "disclosureTypes": {
+      "type": "array",
+      "description": "Types of AI usage in the artist's music production",
+      "items": {
+        "type": "string",
+        "enum": [
+          "instrumentation",
+          "lyrics",
+          "mastering",
+          "mixing",
+          "vocals"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "urls": {
+      "type": "array",
+      "description": "URLs with supporting evidence or references",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": ["url", "notes"],
+        "additionalProperties": false
+      }
+    },
+    "markers": {
+      "type": "array",
+      "description": "markers suggesting AI-generated content",
+      "items": {
+        "type": "string",
+        "enum": [
+          "2024-onwards",
+          "ai-visuals",
+          "anonymous",
+          "high-output",
+          "inconsistent-style"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Additional details for the markers value, or null if no details provided"
+    },
+    "genres": {
+      "type": "array",
+      "description": "Spotify genres associated with the artist",
+      "items": {
+        "type": "string"
+      }
+    },
+    "popularity": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Spotify popularity score (0-100), or null if not available"
+    },
+    "followers": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Spotify followers count, or null if not available"
+    },
+    "shScore": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "SubmitHub's AI probability score (averaged across an artists 3 most recent popular tracks on Spotify)"
+    },
+    "spotify": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-zA-Z0-9]{22}$",
+      "description": "Spotify artist ID, or null if not available"
+    },
+    "apple": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9]+$",
+      "description": "Apple Music artist ID, or null if not available"
+    },
+    "amazon": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z0-9]+$",
+      "description": "Amazon profile ID, or null if not available"
+    },
+    "youtube": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^UC[a-zA-Z0-9_-]{22}$",
+      "description": "YouTube channel ID (starting with UC), or null if not available"
+    },
+    "tiktok": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^@[a-z0-9_.]{2,24}$",
+      "description": "TikTok profile handle, or null if not available"
+    },
+    "instagram": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9_.]{1,30}$",
+      "description": "Instagram profile handle, or null if not available"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "dateAdded",
+    "dateUpdated",
+    "removed",
+    "issue",
+    "disclosure",
+    "disclosureTypes",
+    "urls",
+    "markers",
+    "notes",
+    "genres",
+    "popularity",
+    "followers",
+    "shScore",
+    "spotify",
+    "apple",
+    "amazon",
+    "youtube",
+    "tiktok",
+    "instagram"
+  ],
+  "additionalProperties": false
+}

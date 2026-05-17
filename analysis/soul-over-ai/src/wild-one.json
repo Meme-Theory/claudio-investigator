@@ -1,0 +1,27 @@
+{
+  "id": "wild-one",
+  "name": "Wild One",
+  "dateAdded": "2026-01-10T11:01:55.262Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "03hIzISbf2KyoZDJW6YGCt",
+  "apple": "480917709",
+  "amazon": "B0DPN6HX7K",
+  "youtube": "UCT3BJIH6Q5fFa7pWRUYx6oQ",
+  "tiktok": null,
+  "instagram": null
+}

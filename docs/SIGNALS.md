@@ -4,7 +4,7 @@ The canonical marker list lives in `investigator/rubric.py` as `SIGNAL_MARKERS`.
 
 A marker is only flagged when the agent has direct evidence for it. Absence-as-evidence (e.g. no MusicBrainz entry) counts; speculation does not.
 
-The ordering below is the Phase 0 prior — markers higher on the list discriminate harder per the Soul Over AI corpus. Phase 0 EDA may re-rank them; treat this as a draft.
+The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul Over AI corpus where the marker was testable, and dev-plan priors otherwise. Five markers carry SOA-measured lift ratios; nine are untested in SOA and await Phase 2 calibration data. See `CALIBRATION_NOTES.md` for the lift table.
 
 ## Catalog & ground-truth markers
 
@@ -30,6 +30,7 @@ The ordering below is the Phase 0 prior — markers higher on the list discrimin
 **What:** More than 12 releases in any 12-month window, with no historical baseline at that velocity.
 **Why it's a signal:** Generative music projects can ship a track a week; human projects can't sustain that.
 **Caveats:** Some real artists (beatmakers, prolific producers) legitimately hit this. Combine with absence signals.
+**Phase 0 caveat:** SOA lift = 1.07 — weak discriminator on its own. Co-occurs heavily with `ai-visuals` (Jaccard 0.57) and `anonymous` (Jaccard 0.49). Treat as cluster-mate, not as a primary signal in isolation.
 
 ### `suno-duration-cap`
 **What:** Track durations cluster suspiciously around 2:00–2:30.
@@ -46,9 +47,11 @@ The ordering below is the Phase 0 prior — markers higher on the list discrimin
 **What:** Present on the major streaming services but absent from niche or community platforms (Bandcamp, Discogs, Soundcloud non-zero, scene-specific aggregators).
 **Why it's a signal:** Real artists historically scatter — they had a Bandcamp before they had a Spotify, they tagged a SoundCloud, they got blogged about somewhere. Catalog presence with no community presence reads as distributor-only delivery.
 
-### `anonymous-project`
+### `anonymous`
 **What:** No individual humans named or linked anywhere — no writer credits, no producer credits, no socials, no interviews, no photos that aren't AI-generated.
 **Why it's a signal:** Real anonymity is rare and conspicuous (e.g. SBTRKT, Daft Punk pre-reveal). Casual anonymity (no profile at all) reads as AI.
+**Phase 0 caveat:** SOA lift = 1.001 — this marker does NOT discriminate disclosed-AI from undisclosed entries *on its own* in the SOA corpus. It also co-occurs heavily with `ai-visuals` (Jaccard 0.65) and `high-output` (Jaccard 0.49), suggesting SOA flaggers applied the trio as a package. Treat as a cluster-mate of `ai-visuals`; do not weight it independently for high-confidence verdicts.
+**Note:** This was `anonymous-project` pre-Phase 0; renamed to match SOA's enum.
 
 ### `no-live-presence`
 **What:** Zero concert listings (Songkick, Bandsintown), no venue tagging on socials, no tour history.
@@ -60,10 +63,11 @@ The ordering below is the Phase 0 prior — markers higher on the list discrimin
 **What:** Bio is missing, AI-generated text patterns, generic template phrasing, or auto-translated obvious slop.
 **Why it's a signal:** Real artists or their teams write bios with specifics (where they're from, what they sound like, who they've worked with). Generic-template bios are a tell.
 
-### `synthetic-album-art`
-**What:** Album art shows AI-generation fingerprints — banding artifacts, hand malformations, signature compositional patterns of Midjourney/SD/etc.
-**Why it's a signal:** Self-explanatory.
-**Cost:** Most expensive signal to collect (vision pass). Use only when other signals are ambiguous.
+### `ai-visuals`
+**What:** AI-generation fingerprints in any visual asset associated with the artist — album art, music videos, profile imagery. Banding artifacts, hand malformations, signature compositional patterns of Midjourney/SD/etc.
+**Why it's a signal:** Self-explanatory. In the SOA corpus this was the second-highest-lift marker (1.32) and the highest-volume one (flagged on 73% of all active entries, 91% of disclosed-AI).
+**Cost:** Most expensive signal to collect (vision pass on album art). Use the vision tool only when cheaper signals are ambiguous.
+**Note:** This was `synthetic-album-art` pre-Phase 0; renamed to match SOA's enum and broaden scope beyond album art alone.
 
 ### `gpt-lyric-patterns`
 **What:** Lyrics show LLM tells — semantic loops, characteristic rhyme dependencies (the "rhymes of ChatGPT"), filler phrasing where real lyrics would be specific.

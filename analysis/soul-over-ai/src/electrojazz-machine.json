@@ -1,0 +1,27 @@
+{
+  "id": "electrojazz-machine",
+  "name": "ElectroJazz Machine",
+  "dateAdded": "2026-01-07T22:55:42.824Z",
+  "dateUpdated": "2026-01-10T20:59:03.287Z",
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "YouTube bio acknowledges the music is AI-generated.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "77HGNkvbJ6TUEzNknURNWx",
+  "apple": null,
+  "amazon": "B0DHYZYSYB",
+  "youtube": "UCW6coZyrNk_aTFHWJL8IyTQ",
+  "tiktok": "@tk_electrojazz_machine",
+  "instagram": null
+}

@@ -1,0 +1,26 @@
+{
+  "id": "bleeding-verse",
+  "name": "Bleeding Verse",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-01-31T21:01:06.865Z",
+  "removed": false,
+  "issue": 2698,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "2024-onwards"
+  ],
+  "notes": "The Spotify bio states: \"Human lyrics, turned to songs with AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6CrsGj3Zj4gIM3rQSU7DeW",
+  "apple": "1829140059",
+  "amazon": "B0FK32BH68",
+  "youtube": "UCljtMjyy35oKk3GUnbcy3CA",
+  "tiktok": null,
+  "instagram": "bleeding_verse_band"
+}

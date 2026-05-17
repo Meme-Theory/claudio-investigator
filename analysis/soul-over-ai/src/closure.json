@@ -1,0 +1,28 @@
+{
+  "id": "closure",
+  "name": "Closure",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-02-03T18:33:14.662Z",
+  "removed": false,
+  "issue": 2956,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous",
+    "high-output",
+    "ai-visuals",
+    "2024-onwards"
+  ],
+  "notes": "There also appears to be another YouTube channel for the artist:\nhttps://www.youtube.com/channel/UCje6pKU_cy_RCOs-wvGncIg",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0XaShgj4XgdneEkOyv0bCC",
+  "apple": "1470041050",
+  "amazon": "B000V7BPVU",
+  "youtube": "UCzekJaOuUlO7cOgf8px5uHQ",
+  "tiktok": null,
+  "instagram": null
+}

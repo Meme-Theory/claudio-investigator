@@ -1,0 +1,29 @@
+{
+  "id": "cain-walker",
+  "name": "Cain Walker",
+  "dateAdded": "2025-12-23T17:02:38.000Z",
+  "dateUpdated": "2026-02-13T11:14:37.924Z",
+  "removed": false,
+  "issue": 3499,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "2024-onwards",
+    "anonymous",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "The YouTube comments on this video https://www.youtube.com/watch?v=CM3AT2sPwDs suggest AI is used.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7BKNTwZykUrvFUK5QbeHhg",
+  "apple": "1838297243",
+  "amazon": "B0CX1W1F7G",
+  "youtube": "UC0RT8Jn69jJouPvjHMiGFXA",
+  "tiktok": "@thecainwalkerofficial",
+  "instagram": "cainwalkermusic"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "bookaria",
+  "name": "BookAria",
+  "dateAdded": "2026-01-19T19:50:33.492Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "it has the same vocals characteristics, and audio artifacts.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "7uedygrXc2dqm7s3fHTmlx",
+  "apple": "1850405883",
+  "amazon": null,
+  "youtube": "UCC5-Lhegpfyajqa67OiW6gw",
+  "tiktok": null,
+  "instagram": null
+}

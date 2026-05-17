@@ -1,0 +1,27 @@
+{
+  "id": "tokyo-chill-lab",
+  "name": "TOKYO CHILL LAB",
+  "dateAdded": "2026-01-04T09:03:31.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states that all tracks and visuals are \"original creations produced using AI\". Albums are released roughly every two weeks, with no identifiable information about the artist beyond Spotify and YouTube.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5KjACf3hRBih15vDJRwkU7",
+  "apple": "1832973634",
+  "amazon": "B0FR4NTNS6",
+  "youtube": "UCfsmpGXkHvQzOLAhCPML91Q",
+  "tiktok": null,
+  "instagram": null
+}

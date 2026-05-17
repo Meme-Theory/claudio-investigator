@@ -1,0 +1,27 @@
+{
+  "id": "didur-lux",
+  "name": "DiDur Lux",
+  "dateAdded": "2026-01-23T10:57:06.112Z",
+  "dateUpdated": "2026-01-24T17:48:48.862Z",
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"a genre-bending artist blending AI innovation with raw emotion\" and \"created with passion + AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "35nnmyOWByVH9bRiHvi1br",
+  "apple": null,
+  "amazon": "B0FKJM4CTD",
+  "youtube": "UCQdHKZVq-IO24hI1U637xFA",
+  "tiktok": "@didur_lux",
+  "instagram": null
+}

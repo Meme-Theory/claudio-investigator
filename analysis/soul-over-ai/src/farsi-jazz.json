@@ -1,0 +1,27 @@
+{
+  "id": "farsi-jazz",
+  "name": "Farsi Jazz",
+  "dateAdded": "2026-02-05T21:11:13.973Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 3053,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "high-output",
+    "anonymous"
+  ],
+  "notes": "The YouTube bio states: \"Farsi Jazz is an experimental project exploring Persian musical heritage through jazz improvisation and atmospheric soundscapes, blending human creativity with AI assistance.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2qLYJGp4OHanrVk6VXDaKb",
+  "apple": "1837205046",
+  "amazon": null,
+  "youtube": "UCteEE2wb0dDpIhrvMTzyO-w",
+  "tiktok": null,
+  "instagram": "farsijazz"
+}

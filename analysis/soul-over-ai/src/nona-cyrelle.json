@@ -1,0 +1,26 @@
+{
+  "id": "nona-cyrelle",
+  "name": "Nona Cyrelle",
+  "dateAdded": "2026-01-13T11:26:09.821Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The Spotify bio states: \"I'm an AI-created character.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "6JdeiRL78vfoGEQ8RhBEa0",
+  "apple": "1839553025",
+  "amazon": "B0FR1CPXMQ",
+  "youtube": "UCkaWZEM9tM3AKt59_AzswEw",
+  "tiktok": null,
+  "instagram": "nonacyrelle"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "mela-mirage",
+  "name": "Mela Mirage",
+  "dateAdded": "2026-01-16T13:49:13.126Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output"
+  ],
+  "notes": "The Youtube bio states: \"Concepts and lyrics by Mela Mirage. Audio provided by Suno.com. Mixing and mastering by Mela Mirage/Suno.com.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4xUvh9IpOF7oOpTiRn6YJT",
+  "apple": "1819577335",
+  "amazon": "B0FCTSNMGB",
+  "youtube": "UCgb7-1HfcNt_C1-IDLCguAw",
+  "tiktok": null,
+  "instagram": null
+}

@@ -1,0 +1,25 @@
+{
+  "id": "plumia-production",
+  "name": "Plumia production",
+  "dateAdded": "2026-01-19T13:09:32.722Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"J'écris des paroles et leurs donne vies\" (I write lyrics and bring them to life).",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5q0RjruPQHAC9t2ufwCdxR",
+  "apple": "1839764678",
+  "amazon": "B0FR3JF924",
+  "youtube": "UCfBfHrDlGKYKLl-qbMLg-fQ",
+  "tiktok": "@plumia_prod",
+  "instagram": "plumia_production"
+}

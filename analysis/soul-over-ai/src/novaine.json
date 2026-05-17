@@ -1,0 +1,27 @@
+{
+  "id": "novaine",
+  "name": "NOVAINE",
+  "dateAdded": "2026-01-15T09:55:01.402Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "high-output",
+    "inconsistent-style"
+  ],
+  "notes": "There also appears to be different voices used for the singer across their tracks.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1Xr0xMO4dQ8SGVOeYHdC6n",
+  "apple": "1851386351",
+  "amazon": "B0G1BZH6T5",
+  "youtube": "UC3riFS1nfcbqyK-CH8Spr4w",
+  "tiktok": "@novainemusic",
+  "instagram": "novaineband"
+}

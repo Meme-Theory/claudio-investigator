@@ -1,0 +1,27 @@
+{
+  "id": "twisted-reality",
+  "name": "Twisted Reality",
+  "dateAdded": "2026-01-21T14:32:25.340Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "The YouTube bio states: \"AI Creator\" and the the YouTube and TikTok handles allude to AI usage.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "3maNvs0pgMKHVmyVkANxZE",
+  "apple": "1867884745",
+  "amazon": "B07GZP1H32",
+  "youtube": "UCuxqNs6B_rjD60__4xCb2Qg",
+  "tiktok": "@twistedreality68",
+  "instagram": null
+}

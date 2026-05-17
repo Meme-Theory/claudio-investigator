@@ -1,0 +1,31 @@
+{
+  "id": "zayen",
+  "name": "Zayen",
+  "dateAdded": "2025-11-25T12:12:56.000Z",
+  "dateUpdated": "2026-02-16T15:50:09.070Z",
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [
+    {
+      "notes": "I create music that blends emotion, storytelling, and a touch of AI magic.",
+      "url": "https://www.youtube.com/channel/UCi-t-oP9Ct01F2Bnwy0vXag"
+    }
+  ],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "1U8rBGLGcsDcuc5O51Hb27",
+  "apple": "526253982",
+  "amazon": null,
+  "youtube": "UCi-t-oP9Ct01F2Bnwy0vXag",
+  "tiktok": null,
+  "instagram": null
+}

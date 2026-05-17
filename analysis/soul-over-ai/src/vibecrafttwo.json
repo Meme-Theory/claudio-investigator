@@ -1,0 +1,30 @@
+{
+  "id": "vibecrafttwo",
+  "name": "VibecraftTwo",
+  "dateAdded": "2026-01-30T20:49:16.741Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 2646,
+  "disclosure": "partial",
+  "disclosureTypes": [
+    "vocals",
+    "lyrics",
+    "instrumentation"
+  ],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The Spotify bio states: \"Created with AI, remixed, mastered, and fine-tuned piece by piece to perfection by VibecraftTwo, you're in for a sonic adventure.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4KHqA3gqU4VTR0N6x7VDXu",
+  "apple": "1781541599",
+  "amazon": "B0DNY2FS7T",
+  "youtube": "UCauEuCuG1URfc3dH8323jOQ",
+  "tiktok": "@vibecrafttwo",
+  "instagram": "vibecrafttwo"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "melodai-official",
+  "name": "MelodAI_Official",
+  "dateAdded": "2026-01-05T20:29:17.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The artist name itself hints at AI involvement, which is openly confirmed in the YouTube bio.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5pQLiPIBfAIMZjGhjaqKwM",
+  "apple": "1753574682",
+  "amazon": "B0D7TPQ7FM",
+  "youtube": "UCc_RvII-l6WgLd8Q666b4TA",
+  "tiktok": "@melod_ai",
+  "instagram": "melodai.official"
+}

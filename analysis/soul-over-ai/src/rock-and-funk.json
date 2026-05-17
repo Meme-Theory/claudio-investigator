@@ -1,0 +1,25 @@
+{
+  "id": "rock-and-funk",
+  "name": "Rock and Funk",
+  "dateAdded": "2025-12-27T20:12:54.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "partial",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "anonymous"
+  ],
+  "notes": "Produces covers of classic rock songs.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4n7MAyBvfQ0yXs3bOSfSpE",
+  "apple": null,
+  "amazon": "B0FPRPFSFF",
+  "youtube": "UC_7T1JcpTBG89CsBlqXeUiA",
+  "tiktok": null,
+  "instagram": null
+}

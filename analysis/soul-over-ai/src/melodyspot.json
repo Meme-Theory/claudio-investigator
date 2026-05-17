@@ -1,0 +1,28 @@
+{
+  "id": "melodyspot",
+  "name": "MelodySpot",
+  "dateAdded": "2026-02-15T14:24:56.324Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": 3234,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "2024-onwards",
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Very high output - new songs every few days.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4rjU0eNuCuzt46USu7Cjrj",
+  "apple": "1762318066",
+  "amazon": "B0DCV3LPZ7",
+  "youtube": "UCVGmQpB6_ixzDLpZdA6oCHQ",
+  "tiktok": "@melodyspot_cm6gm",
+  "instagram": "melodyspot_cm6gm"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "slime-dot",
+  "name": "Slime Dot",
+  "dateAdded": "2026-01-20T22:05:52.732Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "Uses hashtags such as #aiartist and #aimusic on social profiles.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "2LnFNK3k4zi3T48mrYdHmA",
+  "apple": "1859936372",
+  "amazon": null,
+  "youtube": "UCB5cx3LqK8W2uGZhR6spIqQ",
+  "tiktok": "@slimedot.ai",
+  "instagram": "slimedot.ai"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "nekonoma",
+  "name": "Nekonoma",
+  "dateAdded": "2026-01-14T17:06:06.515Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "high-output"
+  ],
+  "notes": "The artist's YouTube bio states that they are a \"a mysterious AI singer.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0G16twsStodbWZ074tAfyc",
+  "apple": "1783460774",
+  "amazon": "B0DPRQXBJ4",
+  "youtube": "UCUAAnReY1hY1Gd2-cRHjTpQ",
+  "tiktok": null,
+  "instagram": null
+}

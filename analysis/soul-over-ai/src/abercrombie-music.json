@@ -1,0 +1,26 @@
+{
+  "id": "abercrombie-music",
+  "name": "Abercrombie Music",
+  "dateAdded": "2026-01-02T19:13:55.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "inconsistent-style"
+  ],
+  "notes": "The Spotify bio states that AI technology is used to fully produce the instrumentation, melodies, and vocals.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0OLroxGWsocS0GJyS85LQE",
+  "apple": "1826336266",
+  "amazon": "B0FHFKV5RX",
+  "youtube": "UCZEI_MhxpVifLpS2-XQp43Q",
+  "tiktok": "@abercrombiemusic",
+  "instagram": "abercrombiemusic"
+}

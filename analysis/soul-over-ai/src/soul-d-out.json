@@ -1,0 +1,27 @@
+{
+  "id": "soul-d-out",
+  "name": "Soul'd Out",
+  "dateAdded": "2025-12-24T13:43:48.000Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "high-output"
+  ],
+  "notes": "Identified as AI using SubmitHub's AI checker. Produces rap songs in a soul, jazz and blues style.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "4iUTPMxJudyRqEL8Xou0ND",
+  "apple": "1843518812",
+  "amazon": "B0FVWB333H",
+  "youtube": "UCOVgjMcWDA7LyBGk56niVwA",
+  "tiktok": "@souldoutrapofficial",
+  "instagram": "souldoutrap"
+}

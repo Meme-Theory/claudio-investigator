@@ -1,0 +1,29 @@
+{
+  "id": "cr-33-pia",
+  "name": "CR33PIA",
+  "dateAdded": "2025-12-22T16:58:01.000Z",
+  "dateUpdated": "2026-01-31T11:49:39.240Z",
+  "removed": false,
+  "issue": 2627,
+  "disclosure": "partial",
+  "disclosureTypes": [
+    "vocals",
+    "instrumentation"
+  ],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "inconsistent-style"
+  ],
+  "notes": "The TikTok profile states \"Ai-Assisted.\" Their TikTok profile content appears to rely heavily on AI-generated prompts.",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "0qyYZ1jH3kYBdWUpJNGukG",
+  "apple": "1825339336",
+  "amazon": "B0FH2R5MMN",
+  "youtube": "UCfvjPKqGU49RQuE8c9-2eSw",
+  "tiktok": "@cr33pia",
+  "instagram": "cr33pia"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "yui",
+  "name": "Yui",
+  "dateAdded": "2026-01-14T16:58:48.175Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "none",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous",
+    "inconsistent-style"
+  ],
+  "notes": null,
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "30Q5sdvIeQyx1T3JaGQ8pD",
+  "apple": "1789130200",
+  "amazon": "B0BF5KZYLF",
+  "youtube": "UC20UUysw9eeGr6GpsE1DQLw",
+  "tiktok": null,
+  "instagram": "learnwithyui"
+}

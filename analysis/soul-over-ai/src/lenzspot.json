@@ -1,0 +1,26 @@
+{
+  "id": "lenzspot",
+  "name": "Lenzspot",
+  "dateAdded": "2026-01-19T13:05:07.657Z",
+  "dateUpdated": null,
+  "removed": false,
+  "issue": null,
+  "disclosure": "confirmed",
+  "disclosureTypes": [],
+  "urls": [],
+  "markers": [
+    "ai-visuals",
+    "anonymous"
+  ],
+  "notes": "The YouTube bio states: \"Powered by AI.\"",
+  "genres": [],
+  "popularity": null,
+  "followers": null,
+  "shScore": null,
+  "spotify": "5Bv2R6g89dxUwVXBFu2BCx",
+  "apple": "1755668533",
+  "amazon": "B0D8VP3KTH",
+  "youtube": "UCQkwuZ9IYVNagcb_Bic9zJw",
+  "tiktok": "@lenzspot",
+  "instagram": "lenzspot"
+}
