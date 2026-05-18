@@ -45,15 +45,108 @@ jobs:
         with:
           ref: main
 
+      # Preflight: if this artist is already in data/investigations.jsonl with
+      # a confident-enough, recent-enough verdict, skip the whole investigation.
+      # The ledger acts as a cache; re-running the agent on a known-good entry
+      # is a waste of $0.04 + tokens. Thresholds are deliberately conservative:
+      # confidence >= 0.85 AND <90 days old. Below either bar we re-investigate.
+      # Set output `skip=true` to short-circuit the downstream steps.
+      - name: Preflight — skip if already confidently investigated
+        id: preflight
+        env:
+          ARTIST: ${{ inputs.artist_name }}
+        run: |
+          python3 <<'PY'
+          import datetime
+          import json
+          import os
+          import pathlib
+          import re
+
+          THRESHOLD_CONF = 0.85
+          THRESHOLD_DAYS = 90
+
+          def norm(s: str) -> str:
+              return re.sub(r"\s+", " ", (s or "").lower()).strip()
+
+          def proceed(reason: str) -> None:
+              print(f"proceeding with full investigation: {reason}")
+
+          def skip(row: dict, age_days: int) -> None:
+              msg = (
+                  f"Skipped — `{row['artist']}` already in ledger as "
+                  f"**{row['verdict']}** (confidence {row['confidence']:.2f}, "
+                  f"{age_days}d ago). "
+                  f"Source run: {row.get('run_url', 'n/a')}"
+              )
+              print(msg)
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("skip=true\n")
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+                  f.write(f"## Preflight skip\n\n{msg}\n\n"
+                          f"_Re-run by deleting the existing row from "
+                          f"`data/investigations.jsonl` or by waiting until it "
+                          f"ages past {THRESHOLD_DAYS} days._\n")
+
+          artist = os.environ["ARTIST"]
+          key = norm(artist)
+          ledger = pathlib.Path("data/investigations.jsonl")
+
+          if not ledger.exists():
+              proceed("ledger does not exist yet")
+              raise SystemExit(0)
+
+          matches = []
+          for line in ledger.read_text(encoding="utf-8").splitlines():
+              if not line.strip():
+                  continue
+              try:
+                  row = json.loads(line)
+              except json.JSONDecodeError:
+                  continue
+              if norm(row.get("artist", "")) == key:
+                  matches.append(row)
+
+          if not matches:
+              proceed(f"`{artist}` not in ledger")
+              raise SystemExit(0)
+
+          matches.sort(key=lambda r: r.get("completed_at") or "")
+          latest = matches[-1]
+          conf = latest.get("confidence") or 0.0
+
+          if conf < THRESHOLD_CONF:
+              proceed(f"existing confidence {conf:.2f} < {THRESHOLD_CONF}")
+              raise SystemExit(0)
+
+          completed = latest.get("completed_at") or ""
+          try:
+              ts = datetime.datetime.fromisoformat(completed.replace("Z", "+00:00"))
+          except Exception as e:
+              proceed(f"unparseable completed_at ({e!r})")
+              raise SystemExit(0)
+
+          age_days = (datetime.datetime.now(datetime.timezone.utc) - ts).days
+
+          if age_days > THRESHOLD_DAYS:
+              proceed(f"ledger row is {age_days}d old > {THRESHOLD_DAYS}")
+              raise SystemExit(0)
+
+          skip(latest, age_days)
+          PY
+
       - uses: actions/setup-python@v5
+        if: steps.preflight.outputs.skip != 'true'
         with:
           python-version: '3.12'
           cache: 'pip'
 
       - name: Install dependencies
+        if: steps.preflight.outputs.skip != 'true'
         run: pip install -r requirements.txt
 
       - name: Run investigation
+        if: steps.preflight.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -77,7 +170,7 @@ jobs:
             | tee artifacts/verdict.json
 
       - name: Render verdict to step summary
-        if: always()
+        if: always() && steps.preflight.outputs.skip != 'true'
         run: |
           {
             echo "## Verdict — \`${ARTIST}\`"
@@ -94,7 +187,7 @@ jobs:
           ARTIST: ${{ inputs.artist_name }}
 
       - name: Upload verdict artifact
-        if: always()
+        if: always() && steps.preflight.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: verdict-${{ github.run_id }}
@@ -107,7 +200,7 @@ jobs:
       # the agent) are not logged at all. The retry loop survives concurrent
       # dispatches: each iteration resets to origin/main, re-dedups, re-pushes.
       - name: Update investigation ledger
-        if: success()
+        if: success() && steps.preflight.outputs.skip != 'true'
         env:
           ARTIST: ${{ inputs.artist_name }}
           GH_REPO: ${{ github.repository }}
@@ -159,17 +252,71 @@ jobs:
               return re.sub(r"\s+", " ", (s or "").lower()).strip()
 
           new = json.loads(os.environ["LEDGER_LINE"])
-          key = norm(new["artist"])
 
+          # --- Schema validation -------------------------------------------
+          # Sanity-check before this row lands in the ledger. Raises here fail
+          # the workflow step rather than corrupting the ledger silently.
+          REQUIRED_FIELDS = ("artist", "verdict", "confidence", "model",
+                             "completed_at", "run_id")
+          missing = [f for f in REQUIRED_FIELDS if f not in new]
+          if missing:
+              raise SystemExit(f"ledger row missing required fields: {missing}")
+
+          VALID_VERDICTS = ("ai", "likely_ai", "unclear", "likely_human", "human")
+          if new["verdict"] not in VALID_VERDICTS:
+              raise SystemExit(f"invalid verdict label: {new['verdict']!r}")
+
+          conf = new.get("confidence")
+          if not isinstance(conf, (int, float)) or not (0.0 <= conf <= 1.0):
+              raise SystemExit(f"confidence out of range or wrong type: {conf!r}")
+
+          if not isinstance(new.get("artist"), str) or not new["artist"].strip():
+              raise SystemExit("artist field is empty or non-string")
+
+          # --- Dedup + regression detection --------------------------------
+          key = norm(new["artist"])
           p = pathlib.Path("data/investigations.jsonl")
           rows = []
+          existing = None
           if p.exists():
               for ln in p.read_text(encoding="utf-8").splitlines():
                   if not ln.strip():
                       continue
                   row = json.loads(ln)
-                  if norm(row.get("artist", "")) != key:
+                  if norm(row.get("artist", "")) == key:
+                      existing = row
+                  else:
                       rows.append(row)
+
+          # If the dedup found a row and the new verdict crosses the AI/human
+          # boundary without a confidence increase, that's a regression worth
+          # auditing. Preserve the prior verdict on the new row instead of
+          # silently swapping. Doesn't block the swap — just records it.
+          AI_LABELS = {"ai", "likely_ai"}
+          HUMAN_LABELS = {"likely_human", "human"}
+          if existing is not None:
+              old_v = existing.get("verdict")
+              old_c = existing.get("confidence") or 0.0
+              flipped = (
+                  (old_v in AI_LABELS and new["verdict"] in HUMAN_LABELS)
+                  or (old_v in HUMAN_LABELS and new["verdict"] in AI_LABELS)
+              )
+              if flipped and conf <= old_c:
+                  new["previous_verdict"] = {
+                      "verdict": old_v,
+                      "confidence": old_c,
+                      "completed_at": existing.get("completed_at"),
+                      "run_id": existing.get("run_id"),
+                      "model": existing.get("model"),
+                  }
+                  new["regression_note"] = (
+                      f"Verdict flipped {old_v} ({old_c:.2f}) "
+                      f"-> {new['verdict']} ({conf:.2f}) without confidence "
+                      f"increase. Previous row preserved for audit."
+                  )
+                  print(f"WARNING: regression flagged ({old_v} -> {new['verdict']}); "
+                        f"previous_verdict preserved on new row")
+
           rows.append(new)
           rows.sort(key=lambda r: r.get("completed_at") or "")
 

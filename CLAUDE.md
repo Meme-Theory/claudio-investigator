@@ -55,7 +55,8 @@ docs/                 # SIGNALS.md (taxonomy), METHODOLOGY.md (public), CALIBRAT
 - **Tool functions return plain dicts** (not Pydantic) — the agent serializes them as `tool_result` content.
 - **Tests mock HTTP at the requests boundary** (`responses` library). Don't mock our own tool functions.
 - **Quick-answer lookup:** before dispatching `manual-investigate.yml` for an artist, grep `data/investigations.jsonl` for the name. If there's a row with confidence ≥ 0.85 (or any verdict ≠ `unclear` from the latest rubric), prefer it over a fresh run. The ledger is the primary source for "did we check X?"; the workflow is what populates it.
-- **Ledger is dedup-on-write.** One row per artist — case-insensitive, whitespace-collapsed match. A new run replaces the prior row for that artist; latest verdict wins. Failed runs (agent didn't submit a verdict) are not logged at all.
+- **Workflow has a built-in preflight skip.** The first step of `manual-investigate.yml` greps the ledger and exits-0 without running the agent when there's a confident-enough (≥ 0.85), recent-enough (< 90 days) verdict already on file. To force a re-investigation, either age out the existing row or delete it from `data/investigations.jsonl`. Thresholds are inline constants in the workflow's preflight step.
+- **Ledger is dedup-on-write, validated, and regression-aware.** One row per artist — case-insensitive, whitespace-collapsed match. The new row is rejected (workflow step fails) if it's missing required fields, has an invalid verdict enum, or has out-of-range confidence. If the new verdict flips the AI↔human boundary against an existing row WITHOUT a confidence increase, the prior row is preserved as `previous_verdict` on the new row with a `regression_note` — the swap still happens (latest wins), but the history is auditable. Failed runs (agent didn't submit a verdict) are not logged at all.
 
 ## Env vars
 
