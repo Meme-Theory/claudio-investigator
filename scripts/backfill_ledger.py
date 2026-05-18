@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import io
 import json
+import re
 import subprocess
 import sys
 import zipfile
@@ -22,6 +23,12 @@ from pathlib import Path
 REPO = "Meme-Theory/claudio-investigator"
 WORKFLOW = "manual-investigate.yml"
 LEDGER = Path("data/investigations.jsonl")
+
+
+def normalize_artist(name: str | None) -> str:
+    """Dedup key — case-insensitive, whitespace-collapsed. Must match the
+    same normalization the workflow uses in its inline Python step."""
+    return re.sub(r"\s+", " ", (name or "").lower()).strip()
 
 
 def gh(args: list[str]) -> bytes:
@@ -70,11 +77,15 @@ def download_verdict(artifact_id: int) -> dict | None:
         return None
 
 
-def to_ledger_row(verdict_doc: dict, run_id: int) -> dict:
-    v = verdict_doc.get("verdict") or {}
+def to_ledger_row(verdict_doc: dict, run_id: int) -> dict | None:
+    """Build a ledger row from a workflow verdict payload, or None to skip
+    (failed runs where the agent never submitted a verdict)."""
+    v = verdict_doc.get("verdict")
+    if not v or not v.get("verdict"):
+        return None
     return {
         "artist": verdict_doc.get("artist"),
-        "verdict": v.get("verdict"),
+        "verdict": v["verdict"],
         "confidence": v.get("confidence"),
         "markers": v.get("markers", []),
         "evidence": v.get("evidence", []),
@@ -84,7 +95,6 @@ def to_ledger_row(verdict_doc: dict, run_id: int) -> dict:
         "terminated_by": verdict_doc.get("terminated_by"),
         "budget": verdict_doc.get("budget"),
         "completed_at": verdict_doc.get("completed_at"),
-        "error": verdict_doc.get("error"),
         "run_id": str(run_id),
         "run_url": f"https://github.com/{REPO}/actions/runs/{run_id}",
     }
@@ -110,16 +120,24 @@ def main() -> int:
         doc = download_verdict(verdict_artifact["id"])
         if not doc:
             continue
-        rows.append(to_ledger_row(doc, rid))
+        row = to_ledger_row(doc, rid)
+        if row is None:
+            print(f"  - no verdict in payload (agent didn't submit) — skipping")
+            continue
+        rows.append(row)
 
-    rows.sort(key=lambda r: r.get("completed_at") or "")
+    # Dedup: latest verdict per normalized artist wins.
+    by_key: dict[str, dict] = {}
+    for row in sorted(rows, key=lambda r: r.get("completed_at") or ""):
+        by_key[normalize_artist(row.get("artist"))] = row
+    rows = sorted(by_key.values(), key=lambda r: r.get("completed_at") or "")
 
     LEDGER.parent.mkdir(parents=True, exist_ok=True)
     with LEDGER.open("w", encoding="utf-8") as f:
         for row in rows:
             f.write(json.dumps(row, separators=(",", ":")) + "\n")
 
-    print(f"Wrote {len(rows)} rows to {LEDGER}.")
+    print(f"Wrote {len(rows)} unique-artist rows to {LEDGER}.")
     return 0
 
 

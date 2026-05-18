@@ -109,12 +109,12 @@ jobs:
           path: artifacts/verdict.json
           if-no-files-found: ignore
 
-      # Append one row per run to data/investigations.jsonl on main. JSONL so
-      # we never read-modify-write — each run appends its own line. The retry
-      # loop survives concurrent dispatches: each iteration resets to the
-      # current origin/main, re-appends, and re-pushes. Whoever races last
-      # still lands their row.
-      - name: Append verdict to investigation ledger
+      # Write one row per artist to data/investigations.jsonl on main. Latest
+      # verdict wins — runs for the same artist (case-insensitive, whitespace-
+      # collapsed) replace prior rows. Failed runs (no verdict submitted by
+      # the agent) are not logged at all. The retry loop survives concurrent
+      # dispatches: each iteration resets to origin/main, re-dedups, re-pushes.
+      - name: Update investigation ledger
         if: success()
         env:
           ARTIST: ${{ inputs.artist_name }}
@@ -124,29 +124,34 @@ jobs:
           set -euo pipefail
 
           if [ ! -s artifacts/verdict.json ]; then
-            echo "No verdict.json on disk — skipping ledger append."
+            echo "No verdict.json on disk — skipping ledger update."
             exit 0
           fi
 
-          LINE=$(jq -c \
+          if [ "$(jq -r '.verdict.verdict // "null"' artifacts/verdict.json)" = "null" ]; then
+            echo "Agent did not submit a verdict (null) — skipping ledger update."
+            exit 0
+          fi
+
+          LEDGER_LINE=$(jq -c \
             --arg run_id "$GH_RUN_ID" \
             --arg run_url "https://github.com/${GH_REPO}/actions/runs/${GH_RUN_ID}" \
             '{
               artist: .artist,
-              verdict: (.verdict.verdict // null),
-              confidence: (.verdict.confidence // null),
+              verdict: .verdict.verdict,
+              confidence: .verdict.confidence,
               markers: (.verdict.markers // []),
               evidence: (.verdict.evidence // []),
-              reasoning: (.verdict.reasoning // null),
+              reasoning: .verdict.reasoning,
               auto_merge_recommended: (.verdict.auto_merge_recommended // false),
               model: .model,
               terminated_by: .terminated_by,
               budget: .budget,
               completed_at: .completed_at,
-              error: (.error // null),
               run_id: $run_id,
               run_url: $run_url
             }' artifacts/verdict.json)
+          export LEDGER_LINE
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -154,9 +159,40 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
-            mkdir -p data
-            printf '%s\n' "$LINE" >> data/investigations.jsonl
+
+            python <<'PY'
+          import json, os, re, pathlib
+
+          def norm(s: str) -> str:
+              return re.sub(r"\s+", " ", (s or "").lower()).strip()
+
+          new = json.loads(os.environ["LEDGER_LINE"])
+          key = norm(new["artist"])
+
+          p = pathlib.Path("data/investigations.jsonl")
+          rows = []
+          if p.exists():
+              for ln in p.read_text(encoding="utf-8").splitlines():
+                  if not ln.strip():
+                      continue
+                  row = json.loads(ln)
+                  if norm(row.get("artist", "")) != key:
+                      rows.append(row)
+          rows.append(new)
+          rows.sort(key=lambda r: r.get("completed_at") or "")
+
+          p.parent.mkdir(parents=True, exist_ok=True)
+          p.write_text(
+              "\n".join(json.dumps(r, separators=(",", ":")) for r in rows) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
             git add data/investigations.jsonl
+            if git diff --cached --quiet; then
+              echo "Ledger unchanged (idempotent re-run) — nothing to push."
+              exit 0
+            fi
             git commit -m "log(investigation): ${ARTIST}"
             if git push origin HEAD:main; then
               echo "Ledger updated on attempt ${attempt}."

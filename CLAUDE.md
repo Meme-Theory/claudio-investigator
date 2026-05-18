@@ -54,8 +54,8 @@ docs/                 # SIGNALS.md (taxonomy), METHODOLOGY.md (public), CALIBRAT
 - **Never edit `dist/artists.json` by hand** — it's built from `src/`.
 - **Tool functions return plain dicts** (not Pydantic) — the agent serializes them as `tool_result` content.
 - **Tests mock HTTP at the requests boundary** (`responses` library). Don't mock our own tool functions.
-- **Quick-answer lookup:** before dispatching `manual-investigate.yml` for an artist, grep `data/investigations.jsonl` for the name. If there's a recent row with confidence ≥ 0.85 (or any verdict ≠ `unclear` from the latest rubric), prefer it over a fresh run. The ledger is the primary source for "did we check X?"; the workflow is what populates it.
-- **Ledger is append-only.** Every `manual-investigate` run writes one row at the end (run_id is the natural key). Don't rewrite history — multiple rows per artist over time is the drift signal we want.
+- **Quick-answer lookup:** before dispatching `manual-investigate.yml` for an artist, grep `data/investigations.jsonl` for the name. If there's a row with confidence ≥ 0.85 (or any verdict ≠ `unclear` from the latest rubric), prefer it over a fresh run. The ledger is the primary source for "did we check X?"; the workflow is what populates it.
+- **Ledger is dedup-on-write.** One row per artist — case-insensitive, whitespace-collapsed match. A new run replaces the prior row for that artist; latest verdict wins. Failed runs (agent didn't submit a verdict) are not logged at all.
 
 ## Env vars
 
