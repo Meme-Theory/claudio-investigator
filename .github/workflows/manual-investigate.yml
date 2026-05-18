@@ -73,6 +73,39 @@ jobs:
               print(f"proceeding with full investigation: {reason}")
 
           def skip(row: dict, age_days: int) -> None:
+              # Reconstruct the verdict.json shape that main.py would have
+              # produced so external consumers (the meme-engine-web frontend
+              # and any future API client) see a uniform artifact regardless
+              # of whether the verdict was freshly computed or cache-served.
+              # The `cached` flag + source-run pointers let consumers tell
+              # the difference if they care; the verdict payload is identical
+              # in shape to a real run.
+              payload = {
+                  "artist": row["artist"],
+                  "verdict": {
+                      "verdict": row["verdict"],
+                      "confidence": row["confidence"],
+                      "markers": row.get("markers", []),
+                      "evidence": row.get("evidence", []),
+                      "reasoning": row.get("reasoning"),
+                      "auto_merge_recommended": row.get("auto_merge_recommended", False),
+                  },
+                  "terminated_by": row.get("terminated_by"),
+                  "budget": row.get("budget"),
+                  "model": row.get("model"),
+                  "completed_at": row.get("completed_at"),
+                  "cached": True,
+                  "cache_source_run_id": row.get("run_id"),
+                  "cache_source_run_url": row.get("run_url"),
+                  "cache_age_days": age_days,
+              }
+              artifacts_dir = pathlib.Path("artifacts")
+              artifacts_dir.mkdir(exist_ok=True)
+              (artifacts_dir / "verdict.json").write_text(
+                  json.dumps(payload, indent=2, default=str),
+                  encoding="utf-8",
+              )
+
               msg = (
                   f"Skipped — `{row['artist']}` already in ledger as "
                   f"**{row['verdict']}** (confidence {row['confidence']:.2f}, "
@@ -83,7 +116,7 @@ jobs:
               with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                   f.write("skip=true\n")
               with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
-                  f.write(f"## Preflight skip\n\n{msg}\n\n"
+                  f.write(f"## Preflight skip (cache hit)\n\n{msg}\n\n"
                           f"_Re-run by deleting the existing row from "
                           f"`data/investigations.jsonl` or by waiting until it "
                           f"ages past {THRESHOLD_DAYS} days._\n")
@@ -170,7 +203,7 @@ jobs:
             | tee artifacts/verdict.json
 
       - name: Render verdict to step summary
-        if: always() && steps.preflight.outputs.skip != 'true'
+        if: always()
         run: |
           {
             echo "## Verdict — \`${ARTIST}\`"
@@ -187,7 +220,7 @@ jobs:
           ARTIST: ${{ inputs.artist_name }}
 
       - name: Upload verdict artifact
-        if: always() && steps.preflight.outputs.skip != 'true'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: verdict-${{ github.run_id }}
