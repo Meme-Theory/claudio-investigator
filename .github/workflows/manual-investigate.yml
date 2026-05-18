@@ -37,6 +37,8 @@ jobs:
   investigate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
       # ref: main so that GitHub's "Re-run" button picks up the LATEST
       # code on main, not the SHA the workflow was originally dispatched
@@ -106,3 +108,63 @@ jobs:
           name: verdict-${{ github.run_id }}
           path: artifacts/verdict.json
           if-no-files-found: ignore
+
+      # Append one row per run to data/investigations.jsonl on main. JSONL so
+      # we never read-modify-write — each run appends its own line. The retry
+      # loop survives concurrent dispatches: each iteration resets to the
+      # current origin/main, re-appends, and re-pushes. Whoever races last
+      # still lands their row.
+      - name: Append verdict to investigation ledger
+        if: success()
+        env:
+          ARTIST: ${{ inputs.artist_name }}
+          GH_REPO: ${{ github.repository }}
+          GH_RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+
+          if [ ! -s artifacts/verdict.json ]; then
+            echo "No verdict.json on disk — skipping ledger append."
+            exit 0
+          fi
+
+          LINE=$(jq -c \
+            --arg run_id "$GH_RUN_ID" \
+            --arg run_url "https://github.com/${GH_REPO}/actions/runs/${GH_RUN_ID}" \
+            '{
+              artist: .artist,
+              verdict: (.verdict.verdict // null),
+              confidence: (.verdict.confidence // null),
+              markers: (.verdict.markers // []),
+              evidence: (.verdict.evidence // []),
+              reasoning: (.verdict.reasoning // null),
+              auto_merge_recommended: (.verdict.auto_merge_recommended // false),
+              model: .model,
+              terminated_by: .terminated_by,
+              budget: .budget,
+              completed_at: .completed_at,
+              error: (.error // null),
+              run_id: $run_id,
+              run_url: $run_url
+            }' artifacts/verdict.json)
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            mkdir -p data
+            printf '%s\n' "$LINE" >> data/investigations.jsonl
+            git add data/investigations.jsonl
+            git commit -m "log(investigation): ${ARTIST}"
+            if git push origin HEAD:main; then
+              echo "Ledger updated on attempt ${attempt}."
+              exit 0
+            fi
+            echo "Push attempt ${attempt} lost the race; refetching and retrying..."
+            sleep $((RANDOM % 3 + 1))
+          done
+
+          echo "Failed to push ledger update after 5 attempts."
+          exit 1

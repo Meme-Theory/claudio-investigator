@@ -25,8 +25,10 @@ investigator/         # Python package (agent, tools, rubric, schema)
   tools/              # one file per API (itunes, spotify, musicbrainz, ...)
 src/                  # curated per-artist records: one {slug}.json each
 dist/                 # generated artists.json (don't hand-edit)
+data/                 # investigations.jsonl — append-only run ledger (one JSON row per workflow run)
 analysis/             # Phase 0 EDA: SOA clone, eda.py, priors, calibration set
-.github/workflows/    # investigate / reinvestigate / build-index
+scripts/              # one-shot maintenance scripts (backfill, etc.)
+.github/workflows/    # investigate / reinvestigate / build-index / manual-investigate
 tests/                # pytest, fixtures for offline tool tests
 docs/                 # SIGNALS.md (taxonomy), METHODOLOGY.md (public), CALIBRATION_NOTES.md
 ```
@@ -52,6 +54,8 @@ docs/                 # SIGNALS.md (taxonomy), METHODOLOGY.md (public), CALIBRAT
 - **Never edit `dist/artists.json` by hand** — it's built from `src/`.
 - **Tool functions return plain dicts** (not Pydantic) — the agent serializes them as `tool_result` content.
 - **Tests mock HTTP at the requests boundary** (`responses` library). Don't mock our own tool functions.
+- **Quick-answer lookup:** before dispatching `manual-investigate.yml` for an artist, grep `data/investigations.jsonl` for the name. If there's a recent row with confidence ≥ 0.85 (or any verdict ≠ `unclear` from the latest rubric), prefer it over a fresh run. The ledger is the primary source for "did we check X?"; the workflow is what populates it.
+- **Ledger is append-only.** Every `manual-investigate` run writes one row at the end (run_id is the natural key). Don't rewrite history — multiple rows per artist over time is the drift signal we want.
 
 ## Env vars
 
