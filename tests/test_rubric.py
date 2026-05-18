@@ -6,7 +6,9 @@ These are pure-Python tests with no external deps — safe to run in any env.
 from __future__ import annotations
 
 from investigator.rubric import (
+    REQUEST_ESCALATION_TOOL,
     SIGNAL_MARKERS,
+    SONNET_ADDENDUM,
     SUBMIT_VERDICT_TOOL,
     SYSTEM_PROMPT,
     build_initial_prompt,
@@ -49,3 +51,31 @@ def test_build_initial_prompt_renders_hints() -> None:
     )
     assert "spotify.com/artist/abc" in prompt
     assert "rapid release cadence" in prompt
+
+
+def test_request_escalation_tool_shape() -> None:
+    assert REQUEST_ESCALATION_TOOL["name"] == "request_escalation"
+    triggers = REQUEST_ESCALATION_TOOL["input_schema"]["properties"]["trigger"]["enum"]
+    assert set(triggers) == {
+        "name-variant-mismatch",
+        "historical-gap-recent-burst",
+        "low-confidence",
+    }
+    required = set(REQUEST_ESCALATION_TOOL["input_schema"]["required"])
+    assert required == {"trigger", "evidence_summary", "current_evidence"}
+
+
+def test_system_prompt_describes_escalation_triggers() -> None:
+    assert "WHEN TO ESCALATE" in SYSTEM_PROMPT
+    assert "request_escalation" in SYSTEM_PROMPT
+    # Each trigger must appear in human-readable form so Haiku can route correctly.
+    assert "NAME-VARIANT MISMATCH" in SYSTEM_PROMPT
+    assert "HISTORICAL GAP" in SYSTEM_PROMPT
+    assert "LOW CONFIDENCE" in SYSTEM_PROMPT
+
+
+def test_sonnet_addendum_drops_escalation_authority() -> None:
+    """Sonnet must NOT be told it can escalate further — it's the terminal model."""
+    flattened = " ".join(SONNET_ADDENDUM.split())
+    assert "submit_verdict" in flattened.lower()
+    assert "do NOT have access to request_escalation" in flattened

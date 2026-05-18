@@ -54,6 +54,65 @@ SIGNAL_MARKERS: list[str] = [
 ]
 
 
+# --- Escalation tool schema -------------------------------------------------
+# Haiku calls this INSTEAD of submit_verdict when one of the three escalation
+# triggers fires (see "WHEN TO ESCALATE" in the system prompt). The agent loop
+# intercepts the call, switches model to Sonnet, bumps the budget, and
+# continues the investigation. Sonnet does NOT receive this tool — it's
+# terminal for Sonnet (must submit_verdict).
+
+REQUEST_ESCALATION_TOOL: dict = {
+    "name": "request_escalation",
+    "description": (
+        "Terminal action for Haiku ONLY. Call instead of submit_verdict when "
+        "ONE of the three explicit escalation triggers fires (see WHEN TO "
+        "ESCALATE in the system prompt). Hands the investigation off to "
+        "Sonnet, a stronger model with stricter requirements and a larger "
+        "budget. Do NOT call this just because a case feels tricky — only "
+        "when a trigger condition is literally met."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "trigger": {
+                "type": "string",
+                "enum": [
+                    "name-variant-mismatch",
+                    "historical-gap-recent-burst",
+                    "low-confidence",
+                ],
+                "description": "Which trigger fired. See WHEN TO ESCALATE in system prompt.",
+            },
+            "evidence_summary": {
+                "type": "string",
+                "description": (
+                    "1–2 paragraph summary of what you found, the specific "
+                    "conflict or low-confidence reason, and what Sonnet should "
+                    "focus on next. Sonnet starts from this summary; be specific "
+                    "about which platforms / name variants / time gaps matter."
+                ),
+            },
+            "current_evidence": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "source": {"type": "string"},
+                        "finding": {"type": "string"},
+                    },
+                    "required": ["source", "finding"],
+                },
+                "description": (
+                    "Structured findings you've already gathered. Sonnet inherits "
+                    "these so it doesn't redo cheap recon."
+                ),
+            },
+        },
+        "required": ["trigger", "evidence_summary", "current_evidence"],
+    },
+}
+
+
 # --- Verdict tool schema ----------------------------------------------------
 
 SUBMIT_VERDICT_TOOL: dict = {
@@ -388,6 +447,51 @@ Hard rules (the code will check several of these):
      `likely_ai` not `likely_human`.
 
 ===========================================================================
+WHEN TO ESCALATE TO SONNET
+===========================================================================
+
+You (Haiku) are the cheap default. Most investigations should end with
+submit_verdict and never need escalation. THREE SPECIFIC TRIGGERS require
+you to call request_escalation INSTEAD of submit_verdict:
+
+  1. NAME-VARIANT MISMATCH between platforms
+     A platform returns the artist's name with different punctuation or
+     capitalization than another platform (or the dispatched name).
+     Example: Discogs has "Ronnie O'Briant" (apostrophe), iTunes has
+     "Ronnie OBriant" (no apostrophe). Two DISTINCT artists are possible
+     and likely — AI distributors squat on real-but-obscure artist names
+     via punctuation variants. You cannot reliably bridge them from
+     Haiku-tier reconnaissance. Escalate.
+
+  2. HISTORICAL GAP + RECENT BURST without clear bridge
+     You find a pre-2020 artifact (Discogs CD, MB full entry, pre-2020
+     press) BUT the current catalog is entirely 2024+ AND your continuity-
+     check bridge evidence (a YouTube channel of ambiguous ownership, a
+     bio claim that could mean either AI tools or recording tools, etc.)
+     is itself unresolved. Sonnet needs to do the deeper search. Escalate.
+
+  3. LOW CONFIDENCE — your verdict would land below 0.65
+     Before calling submit_verdict, draft your confidence. If you would
+     submit anything below 0.65, call request_escalation with trigger=
+     "low-confidence" instead. "Unclear at 0.55" is a Sonnet job, not a
+     Haiku one — Sonnet can either firm up the evidence or land a
+     well-supported "unclear" at higher confidence.
+
+DO NOT escalate to avoid hard work. Escalation is for genuine structural
+conflicts and self-acknowledged low confidence — not for "this seems
+tricky." Most cases resolve with submit_verdict.
+
+When escalating, your request_escalation call MUST include:
+  - trigger: the enum value matching the condition above
+  - evidence_summary: 1–2 paragraphs naming the specific conflict and
+    what Sonnet should focus on
+  - current_evidence: structured findings already gathered, so Sonnet
+    doesn't redo cheap recon
+
+After escalation, the investigation continues — you do not see the result.
+Sonnet picks up your transcript and finishes.
+
+===========================================================================
 INVESTIGATION STRATEGY
 ===========================================================================
 
@@ -563,6 +667,72 @@ Before calling submit_verdict, verify:
     independent categories AND no contradicting evidence
   □ No tool returned an error you treated as evidence
   □ If contradicting evidence exists, confidence reflects it
+"""
+
+
+# --- Sonnet escalation addendum --------------------------------------------
+# Appended to SYSTEM_PROMPT when Haiku has called request_escalation and the
+# loop is now running on Sonnet 4.6. Adds stricter requirements that Haiku
+# couldn't reliably satisfy at its price point.
+
+SONNET_ADDENDUM = """\
+
+===========================================================================
+SONNET ESCALATION ADDENDUM
+===========================================================================
+
+You are no longer Haiku. This investigation has been escalated to you
+(Sonnet 4.6) because Haiku hit one of the three escalation triggers: a
+name-variant mismatch between platforms, a historical-gap + recent-burst
+without a clear bridge, or a low-confidence stop. Haiku's transcript and
+the `request_escalation` payload (trigger + evidence summary + structured
+findings) are immediately above. Continue from there.
+
+You have a $1.00 USD budget and 6 additional iterations. The standard
+rubric above still applies; the requirements below are STRICTER and
+ADDITIVE, not replacements.
+
+STRICTER REQUIREMENTS:
+
+  1. SEARCH BOTH NAME VARIANTS independently — if Haiku flagged a
+     name-variant mismatch, you MUST dispatch the lookup tools for BOTH
+     spellings on EACH relevant platform (iTunes, MusicBrainz, Spotify,
+     Discogs, YouTube, Deezer, Last.fm). Confirm whether the variants
+     resolve to the SAME artist (consistent IDs / metadata / engagement)
+     or DIFFERENT entities (separate channels with separate follower
+     bases, separate Discogs entries, etc.). Document both query results
+     in your evidence — do not collapse them.
+
+  2. SURFACE EXPLICIT AI MARKERS in artist-owned content — when you call
+     get_youtube_channel, READ the recent video titles in the response.
+     If any title contains a literal AI marker — "[AI]", "(AI)", "AI
+     generated", "Suno", "Udio", "made with AI", etc. — cite the exact
+     title as HIGH-WEIGHT evidence. Self-disclosed AI use in artist-owned
+     content is near-certain confirmation, regardless of what bridge
+     evidence claims about continuity. Also scan bios and album/track
+     titles for the same markers.
+
+  3. DISTRIBUTOR SQUAT AS BASELINE HYPOTHESIS — when continuity is
+     ambiguous (gap, name variant, weak bridge), treat distributor squat
+     (an AI music distributor reusing a real artist's name with a
+     punctuation variant) as the BASELINE hypothesis you must disprove,
+     not the exotic case to dismiss. Squats are common; real returning
+     artists shipping 200× their historical catalog velocity in 8 months
+     are rare.
+
+  4. HARDER CONFIDENCE CAP when continuity unresolved — if you cannot
+     fully resolve the bridge between historical artifact and current
+     catalog, cap confidence at 0.85 (not 0.95). Save the 0.85+ range
+     for cases you genuinely closed out.
+
+  5. SUBMIT_VERDICT IS YOUR TERMINAL ACTION — you do NOT have access to
+     request_escalation. You are the escalation target; you must reach a
+     verdict. If the case is irreducibly ambiguous after deeper work,
+     submit verdict='unclear' with a firmly-supported low confidence.
+
+The original artist name and submitter hints are at the top of the
+conversation. Haiku's findings are in the request_escalation payload.
+Use the tools; don't redo cheap recon Haiku already completed.
 """
 
 

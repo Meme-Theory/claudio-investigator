@@ -32,13 +32,20 @@ from typing import Any
 from anthropic import Anthropic, APIError
 
 from .budget import Budget
-from .rubric import SUBMIT_VERDICT_TOOL, SYSTEM_PROMPT, build_initial_prompt
+from .rubric import (
+    REQUEST_ESCALATION_TOOL,
+    SONNET_ADDENDUM,
+    SUBMIT_VERDICT_TOOL,
+    SYSTEM_PROMPT,
+    build_initial_prompt,
+)
 from .schema import Verdict
 from .tools import TOOL_RUNNERS, TOOLS
 
 logger = logging.getLogger(__name__)
 
 DEFAULT_MODEL = "claude-haiku-4-5"
+ESCALATION_MODEL = "claude-sonnet-4-6"
 DEFAULT_MAX_TOKENS = 2048
 DEFAULT_TEMPERATURE = 0.2
 
@@ -106,11 +113,18 @@ def _execute_tool(name: str, input_data: dict, budget: Budget) -> tuple[dict, bo
         return ({"error": str(e), "tool": name}, True)
 
 
-def _build_system_blocks() -> list[dict]:
-    """System prompt with a cache breakpoint covering tools+system."""
+def _build_system_blocks(escalated: bool = False) -> list[dict]:
+    """System prompt with a cache breakpoint covering tools+system.
+
+    When `escalated=True`, the Sonnet addendum is appended to the prompt.
+    The cache breakpoint moves with it — Haiku's cached prefix is invalidated
+    on escalation (different model, different prefix), which is fine: the
+    handover is rare and the addendum is worth the cache miss.
+    """
+    text = SYSTEM_PROMPT + SONNET_ADDENDUM if escalated else SYSTEM_PROMPT
     return [{
         "type": "text",
-        "text": SYSTEM_PROMPT,
+        "text": text,
         "cache_control": {"type": "ephemeral"},
     }]
 
@@ -134,8 +148,14 @@ def investigate(
     """
     client = client or Anthropic()
     budget = budget or Budget()
+    # Haiku starts with request_escalation available; Sonnet doesn't (terminal
+    # for it). We rebuild tools_schema on escalation to drop it. If the caller
+    # explicitly starts from a non-Haiku model, treat that as already-escalated.
+    starts_at_haiku = model == DEFAULT_MODEL
     tools_schema = [*TOOLS, SUBMIT_VERDICT_TOOL]
-    system_blocks = _build_system_blocks()
+    if starts_at_haiku:
+        tools_schema.append(REQUEST_ESCALATION_TOOL)
+    system_blocks = _build_system_blocks(escalated=not starts_at_haiku)
 
     messages: list[dict] = [
         {"role": "user", "content": build_initial_prompt(artist_name, hints or {})}
@@ -207,6 +227,40 @@ def investigate(
                     verdict=verdict, budget=budget, transcript=transcript,
                     model=model, terminated_by=TERMINATED_SUBMIT_VERDICT,
                 )
+
+        # request_escalation is "soft-terminal" — Haiku stops, Sonnet picks up.
+        # Swap model + budget + system prompt + tools, acknowledge the call as
+        # a tool_result, and continue the loop. The next iteration calls Sonnet
+        # with the full Haiku transcript visible to it.
+        escalation_block = next(
+            (b for b in tool_uses if getattr(b, "name", None) == "request_escalation"),
+            None,
+        )
+        if escalation_block is not None:
+            budget.escalate_to_sonnet()
+            model = ESCALATION_MODEL
+            system_blocks = _build_system_blocks(escalated=True)
+            tools_schema = [*TOOLS, SUBMIT_VERDICT_TOOL]  # drop request_escalation
+            messages.append({"role": "assistant", "content": response.content})
+            messages.append({
+                "role": "user",
+                "content": [{
+                    "type": "tool_result",
+                    "tool_use_id": escalation_block.id,
+                    "content": json.dumps({
+                        "status": "escalated",
+                        "active_model": ESCALATION_MODEL,
+                        "note": (
+                            "You are now Sonnet 4.6. Apply the stricter "
+                            "requirements in the SONNET ESCALATION ADDENDUM in "
+                            "your system prompt. Continue the investigation; "
+                            "submit_verdict is your terminal action."
+                        ),
+                    }),
+                    "is_error": False,
+                }],
+            })
+            continue
 
         # Execute requested tools and feed results back.
         tool_results = []
