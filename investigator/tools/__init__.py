@@ -20,12 +20,16 @@ from . import (
     itunes,
     lastfm,
     musicbrainz,
-    spotify,
-    vision,
     youtube,
 )
 
-_MODULES = (itunes, musicbrainz, spotify, youtube, discogs, deezer, lastfm, genius, vision)
+# Spotify removed 2026-05-18 — Spotify Web API now requires a Premium
+# subscription for the app owner. We don't have one and aren't acquiring one;
+# `popularity-follower-mismatch` keeps working on Deezer/Last.fm engagement,
+# and `suno-duration-cap` moves to Deezer top-tracks + YouTube video durations.
+# Vision (analyze_album_art) is Phase 4 — not registered until the runner
+# actually does the vision pass instead of raising NotImplementedError.
+_MODULES = (itunes, musicbrainz, youtube, discogs, deezer, lastfm, genius)
 
 TOOLS: list[dict] = [t for mod in _MODULES for t in getattr(mod, "TOOLS", [])]
 TOOL_RUNNERS: dict = {

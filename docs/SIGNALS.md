@@ -38,8 +38,9 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 **Phase 0 caveat:** SOA lift = 1.07 — weak discriminator on its own. Co-occurs heavily with `ai-visuals` (Jaccard 0.57) and `anonymous` (Jaccard 0.49). Treat as cluster-mate, not as a primary signal in isolation.
 
 ### `suno-duration-cap`
-**What:** Track durations cluster suspiciously around 2:00–2:30.
+**What:** Track durations cluster suspiciously around 2:00–2:30 (the Suno free-tier per-generation cap). Trigger: ≥ 60% of available track durations are in [120s, 150s].
 **Why it's a signal:** Suno's free tier caps at ~2 minutes per generation. Artists whose entire catalog hugs that cap are very often Suno-generated.
+**Method:** Two duration sources, in priority order — (1) `lookup_deezer.top_tracks[].duration_seconds` is the clean audio source; (2) `get_youtube_channel.recent_uploads[].duration_seconds` is the fallback when the artist isn't on Deezer (lyric/music videos may add 5–30s vs. audio-only — Deezer wins when both have data). Cite the source on every evidence row.
 **Caveats:** Genre conventions (punk, grindcore) legitimately produce short tracks. Look for cluster *shape*, not just duration.
 
 ### `recent-only-listener-history`
@@ -49,8 +50,8 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 ## Cross-platform presence markers
 
 ### `thin-cross-platform`
-**What:** Present on the major streaming services but absent from niche or community platforms (Bandcamp, Discogs, Soundcloud non-zero, scene-specific aggregators).
-**Why it's a signal:** Real artists historically scatter — they had a Bandcamp before they had a Spotify, they tagged a SoundCloud, they got blogged about somewhere. Catalog presence with no community presence reads as distributor-only delivery.
+**What:** Present on the major streaming services (YouTube, Apple Music, Deezer) but absent from niche or community platforms (Bandcamp, Discogs, Soundcloud non-zero, scene-specific aggregators).
+**Why it's a signal:** Real artists historically scatter — they had a Bandcamp before they had streaming distribution, they tagged a SoundCloud, they got blogged about somewhere. Catalog presence with no community presence reads as distributor-only delivery.
 
 ### `anonymous`
 **What:** No individual humans named or linked anywhere — no writer credits, no producer credits, no socials, no interviews, no photos that aren't AI-generated.
@@ -82,9 +83,10 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 ## Coherence markers
 
 ### `popularity-follower-mismatch`
-**What:** Engagement is disproportionately low for the catalog size. Two firing conditions: (a) Spotify popularity ≥ 50 vs. < 1,000 followers, OR (b) ≥ 10 releases on any platform paired with < 100 followers/fans/listeners on the same or another platform (Spotify, Deezer fans, Bandcamp, Last.fm). The ≥ 10× release-to-engagement ratio is the key shape.
-**Why it's a signal:** Real artists' audiences grow with their catalog and popularity. AI projects ship catalog volume (algorithmic distribution) without acquiring listeners — the metrics decouple. Condition (a) catches algorithmic-popularity inflation; condition (b) catches distributor-floods-without-audience.
-**Method:** Compare across platforms — Deezer fans, Last.fm listeners, and Spotify follower count are all valid denominators when the numerator is catalog size.
+**What:** Engagement is disproportionately low for the catalog size. Trigger: ≥ 10 releases on any platform paired with < 100 followers/fans/listeners on another platform (Deezer fans, Bandcamp fans, Last.fm listeners). The ≥ 10× release-to-engagement ratio is the key shape.
+**Why it's a signal:** Real artists' audiences grow with their catalog. AI projects ship catalog volume (algorithmic distribution) without acquiring listeners — the metrics decouple.
+**Method:** Compare across platforms — Deezer `nb_fan`, Last.fm `listeners`, Bandcamp follower counts are all valid denominators when the numerator is catalog size from iTunes / Deezer / Discogs.
+**History:** Pre-2026-05-18 this marker also had a Spotify-popularity-vs-follower condition; removed when Spotify Web API was paywalled behind Premium.
 
 ### `inconsistent-style`
 **What:** Wild genre swings across the catalog (folk → trap → orchestral → metal in 18 months) with no curatorial framing.

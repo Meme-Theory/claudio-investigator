@@ -34,13 +34,3 @@ def load_fixture():
     return _load
 
 
-@pytest.fixture
-def fake_spotify_env(monkeypatch):
-    """Provide Spotify client-credentials env vars; reset the token cache."""
-    from investigator.tools.spotify import _reset_token_cache_for_testing
-
-    monkeypatch.setenv("SPOTIFY_CLIENT_ID", "test-client-id")
-    monkeypatch.setenv("SPOTIFY_CLIENT_SECRET", "test-client-secret")
-    _reset_token_cache_for_testing()
-    yield
-    _reset_token_cache_for_testing()

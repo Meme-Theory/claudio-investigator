@@ -43,7 +43,7 @@ SIGNAL_MARKERS: list[str] = [
     "no-physical-release",           # untested in SOA; Discogs absence signal
     "inconsistent-style",            # SOA lift 1.19
     "suno-duration-cap",             # untested in SOA; 2:00–2:30 cluster
-    "popularity-follower-mismatch",  # untested in SOA; Spotify popularity vs. follower-base
+    "popularity-follower-mismatch",  # untested in SOA; catalog-size vs. engagement gap
     "placeholder-bio",               # untested in SOA
     "gpt-lyric-patterns",            # untested in SOA; LLM-tell text patterns
     "recent-only-listener-history",  # untested in SOA; Last.fm step-function curve
@@ -253,26 +253,26 @@ least one Tier 1 marker before pushing confidence above 0.70.
   • `suno-duration-cap`
     What: Track durations across the catalog cluster suspiciously near
     2:00–2:30 — the upper limit of Suno's free-tier per-generation output.
-    Evidence: get_spotify_albums returned tracks where ≥ 60% have duration
-    in [120s, 150s]. Cite specific track counts in evidence.
+    Evidence: durations from EITHER source — `lookup_deezer.top_tracks[].
+    duration_seconds` (clean audio durations, primary source) OR
+    `get_youtube_channel.recent_uploads[].duration_seconds` (secondary;
+    lyric/music videos may add a few seconds vs. audio-only). Trigger:
+    ≥ 60% of available track durations are in [120s, 150s]. Prefer Deezer
+    when both sources have data; use YouTube as fallback when the artist
+    isn't on Deezer. Cite specific track counts and the source.
     Caveats: Some real genres (punk, grindcore, certain electronic styles)
     legitimately produce short tracks. Don't flag a punk band as Suno.
 
   • `popularity-follower-mismatch`
-    What: Engagement is disproportionately low given catalog size, OR
-    Spotify popularity is high without follower base. Real artists'
-    audiences grow with their output; AI projects ship catalog without
-    acquiring listeners.
-    Two firing conditions (either qualifies):
-      (a) Spotify popularity ≥ 50 against < 1,000 followers — algorithmic
-          placement without organic audience.
-      (b) Catalog/engagement gap — ≥ 10 releases on any platform paired
-          with < 100 followers/fans on the same or another platform
-          (Spotify followers, Deezer fans, Bandcamp fans, Last.fm
-          listeners). Gap must be ≥ 10× between releases and engagement.
-          11 albums against 22 Deezer fans fires this.
-    Evidence: numerical popularity, follower/fan/listener, and release
-    counts from the relevant tools. Cite the ratio explicitly.
+    What: Engagement is disproportionately low given catalog size. Real
+    artists' audiences grow with their catalog; AI projects ship volume
+    without acquiring listeners.
+    Trigger: ≥ 10 releases on any platform paired with < 100 followers /
+    fans / listeners on the same or another platform (Deezer fans,
+    Bandcamp fans, Last.fm listeners). Gap must be ≥ 10× between releases
+    and engagement. 11 albums against 22 Deezer fans fires this.
+    Evidence: numerical follower/fan/listener and release counts from the
+    relevant tools. Cite the ratio explicitly.
 
   • `placeholder-bio`
     What: Artist bio is missing entirely, AI-template phrasing, or generic
@@ -294,10 +294,10 @@ least one Tier 1 marker before pushing confidence above 0.70.
     Evidence: get_lastfm_artist data showing the shape.
 
   • `thin-cross-platform`
-    What: Present on major streaming services (Spotify, YouTube) but absent
-    from community / niche platforms (Bandcamp, MusicBrainz, Discogs, scene
-    blogs, etc.). Real artists historically scatter — they had a Bandcamp
-    before they had a Spotify.
+    What: Present on major streaming services (YouTube, Apple Music,
+    Deezer) but absent from community / niche platforms (Bandcamp,
+    MusicBrainz, Discogs, scene blogs, etc.). Real artists historically
+    scatter — they had a Bandcamp before they had streaming distribution.
     Evidence: cite which platforms returned data and which didn't.
     Phase 0 caveat: Do NOT include TikTok / Instagram absence in this. SOA
     data shows TikTok and Instagram are platform-independent of AI status
@@ -504,30 +504,31 @@ Phase 1 — Cheap broad recon (always run first):
      catalog, returns earliest release date, country, genre.
   2. lookup_musicbrainz(artist_name) — establishes presence-or-absence in
      the ground-truth catalog. Absence is recordable evidence.
+  3. lookup_deezer(artist_name) — fan count + top-track durations in one
+     call. Fan count feeds `popularity-follower-mismatch`; durations feed
+     `suno-duration-cap`. This is the primary engagement source.
 
-  If iTunes finds nothing AND MusicBrainz finds nothing AND there's no
-  Spotify hint in the submission, you likely have an artist name that
-  doesn't resolve — return unclear with low confidence rather than digging
-  deeper.
+  If iTunes finds nothing AND MusicBrainz finds nothing AND Deezer finds
+  nothing, the artist name doesn't resolve — return unclear with low
+  confidence rather than digging deeper.
 
 Phase 2 — Targeted enrichment (based on what Phase 1 surfaced):
-  3. search_spotify_artist or get_spotify_artist (if hint provided)
-     — popularity, followers, genres
-  4. get_spotify_albums — release dates, track durations, velocity
-  5. lookup_discogs — physical media presence
-  6. get_youtube_channel — channel age, upload cadence
+  4. lookup_discogs — physical media presence; the strongest human-artifact
+     source (subject to the CONTINUITY CHECK above).
+  5. get_youtube_channel — channel age, upload cadence, video durations
+     (secondary track-duration source), and recent-upload TITLES (read
+     them for literal [AI] / Suno / etc. self-disclosure markers).
 
 Phase 3 — Specialized (only when signals are mixed):
-  7. analyze_album_art — vision pass (max 2 per investigation; expensive)
-  8. get_genius_lyrics — only if `gpt-lyric-patterns` would change the
-     verdict tier
-  9. get_lastfm_artist — only if you specifically need the listener curve
-  10. lookup_deezer — cross-platform presence sanity check
+  6. get_genius_lyrics — only if `gpt-lyric-patterns` would change the
+     verdict tier.
+  7. get_lastfm_artist — only if you specifically need the listener curve
+     for `recent-only-listener-history`.
 
 Stop early when you have enough. If by iteration 3 you have `2024-onwards`
-+ `no-musicbrainz` + a verified Spotify popularity-follower mismatch from
-distinct categories, that's a confident likely_ai at 0.75–0.85 — submit and
-move on. Don't run the vision tool just because you can.
++ `no-musicbrainz` + a verified `popularity-follower-mismatch` (catalog
+size vs. Deezer/Last.fm engagement), that's a confident likely_ai at
+0.75–0.85 — submit and move on.
 
 Do NOT stop early when you have a CONTRADICTION. If your stack contains
 both AI markers AND any "STRONG human artifact" (Discogs physical press,
@@ -547,12 +548,12 @@ budget on vision passes "just to confirm."
 WORKED EXAMPLE
 ===========================================================================
 
-User submission: "Investigate: Aria Vex". Hint: Spotify URL provided.
+User submission: "Investigate: Aria Vex".
 
 Iteration 1:
   lookup_itunes("Aria Vex")
   → {results: [{artistName: "Aria Vex", earliestRelease: "2025-02-14",
-                primaryGenreName: "Electronic"}]}
+                primaryGenreName: "Electronic", album_count: 14}]}
 
 Iteration 2:
   lookup_musicbrainz("Aria Vex")
@@ -561,18 +562,15 @@ Iteration 2:
   categories already (Category A + Category B).
 
 Iteration 3:
-  get_spotify_artist(spotify_id="...")
-  → {popularity: 47, followers: 312, genres: ["dark electronic", "phonk"]}
-  Notable: popularity 47 with only 312 followers is a dramatic mismatch
-  (Category D).
+  lookup_deezer("Aria Vex")
+  → {found_exact: true, exact_match: {nb_fan: 31, nb_album: 14},
+     top_tracks: [{duration_seconds: 138}, {duration_seconds: 145},
+                  {duration_seconds: 122}, ...]}
+  Notable: 14 albums against 31 Deezer fans — ≥10× catalog/engagement gap
+  (Category D, popularity-follower-mismatch). Top tracks cluster 2:02–2:25
+  (Category D, suno-duration-cap — same category, not a new one).
 
-Iteration 4:
-  get_spotify_albums(spotify_id="...")
-  → 14 albums and singles released in 18 months; all tracks 2:00–2:38
-  Notable: high-output (Category D, cluster-mate) AND suno-duration-cap
-  (Category D, independent).
-
-At iteration 4, evidence stack:
+At iteration 3, evidence stack:
   • `2024-onwards`             — Category A
   • `no-musicbrainz`           — Category B
   • `popularity-follower-mismatch` — Category D
@@ -581,8 +579,8 @@ At iteration 4, evidence stack:
   • `high-output`               — Category D (Tier 3 cluster — cluster-mate)
 
 Independent categories: A, B, D. That's three. → eligible for confidence
-in the 0.85–0.92 range. The two category-D markers are independent of each
-other (release count is not duration cluster), but counted carefully they
+in the 0.85–0.92 range. The category-D markers are independent of each
+other (release-vs-fans isn't duration cluster), but counted carefully they
 strengthen category D without doubling it.
 
 Submit:
@@ -592,11 +590,10 @@ Submit:
             "popularity-follower-mismatch", "suno-duration-cap",
             "high-output"]
   reasoning: "Catalog originates Feb 2025 with no earlier history; no
-   MusicBrainz entry under canonical name; Spotify popularity 47 against
-   only 312 followers indicates algorithmic placement without organic
-   audience; 14 releases in 18 months with characteristic 2:00–2:30
-   duration cluster consistent with Suno generation. Five markers across
-   three independent signal categories."
+   MusicBrainz entry under canonical name; 14 albums against 31 Deezer
+   fans indicates algorithmic distribution without organic audience;
+   top-tracks cluster 2:02–2:25 consistent with Suno generation. Five
+   markers across three independent signal categories."
   auto_merge_recommended: false   (just under 0.90 threshold)
 
 Note: I did NOT run analyze_album_art here. With three independent
@@ -696,12 +693,12 @@ STRICTER REQUIREMENTS:
 
   1. SEARCH BOTH NAME VARIANTS independently — if Haiku flagged a
      name-variant mismatch, you MUST dispatch the lookup tools for BOTH
-     spellings on EACH relevant platform (iTunes, MusicBrainz, Spotify,
-     Discogs, YouTube, Deezer, Last.fm). Confirm whether the variants
-     resolve to the SAME artist (consistent IDs / metadata / engagement)
-     or DIFFERENT entities (separate channels with separate follower
-     bases, separate Discogs entries, etc.). Document both query results
-     in your evidence — do not collapse them.
+     spellings on EACH relevant platform (iTunes, MusicBrainz, Discogs,
+     YouTube, Deezer, Last.fm). Confirm whether the variants resolve to
+     the SAME artist (consistent IDs / metadata / engagement) or
+     DIFFERENT entities (separate channels with separate follower bases,
+     separate Discogs entries, etc.). Document both query results in your
+     evidence — do not collapse them.
 
   2. SURFACE EXPLICIT AI MARKERS in artist-owned content — when you call
      get_youtube_channel, READ the recent video titles in the response.

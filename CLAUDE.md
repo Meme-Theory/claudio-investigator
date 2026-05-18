@@ -22,7 +22,7 @@ Phases (from dev plan §"Phased Implementation"):
 
 ```
 investigator/         # Python package (agent, tools, rubric, schema)
-  tools/              # one file per API (itunes, spotify, musicbrainz, ...)
+  tools/              # one file per API (itunes, musicbrainz, deezer, ...)
 src/                  # curated per-artist records: one {slug}.json each
 dist/                 # generated artists.json (don't hand-edit)
 data/                 # investigations.jsonl — append-only run ledger (one JSON row per workflow run)
@@ -73,21 +73,19 @@ the user has tokens for as of 2026-05-17):
 - MusicBrainz — `lookup_musicbrainz`. Set `MUSICBRAINZ_USER_AGENT` to a
   descriptive UA per their policy (default in `.env.example` is fine).
 
-**Optional** (implemented but requires a free developer-account signup;
-without these, the agent gets a graceful tool error and adapts):
-- `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` — `search_spotify_artist`,
-  `get_spotify_artist`, `get_spotify_albums`. Without Spotify, the markers
-  `popularity-follower-mismatch` and `suno-duration-cap` lose their
-  evidence path.
+**Optional** (free dev accounts — agent adapts gracefully without them):
+- `DISCOGS_TOKEN` — `lookup_discogs` (physical-release evidence is a strong human artifact path; without it we lose continuity-check (c)).
+- `LASTFM_API_KEY` — `get_lastfm_artist` (listener counts, listener-history curve).
 
-**Not yet implemented** (runners raise; agent catches and skips):
-- `DISCOGS_TOKEN`, `LASTFM_API_KEY` — corresponding tools are scaffolded.
-- Vision tool (`analyze_album_art`) is Phase 4.
+**Removed 2026-05-18:** Spotify. The Web API now requires the app owner to hold a Spotify Premium subscription. `popularity-follower-mismatch` runs on Deezer fans / Last.fm listeners instead; `suno-duration-cap` runs on Deezer top-track durations + YouTube video durations. The tool module is deleted (not commented out) and unregistered in `tools/__init__.py`.
+
+**Not yet implemented:**
+- Vision tool (`analyze_album_art`) is Phase 4 — unregistered in `tools/__init__.py::_MODULES` until the runner actually performs the vision pass. Re-register when implemented.
 
 ## Don'ts (project-specific traps)
 
-- **Don't add paid APIs.** Apple Music ($99/yr), Amazon Music, SoundCloud — all explicitly out of scope. Stay free-tier.
-- **Don't use Spotify audio-features.** Deprecated for new apps Nov 2024. Replaced by behavior signals.
+- **Don't add paid APIs.** Apple Music ($99/yr), Amazon Music, SoundCloud — all explicitly out of scope. Stay free-tier. Spotify removed itself from the free tier in 2026 — same reason.
+- **Don't silently swallow tool errors.** A real error (HTTP 403, auth failure, etc.) means a tool genuinely doesn't work for us — find the root cause and either fix the config or remove the tool from `tools/__init__.py::_MODULES`. Do NOT wrap raises in graceful-return decorators to clean up logs; that installs a permanent silent-failure mode.
 - **Don't add audio fingerprinting yet.** Phase 5, deferred. Don't pull it forward without a plan-update.
 - **Don't grow the marker set on a hunch.** Markers earn their place via EDA lift ratios (Phase 0). Adding a marker means re-running the calibration set.
 - **Don't let the agent loop run unbounded.** `budget.py` enforces 12 iterations / 20k tokens / $0.50 — never relax these in code, only via deliberate config.

@@ -38,11 +38,13 @@ cp .env.example .env             # fill in API keys
 Required env vars:
 
 - `ANTHROPIC_API_KEY`
-- `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`
 - `YOUTUBE_API_KEY`
 - `DISCOGS_TOKEN`
 - `LASTFM_API_KEY`
 - `GENIUS_TOKEN`
+
+(Spotify was removed 2026-05-18 — Web API now requires Premium. Deezer
+covers fan-count + track-duration signals instead.)
 
 See `.env.example` for the full list.
 

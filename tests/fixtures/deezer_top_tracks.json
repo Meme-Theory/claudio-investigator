@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": 1001,
+      "title": "One More Time",
+      "duration": 320,
+      "rank": 951234,
+      "explicit_lyrics": false,
+      "preview": "https://cdns-preview-x.dzcdn.net/stream/x.mp3"
+    },
+    {
+      "id": 1002,
+      "title": "Harder, Better, Faster, Stronger",
+      "duration": 224,
+      "rank": 887420,
+      "explicit_lyrics": false,
+      "preview": "https://cdns-preview-x.dzcdn.net/stream/x.mp3"
+    },
+    {
+      "id": 1003,
+      "title": "Around The World",
+      "duration": 429,
+      "rank": 826110,
+      "explicit_lyrics": false,
+      "preview": "https://cdns-preview-x.dzcdn.net/stream/x.mp3"
+    }
+  ],
+  "total": 3
+}

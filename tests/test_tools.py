@@ -23,12 +23,7 @@ from investigator.tools.itunes import lookup_itunes
 from investigator.tools.musicbrainz import ARTIST_URL as MB_ARTIST_URL
 from investigator.tools.musicbrainz import SEARCH_URL as MB_SEARCH_URL
 from investigator.tools.musicbrainz import lookup_musicbrainz
-from investigator.tools.spotify import (
-    API_BASE as SPOTIFY_API_BASE,
-)
-from investigator.tools.spotify import (
-    TOKEN_URL as SPOTIFY_TOKEN_URL,
-)
+from investigator.tools.deezer import ARTIST_TOP_URL as DEEZER_TOP_URL
 from investigator.tools.deezer import SEARCH_URL as DEEZER_SEARCH_URL
 from investigator.tools.deezer import lookup_deezer
 from investigator.tools.discogs import ARTIST_URL as DISCOGS_ARTIST_URL
@@ -45,11 +40,6 @@ from investigator.tools.genius import (
 )
 from investigator.tools.lastfm import API_URL as LASTFM_API_URL
 from investigator.tools.lastfm import get_lastfm_artist
-from investigator.tools.spotify import (
-    get_spotify_albums,
-    get_spotify_artist,
-    search_spotify_artist,
-)
 from investigator.tools.youtube import (
     CHANNELS_URL as YOUTUBE_CHANNELS_URL,
 )
@@ -60,6 +50,10 @@ from investigator.tools.youtube import (
     SEARCH_URL as YOUTUBE_SEARCH_URL,
 )
 from investigator.tools.youtube import (
+    VIDEOS_URL as YOUTUBE_VIDEOS_URL,
+)
+from investigator.tools.youtube import (
+    _parse_iso_duration,
     get_youtube_channel,
 )
 
@@ -259,91 +253,6 @@ def test_musicbrainz_rate_limit_floor_enforced(load_fixture) -> None:
     assert elapsed >= 1.0, f"expected ≥1s between calls, got {elapsed:.3f}s"
 
 
-# --- Spotify ---------------------------------------------------------------
-
-
-@responses.activate
-def test_spotify_search_returns_top_matches(load_fixture, fake_spotify_env) -> None:
-    responses.add(responses.POST, SPOTIFY_TOKEN_URL, json=load_fixture("spotify_token.json"))
-    responses.add(
-        responses.GET, f"{SPOTIFY_API_BASE}/search", json=load_fixture("spotify_search.json")
-    )
-
-    result = search_spotify_artist("Aphex Twin")
-
-    assert result["found"] is True
-    assert result["found_exact"] is True
-    assert result["exact_match"]["id"] == "6kBDZFXuLrZgHnvmPu9NsG"
-    assert result["exact_match"]["popularity"] == 72
-    assert result["exact_match"]["followers_count"] == 1487412
-
-
-@responses.activate
-def test_spotify_get_artist(load_fixture, fake_spotify_env) -> None:
-    responses.add(responses.POST, SPOTIFY_TOKEN_URL, json=load_fixture("spotify_token.json"))
-    responses.add(
-        responses.GET,
-        f"{SPOTIFY_API_BASE}/artists/6kBDZFXuLrZgHnvmPu9NsG",
-        json=load_fixture("spotify_artist.json"),
-    )
-
-    result = get_spotify_artist("6kBDZFXuLrZgHnvmPu9NsG")
-
-    assert result["id"] == "6kBDZFXuLrZgHnvmPu9NsG"
-    assert result["name"] == "Aphex Twin"
-    assert result["popularity"] == 72
-    assert result["followers_count"] == 1487412
-    assert "electronic" in result["genres"]
-
-
-@responses.activate
-def test_spotify_get_albums(load_fixture, fake_spotify_env) -> None:
-    responses.add(responses.POST, SPOTIFY_TOKEN_URL, json=load_fixture("spotify_token.json"))
-    responses.add(
-        responses.GET,
-        f"{SPOTIFY_API_BASE}/artists/6kBDZFXuLrZgHnvmPu9NsG/albums",
-        json=load_fixture("spotify_albums.json"),
-    )
-
-    result = get_spotify_albums("6kBDZFXuLrZgHnvmPu9NsG")
-
-    assert result["album_count"] == 2
-    assert result["earliest_release_date"] == "1992-11-09"
-    assert result["latest_release_date"] == "2001-10-22"
-
-
-@responses.activate
-def test_spotify_token_cached_across_calls(load_fixture, fake_spotify_env) -> None:
-    """Two API calls should auth once (token cached), not twice."""
-    responses.add(responses.POST, SPOTIFY_TOKEN_URL, json=load_fixture("spotify_token.json"))
-    responses.add(
-        responses.GET, f"{SPOTIFY_API_BASE}/search", json=load_fixture("spotify_search.json")
-    )
-    responses.add(
-        responses.GET,
-        f"{SPOTIFY_API_BASE}/artists/6kBDZFXuLrZgHnvmPu9NsG",
-        json=load_fixture("spotify_artist.json"),
-    )
-
-    search_spotify_artist("Aphex Twin")
-    get_spotify_artist("6kBDZFXuLrZgHnvmPu9NsG")
-
-    # responses.calls includes every request made through the mocked session.
-    token_calls = [c for c in responses.calls if c.request.url == SPOTIFY_TOKEN_URL]
-    assert len(token_calls) == 1, f"expected 1 token request, got {len(token_calls)}"
-
-
-def test_spotify_missing_credentials_raises(monkeypatch) -> None:
-    """No env vars → clear error rather than mysterious 401 at the API."""
-    from investigator.tools.spotify import _reset_token_cache_for_testing
-
-    monkeypatch.delenv("SPOTIFY_CLIENT_ID", raising=False)
-    monkeypatch.delenv("SPOTIFY_CLIENT_SECRET", raising=False)
-    _reset_token_cache_for_testing()
-    with pytest.raises(RuntimeError, match="SPOTIFY_CLIENT_ID"):
-        search_spotify_artist("anything")
-
-
 # --- YouTube --------------------------------------------------------------
 
 
@@ -360,6 +269,9 @@ def test_youtube_channel_by_id(load_fixture, fake_youtube_env) -> None:
     responses.add(
         responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
     )
+    responses.add(
+        responses.GET, YOUTUBE_VIDEOS_URL, json=load_fixture("youtube_video_durations.json")
+    )
 
     result = get_youtube_channel("UCQpsLlpUlsdkRoZyaSwUTuw")
 
@@ -373,6 +285,24 @@ def test_youtube_channel_by_id(load_fixture, fake_youtube_env) -> None:
     assert result["recent_uploads_sampled"] == 3
     assert result["recent_uploads_earliest"].startswith("2017-")
     assert result["recent_uploads_latest"].startswith("2024-")
+    # Durations should be parsed into seconds for each recent upload —
+    # feeds the suno-duration-cap marker as a secondary source.
+    durations = {v["video_id"]: v["duration_seconds"] for v in result["recent_uploads"]}
+    assert durations["vid_aisatsana_001"] == 322   # PT5M22S
+    assert durations["vid_diskprep_002"] == 227    # PT3M47S
+    assert durations["vid_fieldday_003"] == 4325   # PT1H12M5S
+
+
+def test_parse_iso_duration() -> None:
+    """Unit-test the ISO 8601 → seconds parser directly."""
+    assert _parse_iso_duration("PT3M42S") == 222
+    assert _parse_iso_duration("PT2M") == 120
+    assert _parse_iso_duration("PT45S") == 45
+    assert _parse_iso_duration("PT1H2M3S") == 3723
+    assert _parse_iso_duration("PT0S") == 0
+    assert _parse_iso_duration(None) is None
+    assert _parse_iso_duration("") is None
+    assert _parse_iso_duration("garbage") is None
 
 
 @responses.activate
@@ -527,6 +457,11 @@ def test_genius_missing_token_raises(monkeypatch) -> None:
 @responses.activate
 def test_deezer_finds_artist(load_fixture) -> None:
     responses.add(responses.GET, DEEZER_SEARCH_URL, json=load_fixture("deezer_found.json"))
+    responses.add(
+        responses.GET,
+        DEEZER_TOP_URL.format(id=27),
+        json=load_fixture("deezer_top_tracks.json"),
+    )
 
     result = lookup_deezer("Daft Punk")
 
@@ -534,6 +469,29 @@ def test_deezer_finds_artist(load_fixture) -> None:
     assert result["found_exact"] is True
     assert result["exact_match"]["id"] == 27
     assert result["exact_match"]["nb_fan"] == 5847234
+    # Top tracks should be fetched for an exact match — durations feed
+    # the suno-duration-cap marker, so the shape must include them.
+    assert len(result["top_tracks"]) == 3
+    assert result["top_tracks"][0]["title"] == "One More Time"
+    assert result["top_tracks"][0]["duration_seconds"] == 320
+
+
+@responses.activate
+def test_deezer_top_tracks_failure_is_tolerated(load_fixture) -> None:
+    """Top-tracks fetch failures should NOT sink the lookup itself.
+
+    Fan-count is the primary signal from this tool; durations are secondary.
+    A 5xx on /artist/{id}/top must leave the search result intact with
+    `top_tracks: []` so the agent can still use the fan-count signal.
+    """
+    responses.add(responses.GET, DEEZER_SEARCH_URL, json=load_fixture("deezer_found.json"))
+    responses.add(responses.GET, DEEZER_TOP_URL.format(id=27), status=500)
+
+    result = lookup_deezer("Daft Punk")
+
+    assert result["found_exact"] is True
+    assert result["exact_match"]["nb_fan"] == 5847234
+    assert result["top_tracks"] == []
 
 
 @responses.activate
@@ -666,17 +624,3 @@ def test_lastfm_missing_key_raises(monkeypatch) -> None:
         get_lastfm_artist("anything")
 
 
-# --- Spotify error reporting (smoke test for auth-failure surfacing) -----
-
-
-@responses.activate
-def test_spotify_auth_failure_surfaces_response_body(fake_spotify_env) -> None:
-    responses.add(
-        responses.POST,
-        SPOTIFY_TOKEN_URL,
-        json={"error": "invalid_client", "error_description": "Invalid client"},
-        status=400,
-    )
-
-    with pytest.raises(RuntimeError, match="invalid_client"):
-        search_spotify_artist("anything")

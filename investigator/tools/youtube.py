@@ -2,18 +2,19 @@
 
 Docs: https://developers.google.com/youtube/v3
 
-Channel age, subscriber count, and upload velocity are the signal-rich fields.
-We do NOT fetch comments here (cheap astroturf target) or per-video durations
-(would multiply quota cost N-fold).
+Channel age, subscriber count, upload velocity, and recent-video durations
+are the signal-rich fields. We do NOT fetch comments here (cheap astroturf
+target).
 
 Quota cost per get_youtube_channel call:
-  - identifier = channel ID:    1 (channels.list) + 1 (playlistItems.list) = 2 units
-  - identifier = @handle:       1 + 1 = 2 units
-  - identifier = arbitrary text: 100 (search.list) + 1 + 1 = 102 units
+  - identifier = channel ID:    1 (channels.list) + 1 (playlistItems.list) + 1 (videos.list batch) = 3 units
+  - identifier = @handle:       1 + 1 + 1 = 3 units
+  - identifier = arbitrary text: 100 (search.list) + 1 + 1 + 1 = 103 units
 
 So if the submitter provides a YouTube hint URL we extract the channel ID or
-handle and stay at 2 units. Search is only the fallback. Keep an eye on this
-when designing prompts — the agent should prefer ID/handle paths.
+handle and stay at 3 units. Search is only the fallback. videos.list is
+batched 50-at-a-time so the duration fetch is one call regardless of how
+many recent uploads we sampled.
 """
 
 from __future__ import annotations
@@ -28,9 +29,30 @@ API_BASE = "https://www.googleapis.com/youtube/v3"
 CHANNELS_URL = f"{API_BASE}/channels"
 SEARCH_URL = f"{API_BASE}/search"
 PLAYLIST_ITEMS_URL = f"{API_BASE}/playlistItems"
+VIDEOS_URL = f"{API_BASE}/videos"
 
 # Recent uploads cap — playlistItems returns 50 per call; we don't paginate.
 RECENT_UPLOADS_LIMIT = 50
+
+# ISO 8601 duration parser — YouTube returns durations like "PT3M42S",
+# "PT1H2M3S", "PT45S". The format is restricted enough that a focused regex
+# beats reaching for `isodate` / `pendulum` here.
+_ISO_DURATION_RE = re.compile(
+    r"^PT(?:(?P<h>\d+)H)?(?:(?P<m>\d+)M)?(?:(?P<s>\d+)S)?$"
+)
+
+
+def _parse_iso_duration(value: str | None) -> int | None:
+    """ISO 8601 duration → seconds. Returns None on malformed input."""
+    if not value:
+        return None
+    m = _ISO_DURATION_RE.match(value)
+    if not m:
+        return None
+    h = int(m.group("h") or 0)
+    m_ = int(m.group("m") or 0)
+    s = int(m.group("s") or 0)
+    return h * 3600 + m_ * 60 + s
 
 _CHANNEL_ID_RE = re.compile(r"^UC[A-Za-z0-9_-]{22}$")
 _HANDLE_RE = re.compile(r"^@[A-Za-z0-9._-]+$")
@@ -44,10 +66,15 @@ TOOLS = [
         "description": (
             "Get YouTube channel data by handle, channel ID, or arbitrary search "
             "string. Returns creation date, subscriber count, video count, and a "
-            "sample of recent uploads. Channel creation date in 2024+ with high "
-            "upload velocity is a strong AI signal. Prefer passing a channel ID "
-            "(starts with UC) or @handle if you have one — search fallback is "
-            "100x more quota-expensive."
+            "sample of recent uploads WITH per-video durations in seconds. "
+            "Channel creation date in 2024+ with high upload velocity is a strong "
+            "AI signal. Recent-uploads durations feed the `suno-duration-cap` "
+            "marker as a secondary source to Deezer (lyric videos may add a few "
+            "seconds vs. audio-only — Deezer is the cleaner source when both "
+            "agree). Recent-uploads titles often contain explicit AI markers "
+            "(\"[AI]\", \"(AI)\", \"Suno\", etc.) — read them. Prefer passing a "
+            "channel ID (starts with UC) or @handle if you have one — search "
+            "fallback is 100x more quota-expensive."
         ),
         "input_schema": {
             "type": "object",
@@ -142,6 +169,37 @@ def _fetch_recent_uploads(session, uploads_playlist_id: str, key: str) -> list[d
     return out
 
 
+def _fetch_video_durations(session, video_ids: list[str], key: str) -> dict[str, int | None]:
+    """One videos.list call returns contentDetails for up to 50 IDs.
+
+    Best-effort — returns empty mapping on API failure so the caller can
+    proceed without durations rather than failing the whole channel lookup.
+    The duration signal feeds `suno-duration-cap` but isn't load-bearing for
+    presence/velocity, which use other fields.
+    """
+    if not video_ids:
+        return {}
+    try:
+        payload = get_json(
+            session,
+            VIDEOS_URL,
+            params={
+                "part": "contentDetails",
+                "id": ",".join(video_ids[:50]),
+                "key": key,
+            },
+        )
+    except Exception:
+        return {}
+    out: dict[str, int | None] = {}
+    for item in payload.get("items") or []:
+        vid = item.get("id")
+        iso = (item.get("contentDetails") or {}).get("duration")
+        if vid:
+            out[vid] = _parse_iso_duration(iso)
+    return out
+
+
 def _int_or_none(value: Any) -> int | None:
     if value is None:
         return None
@@ -184,6 +242,16 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
             # Playlist fetch failures shouldn't sink the channel lookup itself.
             recent_videos = []
 
+    # Annotate recent videos with audio duration. One batched videos.list call
+    # is enough for the 20 we sample. Lyric videos / music videos may add a
+    # few seconds vs. the audio-only equivalent — see `suno-duration-cap`
+    # marker definition for how this signal is interpreted.
+    sample = recent_videos[:20]
+    video_ids = [v["video_id"] for v in sample if v.get("video_id")]
+    duration_map = _fetch_video_durations(session, video_ids, key)
+    for v in sample:
+        v["duration_seconds"] = duration_map.get(v.get("video_id"))
+
     publish_dates = sorted(v["published_at"] for v in recent_videos if v.get("published_at"))
 
     return {
@@ -202,7 +270,7 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
         "recent_uploads_sampled": len(recent_videos),
         "recent_uploads_earliest": publish_dates[0] if publish_dates else None,
         "recent_uploads_latest": publish_dates[-1] if publish_dates else None,
-        "recent_uploads": recent_videos[:20],
+        "recent_uploads": sample,
     }
 
 

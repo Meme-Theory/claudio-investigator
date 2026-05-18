@@ -2,6 +2,10 @@
 
 A GitHub-native, agent-driven public index of AI-generated music artists. Successor in spirit to Soul Over AI; structurally a metadata-fingerprint engine where a Claude Haiku 4.5 agent renders verdicts from free public APIs, with the issue tracker doubling as submission flow and evidence trail.
 
+> **Drift notice (2026-05-18):** This plan still references Spotify throughout, but the Spotify Web API was paywalled behind a Premium subscription requirement in mid-2026. Spotify is **removed** from the tool stack. Deezer covers fan-count + track-duration signals; YouTube covers video durations as a fallback. `suno-duration-cap` and `popularity-follower-mismatch` are alive, just on different data sources. See `CLAUDE.md` for current state and `investigator/tools/__init__.py` for the live module list.
+>
+> Additional drift since this plan was written: Haiku → Sonnet escalation (`request_escalation` tool, triggers on name-variant mismatch / historical-gap+recent-burst / low-confidence). See `investigator/rubric.py` for the escalation prompt and `agent.py` for the model-swap loop.
+
 ---
 
 ## North Star

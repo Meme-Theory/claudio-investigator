@@ -1,0 +1,20 @@
+{
+  "kind": "youtube#videoListResponse",
+  "items": [
+    {
+      "kind": "youtube#video",
+      "id": "vid_aisatsana_001",
+      "contentDetails": { "duration": "PT5M22S" }
+    },
+    {
+      "kind": "youtube#video",
+      "id": "vid_diskprep_002",
+      "contentDetails": { "duration": "PT3M47S" }
+    },
+    {
+      "kind": "youtube#video",
+      "id": "vid_fieldday_003",
+      "contentDetails": { "duration": "PT1H12M5S" }
+    }
+  ]
+}
