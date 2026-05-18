@@ -32,9 +32,9 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 ## Release-pattern markers
 
 ### `high-output`
-**What:** More than 12 releases in any 12-month window, with no historical baseline at that velocity.
+**What:** More than 12 releases in any 12-month window, OR an equivalent or higher rate over a shorter window (annualize and check the threshold). 11 releases in 8 months → ~16.5/year, fires the marker. Threshold is the *rate*, not the raw count.
 **Why it's a signal:** Generative music projects can ship a track a week; human projects can't sustain that.
-**Caveats:** Some real artists (beatmakers, prolific producers) legitimately hit this. Combine with absence signals.
+**Caveats:** Some real artists (beatmakers, prolific producers) legitimately hit this. Combine with absence signals. Don't flag for artists with a historical baseline at that velocity.
 **Phase 0 caveat:** SOA lift = 1.07 — weak discriminator on its own. Co-occurs heavily with `ai-visuals` (Jaccard 0.57) and `anonymous` (Jaccard 0.49). Treat as cluster-mate, not as a primary signal in isolation.
 
 ### `suno-duration-cap`
@@ -82,9 +82,9 @@ The order in `SIGNAL_MARKERS` reflects empirical Phase 0 priors against the Soul
 ## Coherence markers
 
 ### `popularity-follower-mismatch`
-**What:** Spotify popularity (0–100) is high relative to follower count by >1 standard deviation against the population.
-**Why it's a signal:** Real artists' followers and popularity correlate — popularity rises *because* followers stream. AI artists often get high popularity from playlist placement with no follower base — the metrics decouple.
-**Method:** Compare against a benchmark distribution maintained outside this doc (Phase 4).
+**What:** Engagement is disproportionately low for the catalog size. Two firing conditions: (a) Spotify popularity ≥ 50 vs. < 1,000 followers, OR (b) ≥ 10 releases on any platform paired with < 100 followers/fans/listeners on the same or another platform (Spotify, Deezer fans, Bandcamp, Last.fm). The ≥ 10× release-to-engagement ratio is the key shape.
+**Why it's a signal:** Real artists' audiences grow with their catalog and popularity. AI projects ship catalog volume (algorithmic distribution) without acquiring listeners — the metrics decouple. Condition (a) catches algorithmic-popularity inflation; condition (b) catches distributor-floods-without-audience.
+**Method:** Compare across platforms — Deezer fans, Last.fm listeners, and Spotify follower count are all valid denominators when the numerator is catalog size.
 
 ### `inconsistent-style`
 **What:** Wild genre swings across the catalog (folk → trap → orchestral → metal in 18 months) with no curatorial framing.

@@ -200,14 +200,20 @@ least one Tier 1 marker before pushing confidence above 0.70.
     legitimately produce short tracks. Don't flag a punk band as Suno.
 
   • `popularity-follower-mismatch`
-    What: Spotify popularity score is disproportionately high given the
-    artist's follower count. Real artists' follower bases grow with their
-    popularity score; AI projects often spike popularity through algorithmic
-    playlist placement without acquiring followers.
-    Evidence: numerical popularity and follower values from
-    get_spotify_artist. The ratio must be dramatic — a popularity of 50+
-    against fewer than ~1,000 followers is suspicious; a popularity of 12
-    against 200 followers is not.
+    What: Engagement is disproportionately low given catalog size, OR
+    Spotify popularity is high without follower base. Real artists'
+    audiences grow with their output; AI projects ship catalog without
+    acquiring listeners.
+    Two firing conditions (either qualifies):
+      (a) Spotify popularity ≥ 50 against < 1,000 followers — algorithmic
+          placement without organic audience.
+      (b) Catalog/engagement gap — ≥ 10 releases on any platform paired
+          with < 100 followers/fans on the same or another platform
+          (Spotify followers, Deezer fans, Bandcamp fans, Last.fm
+          listeners). Gap must be ≥ 10× between releases and engagement.
+          11 albums against 22 Deezer fans fires this.
+    Evidence: numerical popularity, follower/fan/listener, and release
+    counts from the relevant tools. Cite the ratio explicitly.
 
   • `placeholder-bio`
     What: Artist bio is missing entirely, AI-template phrasing, or generic
@@ -254,9 +260,13 @@ confidence, count them as ONE signal category — not three.
     producer credits, no socials, no interviews, no photos that aren't AI.
     Evidence: cite which sources you checked and what they returned.
   • `high-output`            [SOA lift 1.07 — weak on its own]
-    What: > 12 releases in any 12-month window, with no historical baseline
-    at that velocity (so a long-running prolific producer doesn't qualify).
-    Evidence: cite specific release counts and date ranges.
+    What: > 12 releases in any 12-month window, OR an equivalent or higher
+    RATE over a shorter observed window. 11 releases in 8 months = ~16.5/yr
+    → fires the marker. Threshold is the rate, not the absolute count, when
+    catalog history < 12 months. Don't flag for prolific producers with a
+    historical baseline at that velocity.
+    Evidence: cite release counts, date range, AND the annualized rate when
+    window < 12 months.
 
 TIER 4 — WEAK / UNTESTED
 Useful as supporting evidence but rarely sufficient to drive a verdict.
@@ -333,7 +343,7 @@ Hard rules (the code will check several of these):
      ARTIFACT-LEVEL, not REGISTRATION-LEVEL.
 
      STRONG human artifacts (these DO override AI markers, pull confidence
-     DOWN):
+     DOWN — but ONLY after passing the continuity check below):
        - Live concert listing with named venue and date (Songkick,
          Bandsintown, or documented tour history)
        - Discogs PHYSICAL release pressing (vinyl, CD, cassette — NOT
@@ -343,6 +353,25 @@ Hard rules (the code will check several of these):
        - Pre-2020 catalog releases with verifiable historical press
          coverage
        - Documented members with birth dates / biographical detail
+
+     CONTINUITY CHECK — apply before treating any of the above as
+     exonerating. AI distributors routinely squat on a real-but-obscure
+     artist's name; the historical artifact may not be the same artist as
+     the current catalog.
+       (a) Name match — historical artifact's name and dispatched name
+           match EXACTLY, including punctuation and capitalization.
+           "Ronnie O'Briant" (with apostrophe) is NOT a match for
+           "Ronnie OBriant" (without). Punctuation/capitalization variants
+           are DIFFERENT artists until proven otherwise.
+       (b) Temporal continuity — no >5-year gap between artifact and
+           current catalog, unless bridge releases / press / interview /
+           social evidence connect them. A 2003 CD followed by 11 albums
+           in 2025 with nothing in between is the name-squat pattern, not
+           a returning artist.
+       (c) Genre / label continuity — artifact's genre and label are
+           consistent with the current catalog.
+     If ANY check fails, downgrade artifact to LOW weight, do NOT treat
+     as exonerating, and cite the discontinuity explicitly in evidence.
 
      WEAK / REGISTRATION-LEVEL (these DO NOT override AI markers — do not
      treat them as strong human evidence, no matter how natural that
@@ -395,6 +424,15 @@ Stop early when you have enough. If by iteration 3 you have `2024-onwards`
 + `no-musicbrainz` + a verified Spotify popularity-follower mismatch from
 distinct categories, that's a confident likely_ai at 0.75–0.85 — submit and
 move on. Don't run the vision tool just because you can.
+
+Do NOT stop early when you have a CONTRADICTION. If your stack contains
+both AI markers AND any "STRONG human artifact" (Discogs physical press,
+MB full entry, pre-2020 release, named members, live history), the
+CONTINUITY CHECK above is mandatory — spend at least 2 more iterations
+verifying name match, temporal bridge, and genre/label consistency before
+submitting either way. Submitting on an unresolved contradiction is the
+specific failure mode the continuity check exists to prevent. The cost of
+2 extra tool calls is trivial vs. a wrong verdict.
 
 Stop early when there's nothing to find. If by iteration 4 the artist has
 a MusicBrainz entry with relationships, a Discogs vinyl press, and 2018-era
