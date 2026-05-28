@@ -51,10 +51,20 @@ jobs:
       # is a waste of $0.04 + tokens. Thresholds are deliberately conservative:
       # confidence >= 0.85 AND <90 days old. Below either bar we re-investigate.
       # Set output `skip=true` to short-circuit the downstream steps.
+      #
+      # Cache override: if the submitter provided ANY disambiguation hint
+      # (youtube_url / apple_url / notes), bypass the cache and run fresh.
+      # Two distinct artists can share a bare name (the same-name elijah
+      # collision is the canonical example), so name alone isn't a safe key
+      # when the submitter has gone to the trouble of providing more info.
+      # If they filled in a hint, they want this run to use it.
       - name: Preflight — skip if already confidently investigated
         id: preflight
         env:
           ARTIST: ${{ inputs.artist_name }}
+          YOUTUBE_URL: ${{ inputs.youtube_url }}
+          APPLE_URL: ${{ inputs.apple_url }}
+          NOTES: ${{ inputs.notes }}
         run: |
           python3 <<'PY'
           import datetime
@@ -71,6 +81,17 @@ jobs:
 
           def proceed(reason: str) -> None:
               print(f"proceeding with full investigation: {reason}")
+
+          # Hint-based cache override (see step comment above).
+          hint_inputs = {
+              "youtube_url": os.environ.get("YOUTUBE_URL", "").strip(),
+              "apple_url": os.environ.get("APPLE_URL", "").strip(),
+              "notes": os.environ.get("NOTES", "").strip(),
+          }
+          provided = {k: v for k, v in hint_inputs.items() if v}
+          if provided:
+              proceed(f"submitter provided disambiguation hints: {sorted(provided)}")
+              raise SystemExit(0)
 
           def skip(row: dict, age_days: int) -> None:
               # Reconstruct the verdict.json shape that main.py would have
