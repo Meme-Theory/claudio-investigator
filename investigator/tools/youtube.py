@@ -22,6 +22,7 @@ from __future__ import annotations
 import os
 import re
 from typing import Any
+from urllib.parse import parse_qs, urlparse
 
 from ._http import get_json, make_session
 
@@ -56,25 +57,58 @@ def _parse_iso_duration(value: str | None) -> int | None:
 
 _CHANNEL_ID_RE = re.compile(r"^UC[A-Za-z0-9_-]{22}$")
 _HANDLE_RE = re.compile(r"^@[A-Za-z0-9._-]+$")
-_URL_CHANNEL_ID_RE = re.compile(r"(?:youtube\.com|youtu\.be)/channel/(UC[A-Za-z0-9_-]{22})")
-_URL_HANDLE_RE = re.compile(r"(?:youtube\.com|youtu\.be)/(@[A-Za-z0-9._-]+)")
+# Channel/handle URLs from any YouTube host (desktop, music, mobile, short).
+_HOST = r"(?:music\.|www\.|m\.)?youtu(?:be\.com|\.be)"
+_URL_CHANNEL_ID_RE = re.compile(rf"{_HOST}/channel/(UC[A-Za-z0-9_-]{{22}})")
+_URL_HANDLE_RE = re.compile(rf"{_HOST}/(@[A-Za-z0-9._-]+)")
+
+
+def _extract_video_id(s: str) -> str | None:
+    """Pull a YouTube video ID out of a watch / share / short / embed URL.
+
+    Uses urlparse instead of a regex because share URLs vary: desktop
+    youtube.com/watch?v=ID&t=..., music.youtube.com/watch?v=ID&si=...,
+    youtu.be/ID, /shorts/ID, /embed/ID. Query-param `v=` covers the
+    /watch family across all hosts; the path-suffix forms are explicit.
+    Returns None for non-video inputs (channel URLs, handles, bare names).
+    """
+    try:
+        parsed = urlparse(s.strip())
+    except Exception:
+        return None
+    if not parsed.scheme and not parsed.netloc:
+        return None
+    if parsed.query:
+        v = parse_qs(parsed.query).get("v")
+        if v and len(v[0]) == 11:
+            return v[0]
+    parts = [p for p in parsed.path.split("/") if p]
+    if parsed.netloc.endswith("youtu.be") and parts and len(parts[0]) == 11:
+        return parts[0]
+    if len(parts) == 2 and parts[0] in ("shorts", "embed", "v") and len(parts[1]) == 11:
+        return parts[1]
+    return None
 
 
 TOOLS = [
     {
         "name": "get_youtube_channel",
         "description": (
-            "Get YouTube channel data by handle, channel ID, or arbitrary search "
-            "string. Returns creation date, subscriber count, video count, and a "
-            "sample of recent uploads WITH per-video durations in seconds. "
-            "Channel creation date in 2024+ with high upload velocity is a strong "
-            "AI signal. Recent-uploads durations feed the `suno-duration-cap` "
-            "marker as a secondary source to Deezer (lyric videos may add a few "
-            "seconds vs. audio-only — Deezer is the cleaner source when both "
-            "agree). Recent-uploads titles often contain explicit AI markers "
-            "(\"[AI]\", \"(AI)\", \"Suno\", etc.) — read them. Prefer passing a "
-            "channel ID (starts with UC) or @handle if you have one — search "
-            "fallback is 100x more quota-expensive."
+            "Get YouTube channel data by handle, channel ID, watch URL, or "
+            "arbitrary search string. Returns creation date, subscriber count, "
+            "video count, and a sample of recent uploads WITH per-video durations "
+            "in seconds. When given a watch/share URL (e.g. "
+            "music.youtube.com/watch?v=ID), the tool resolves video → channel "
+            "automatically and surfaces the URL-anchored video's snippet as "
+            "`anchor_video` (title, description, publishedAt, channel title). "
+            "ALWAYS pass the submitter's youtube_url hint directly to this tool "
+            "— do NOT fall back to searching by artist name. The watch URL is "
+            "the authoritative anchor; name search returns the wrong artist in "
+            "every same-name-collision case. Channel creation date in 2024+ "
+            "with high upload velocity is a strong AI signal. Recent-uploads "
+            "durations feed the `suno-duration-cap` marker as a secondary source "
+            "to Deezer. Recent-uploads titles often contain explicit AI markers "
+            "(\"[AI]\", \"(AI)\", \"Suno\", etc.) — read them."
         ),
         "input_schema": {
             "type": "object",
@@ -83,8 +117,9 @@ TOOLS = [
                     "type": "string",
                     "description": (
                         "Channel ID (e.g. 'UCxxx...'), @handle (e.g. '@AphexTwin'), "
-                        "a youtube.com URL containing either, or a free-text artist "
-                        "name (will be resolved via search)."
+                        "a youtube.com or music.youtube.com URL (watch/share/channel/"
+                        "handle), or a free-text artist name (search; quota-expensive "
+                        "fallback only)."
                     ),
                 }
             },
@@ -102,7 +137,7 @@ def _api_key() -> str:
 
 
 def _parse_identifier(identifier: str) -> tuple[str, str]:
-    """Resolve identifier to (kind, value) where kind ∈ {'id', 'handle', 'search'}."""
+    """Resolve identifier to (kind, value) where kind ∈ {'id', 'handle', 'video', 'search'}."""
     stripped = identifier.strip()
     m = _URL_CHANNEL_ID_RE.search(stripped)
     if m:
@@ -110,11 +145,49 @@ def _parse_identifier(identifier: str) -> tuple[str, str]:
     m = _URL_HANDLE_RE.search(stripped)
     if m:
         return ("handle", m.group(1))
+    # Watch / share / short URL — the submitter's primary anchor.
+    video_id = _extract_video_id(stripped)
+    if video_id:
+        return ("video", video_id)
     if _CHANNEL_ID_RE.match(stripped):
         return ("id", stripped)
     if _HANDLE_RE.match(stripped):
         return ("handle", stripped)
     return ("search", stripped)
+
+
+def _resolve_video_to_channel(session, video_id: str, key: str) -> dict | None:
+    """videos.list → channelId + video snippet. 1 quota unit.
+
+    Returns {'channel_id', 'video': {...snippet...}} so the caller can both
+    anchor on the right channel AND surface the URL-anchored video's specific
+    details (title, description with distributor credits, publish date) to
+    the agent. That second piece is what enables sub-catalog isolation —
+    without the video's description the agent can't filter the channel's
+    uploads to the URL-anchored sub-catalog.
+    """
+    payload = get_json(
+        session,
+        VIDEOS_URL,
+        params={"part": "snippet", "id": video_id, "key": key},
+    )
+    items = payload.get("items") or []
+    if not items:
+        return None
+    snippet = items[0].get("snippet") or {}
+    channel_id = snippet.get("channelId")
+    if not channel_id:
+        return None
+    return {
+        "channel_id": channel_id,
+        "video": {
+            "video_id": video_id,
+            "title": snippet.get("title"),
+            "description": snippet.get("description"),
+            "published_at": snippet.get("publishedAt"),
+            "channel_title": snippet.get("channelTitle"),
+        },
+    }
 
 
 def _fetch_channel(session, *, channel_id=None, handle=None, key: str) -> dict | None:
@@ -210,16 +283,30 @@ def _int_or_none(value: Any) -> int | None:
 
 
 def get_youtube_channel(identifier: str, **_: Any) -> dict:
-    """Resolve identifier → channel → recent uploads. Returns flat dict."""
+    """Resolve identifier → channel → recent uploads. Returns flat dict.
+
+    When `identifier` is a watch URL (the submitter's typical share link),
+    we resolve video → channel via videos.list (+1 quota unit) and surface
+    the URL-anchored video's snippet on the result as `anchor_video`. The
+    agent needs the video's description to identify the distributor and
+    release window of the URL-anchored sub-catalog for RULE A scoping.
+    """
     session = make_session()
     key = _api_key()
 
     kind, value = _parse_identifier(identifier)
+    anchor_video: dict | None = None
 
     if kind == "id":
         channel = _fetch_channel(session, channel_id=value, key=key)
     elif kind == "handle":
         channel = _fetch_channel(session, handle=value, key=key)
+    elif kind == "video":
+        resolved = _resolve_video_to_channel(session, value, key)
+        if not resolved:
+            return {"found": False, "query": identifier, "resolved_via": "video"}
+        anchor_video = resolved["video"]
+        channel = _fetch_channel(session, channel_id=resolved["channel_id"], key=key)
     else:
         resolved_id = _search_for_channel(session, value, key)
         if not resolved_id:
@@ -271,6 +358,7 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
         "recent_uploads_earliest": publish_dates[0] if publish_dates else None,
         "recent_uploads_latest": publish_dates[-1] if publish_dates else None,
         "recent_uploads": sample,
+        "anchor_video": anchor_video,
     }
 
 

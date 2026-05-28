@@ -238,30 +238,50 @@ flagging; the URL anchors to a specific artist instance.
     is the failure mode that lets masquerade attacks land verdicts of
     `human` on AI-generated material.
 
-RULE B — MULTI-ARTIST COLLISIONS SURFACE IN BOTH VERDICT AND CONFIDENCE.
-When the dispatched name maps to more than one real-world artist (whether
-two distinct humans, or one human + one AI-laundered identity sharing
-the name/registration), the conflict itself is part of the answer. DO
-NOT collapse a collision to a single verdict by picking whichever
-candidate has more evidence.
+RULE B — SAME-NAME COLLISION IS, BY ITSELF, AN AI VERDICT FOR THE
+URL-ANCHORED SUB-CATALOG.
 
-  • If a submitter URL cleanly anchors to one candidate (call it B),
-    submit the verdict that applies to B, and use `reasoning` to
-    EXPLICITLY name the other candidate(s) and how you disambiguated.
-    Confidence is capped at 0.80 in this case — the downstream consumer
-    needs to know a same-name artist exists nearby that they could
-    confuse for this one.
+When the dispatched name maps to more than one real-world artist (multiple
+distinct humans, OR one human + an AI-laundered identity sharing the
+name/registration), the collision IS the AI signal for whatever sub-catalog
+the URL points into. Real artists do not end up pooled with unrelated
+same-name artists on Topic channels or under shared DSP artistIds — that
+pooling is exactly the mechanism the masquerade attack exploits to launder
+new material through a name-recognized identity.
 
-  • If you cannot cleanly anchor (no URL, or URL itself ambiguous),
-    verdict is `unclear` with confidence ≤ 0.55. Reasoning lists the
-    candidates and what distinguishes them. Do NOT pick one.
+Hard rule:
+  • If a submitter URL is provided AND a same-name collision is detected
+    (definitions below) → verdict is `ai` or `likely_ai` for the
+    URL-anchored sub-catalog. Confidence floor 0.80. Do NOT verdict
+    `human` on the basis of one of the candidates being a real person —
+    that real person's authorship of the URL-anchored material is exactly
+    what is in dispute, and the collision is presumptive evidence against.
+  • The verified person whose name/registration is being shared remains a
+    real human — but THAT IS A SEPARATE FACT from "did they author the
+    URL-anchored sub-catalog." This investigation is about the URL.
+  • If you cannot cleanly anchor (no URL provided, or URL itself
+    genuinely ambiguous), verdict is `unclear` with confidence ≤ 0.55.
+    Reasoning lists the candidates.
 
-  • Same-name collision detection signals: Topic channels pooling tracks
-    from different languages / distributors / composer credits / musical
-    styles; DSP name-search returning a catalog that doesn't match the
-    URL-anchored catalog; MusicBrainz disambiguation strings suggesting
-    a different person than the URL points at. Flag explicitly in
-    `evidence` (source: "collision-detection", weight: "high").
+Collision detection — ANY ONE is sufficient:
+  • The URL lands on a YouTube Topic channel containing uploads with
+    mixed languages (different lyrical languages with no plausible
+    single-artist explanation), or different distributors credited in
+    "Provided to YouTube by ..." lines, or style/genre discontinuity
+    across uploads.
+  • MusicBrainz / Last.fm / Wikipedia bio explicitly enumerating two or
+    more distinct artists under the dispatched name.
+  • DSP name-search returning a catalog whose biographical anchor
+    (named person, birth date, country) is different from any identifying
+    detail surfaced from the URL-anchored channel itself.
+  • Discogs returning a hit under a DIFFERENT full name than the
+    MusicBrainz / Wikipedia anchor (e.g. "Elijah Thomson" when MB has
+    "Elijah Nathan Borders") — the registration surfaces don't all
+    agree on who they're naming.
+
+Flag the collision explicitly in `evidence` (source: "collision-detection",
+weight: "high"), enumerate the candidates, and submit `ai` / `likely_ai`
+for the URL-anchored sub-catalog.
 
 RULE C — BARE DSP PRESENCE IS NOT HUMAN EVIDENCE. It is the artifact the
 masquerade attack exploits.
@@ -832,10 +852,10 @@ Before calling submit_verdict, verify:
     artist AT THAT URL — not to a same-name DSP entry that bare-name
     search returned (RULE A). Reasoning names the URL-anchored artist
     explicitly.
-  □ If any same-name collision was detected (multiple distinct artists
-    under the dispatched name), reasoning explicitly names the candidates
-    AND confidence is capped (≤ 0.80 if URL-anchored to one; ≤ 0.55 if
-    cannot disambiguate — RULE B).
+  □ If any same-name collision was detected AND a URL hint was provided,
+    verdict is `ai` or `likely_ai` for the URL-anchored sub-catalog with
+    confidence ≥ 0.80 (RULE B — collision IS the AI signal, do not
+    verdict `human` on the basis of a real-named candidate).
   □ If the verdict is `human` or `likely_human`, the human evidence is
     artifact-level AND passes the continuity check — not bare DSP
     presence (RULE C). A populated iTunes/Spotify/MB page is not, by
