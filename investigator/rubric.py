@@ -53,7 +53,22 @@ SIGNAL_MARKERS: list[str] = [
     "anonymous",                     # SOA lift 1.00 — does NOT discriminate alone; keep as cluster-mate only
     "pooled-identity",               # added 2026-05-28; Topic channel / DSP artistId pools multiple distinct same-name artists
     "unbridged-recent-subcatalog",   # added 2026-05-28; verified historical artist has a recent sub-catalog with no personal-channel/press bridge
+    "single-batch-dump",             # added 2026-05-28; entire catalog uploaded same day via one self-published distributor — AI squatter signature
 ]
+
+
+# Distributors empirically associated with high-volume AI catalog laundering.
+# These services let anyone (including bot-driven workflows) deliver an album
+# under any artist name with self-published ℗ metadata; they're the path AI
+# squatters use to inject catalogs into DSP/YouTube indexing without label
+# vetting. A track Provided to YouTube by one of these is not by itself proof
+# of AI — many legitimate DIY artists use them too — but combined with the
+# single-batch-dump + self-published ℗ + 2024-onwards signature, it's the
+# AI-squatter fingerprint. Add to this list as new laundering distributors
+# surface; remove only with empirical evidence the pattern has changed.
+KNOWN_LAUNDERING_DISTRIBUTORS: frozenset[str] = frozenset({
+    "CmdShft",      # confirmed via elijah case 2026-05-28
+})
 
 
 # --- Escalation tool schema -------------------------------------------------
@@ -401,6 +416,55 @@ discriminate well. Trust them more than other markers.
     Don't flag: an artist with 2024+ recent releases who also has earlier
     catalog. Recent activity is not "2024-onwards."
 
+  • `single-batch-dump`      [empirical pattern from elijah case 2026-05-28]
+    What: A sub-catalog dumped onto a Topic channel via a known AI-
+    laundering distributor, in one batch, with the ℗ copyright line
+    naming the artist themselves (not a real label) — the AI squatter
+    delivery signature.
+
+    Fire when ALL three conditions are true (across the URL-anchored
+    sub-catalog, i.e. uploads sharing the same distributor as the
+    anchor_video):
+      (1) `anchor_video.distributor` is in KNOWN_LAUNDERING_DISTRIBUTORS
+          (see rubric.py top — CmdShft is the canonical example), OR
+          `dominant_distributor` is in that set. Either anchors the
+          sub-catalog to a known laundering surface.
+      (2) The ℗ copyright line for the URL-anchored material matches
+          the dispatched artist name (case-insensitive substring) —
+          i.e. it's self-published, not routed through a real label.
+          Real label deals route copyright through the label
+          ("℗ 2025 Sub Pop Records", "℗ 2024 RCA"); squatters self-
+          credit ("℗ elijah", "℗ 2025 elijah").
+      (3) The same-distributor sub-catalog landed in a single upload
+          batch — `unique_upload_days` ≤ 3 when filtered to that
+          distributor's tracks. Use the per-video `published_at` +
+          `distributor` from `recent_uploads` to filter; don't rely on
+          the channel-wide unique_upload_days, which counts batches
+          from OTHER pooled artists too.
+
+    Evidence: cite `dominant_distributor`, the anchor_video's
+    distributor + copyright, the per-distributor upload-day count, and
+    the dispatched artist name. Quote one "Provided to YouTube by X"
+    line from a recent_uploads description as the source.
+
+    Why this beats existing markers: `2024-onwards` catches the
+    timeline; `popularity-follower-mismatch` catches the engagement
+    gap; this catches the DELIVERY MECHANISM — the fingerprint that
+    distinguishes a real artist with a 2025 debut from an AI catalog
+    injected into a name slot via a self-publish distributor in one
+    batch. Real DIY artists who use CmdShft / similar services tend to
+    release singles spread over time, not whole albums dumped on one
+    day with ℗ themselves.
+
+    Caveats: A real DIY artist self-releasing their debut album via
+    CmdShft on a single launch day could match the pattern. Cross-
+    check with the agent's other evidence — Songkick past-concert
+    history, independent press coverage of THIS specific release (not
+    listings or aggregator pages), a personal non-Topic YouTube
+    channel with BTS / tour vlogs / music videos. If those concrete
+    countersignals exist → soften toward `likely_ai`. If none of them
+    exist → firm `ai`.
+
   • `ai-visuals`             [SOA lift 1.32]
     What: AI-generation fingerprints in visual assets — album art, music
     videos, profile imagery. Diffusion-model signatures: banding artifacts,
@@ -609,7 +673,8 @@ human. The confidence value is restricted to {0.50, 0.70, 0.90, 0.95}
 
 Independent signal categories (this is the rule that breaks most cases):
 
-  Category A — Catalog age / footprint    →  `2024-onwards`
+  Category A — Catalog age / footprint    →  `2024-onwards`,
+                                              `single-batch-dump`
   Category B — Catalog presence           →  `no-musicbrainz`,
                                               `no-physical-release`,
                                               `thin-cross-platform`

@@ -241,13 +241,37 @@ def _fetch_recent_uploads(session, uploads_playlist_id: str, key: str) -> list[d
     return out
 
 
-def _fetch_video_durations(session, video_ids: list[str], key: str) -> dict[str, int | None]:
-    """One videos.list call returns contentDetails for up to 50 IDs.
+# "Provided to YouTube by <DISTRIBUTOR>" is the canonical first line of
+# auto-generated Topic-channel video descriptions. Pulling it out per-upload
+# lets the agent see: which distributor delivered each track, whether the
+# whole channel comes from one distributor (squatter signature) or several
+# (real artist whose label has digital + sync deals across services), and
+# whether the ℗ copyright line names a real label vs. self-publishing.
+_PROVIDED_BY_RE = re.compile(r"Provided to YouTube by\s+(.+?)$", re.MULTILINE)
+_PCOPY_RE = re.compile(r"℗\s*(?:\d{4}\s+)?(.+?)$", re.MULTILINE)
+
+
+def _parse_video_meta(description: str | None) -> dict:
+    """Extract distributor + ℗ copyright line from a Topic-channel description."""
+    if not description:
+        return {"distributor": None, "copyright": None}
+    dist_m = _PROVIDED_BY_RE.search(description)
+    cpy_m = _PCOPY_RE.search(description)
+    return {
+        "distributor": dist_m.group(1).strip() if dist_m else None,
+        "copyright": cpy_m.group(1).strip() if cpy_m else None,
+    }
+
+
+def _fetch_video_details(session, video_ids: list[str], key: str) -> dict[str, dict]:
+    """One videos.list call returns contentDetails + snippet for up to 50 IDs.
 
     Best-effort — returns empty mapping on API failure so the caller can
-    proceed without durations rather than failing the whole channel lookup.
-    The duration signal feeds `suno-duration-cap` but isn't load-bearing for
-    presence/velocity, which use other fields.
+    proceed without per-video details rather than failing the whole channel
+    lookup. Snippet costs nothing extra on the same call (videos.list bills
+    per call, not per part).
+
+    Returns: {video_id: {duration_seconds, description, published_at, distributor, copyright}}
     """
     if not video_ids:
         return {}
@@ -256,19 +280,29 @@ def _fetch_video_durations(session, video_ids: list[str], key: str) -> dict[str,
             session,
             VIDEOS_URL,
             params={
-                "part": "contentDetails",
+                "part": "contentDetails,snippet",
                 "id": ",".join(video_ids[:50]),
                 "key": key,
             },
         )
     except Exception:
         return {}
-    out: dict[str, int | None] = {}
+    out: dict[str, dict] = {}
     for item in payload.get("items") or []:
         vid = item.get("id")
+        if not vid:
+            continue
         iso = (item.get("contentDetails") or {}).get("duration")
-        if vid:
-            out[vid] = _parse_iso_duration(iso)
+        snip = item.get("snippet") or {}
+        desc = snip.get("description")
+        meta = _parse_video_meta(desc)
+        out[vid] = {
+            "duration_seconds": _parse_iso_duration(iso),
+            "description": desc,
+            "published_at": snip.get("publishedAt"),
+            "distributor": meta["distributor"],
+            "copyright": meta["copyright"],
+        }
     return out
 
 
@@ -344,17 +378,47 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
             # Playlist fetch failures shouldn't sink the channel lookup itself.
             recent_videos = []
 
-    # Annotate recent videos with audio duration. One batched videos.list call
-    # is enough for the 20 we sample. Lyric videos / music videos may add a
-    # few seconds vs. the audio-only equivalent — see `suno-duration-cap`
-    # marker definition for how this signal is interpreted.
+    # Annotate recent videos with duration + description-derived metadata
+    # (distributor name from "Provided to YouTube by ..." line, ℗ copyright
+    # holder). One batched videos.list call is enough for the 20 we sample;
+    # adding the snippet part doesn't increase quota cost.
     sample = recent_videos[:20]
     video_ids = [v["video_id"] for v in sample if v.get("video_id")]
-    duration_map = _fetch_video_durations(session, video_ids, key)
+    details_map = _fetch_video_details(session, video_ids, key)
     for v in sample:
-        v["duration_seconds"] = duration_map.get(v.get("video_id"))
+        d = details_map.get(v.get("video_id"), {})
+        v["duration_seconds"] = d.get("duration_seconds")
+        v["distributor"] = d.get("distributor")
+        v["copyright"] = d.get("copyright")
 
     publish_dates = sorted(v["published_at"] for v in recent_videos if v.get("published_at"))
+
+    # Batch-dump / single-distributor signature aggregates. AI squatters
+    # routinely deliver an entire fake catalog through one distributor in a
+    # single upload day; real artists' catalogs are spread across release
+    # windows and (often) multiple distributors over their career. Surface
+    # these aggregates so the agent doesn't have to recompute them from the
+    # raw recent_uploads list.
+    distributors = [v.get("distributor") for v in sample if v.get("distributor")]
+    distributor_counts: dict[str, int] = {}
+    for d in distributors:
+        distributor_counts[d] = distributor_counts.get(d, 0) + 1
+    dominant_distributor = max(distributor_counts, key=distributor_counts.get) if distributor_counts else None
+    distributor_concentration = (
+        distributor_counts[dominant_distributor] / len(distributors)
+        if dominant_distributor and distributors else 0.0
+    )
+
+    upload_day_set = {
+        (v.get("published_at") or "")[:10] for v in sample if v.get("published_at")
+    }
+    upload_day_set.discard("")
+
+    copyrights = [v.get("copyright") for v in sample if v.get("copyright")]
+    copyright_counts: dict[str, int] = {}
+    for c in copyrights:
+        copyright_counts[c] = copyright_counts.get(c, 0) + 1
+    dominant_copyright = max(copyright_counts, key=copyright_counts.get) if copyright_counts else None
 
     return {
         "found": True,
@@ -374,6 +438,12 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
         "recent_uploads_latest": publish_dates[-1] if publish_dates else None,
         "recent_uploads": sample,
         "anchor_video": anchor_video,
+        # Squatter-pattern aggregates (see SIGNAL_MARKERS::single-batch-dump).
+        "distributor_counts": distributor_counts,
+        "dominant_distributor": dominant_distributor,
+        "distributor_concentration": round(distributor_concentration, 2),
+        "unique_upload_days": len(upload_day_set),
+        "dominant_copyright": dominant_copyright,
     }
 
 
