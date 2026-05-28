@@ -15,6 +15,14 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 VerdictLabel = Literal["ai", "likely_ai", "unclear", "likely_human", "human"]
 EvidenceWeight = Literal["low", "medium", "high"]
 
+# Confidence is a discrete 4-bucket scale (see rubric SYSTEM_PROMPT rule 0).
+# The model is not calibrated well enough for a continuous 0.0-1.0 number to
+# carry meaning — outputting 0.87 vs 0.92 across runs for similar evidence is
+# fabrication. Enforcing the bucket set at the schema level means a verdict
+# with a non-bucket value (0.80, 0.85, 0.92, etc.) gets rejected at
+# Verdict() construction time and fed back through the agent's retry loop.
+CONFIDENCE_BUCKETS: tuple[float, ...] = (0.50, 0.70, 0.90, 0.95)
+
 
 class Evidence(BaseModel):
     """One supporting datum the agent used to reach the verdict."""
@@ -62,6 +70,20 @@ class Verdict(BaseModel):
         for m in v:
             if m != m.lower() or " " in m:
                 raise ValueError(f"marker must be lowercase-hyphenated: {m!r}")
+        return v
+
+    @field_validator("confidence")
+    @classmethod
+    def _confidence_in_bucket(cls, v: float) -> float:
+        if v not in CONFIDENCE_BUCKETS:
+            raise ValueError(
+                f"confidence must be one of {CONFIDENCE_BUCKETS} "
+                f"(got {v}). The model is not calibrated well enough to "
+                f"distinguish intermediate values; pick a bucket — 0.50 "
+                f"for toss-up/unclear, 0.70 for directional with "
+                f"contradicting evidence, 0.90 for confident verdicts, "
+                f"0.95 for explicit self-disclosure only."
+            )
         return v
 
 

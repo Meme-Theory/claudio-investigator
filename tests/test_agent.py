@@ -133,7 +133,7 @@ def test_budget_total_excludes_cache_reads() -> None:
 def _valid_verdict_input() -> dict:
     return {
         "verdict": "likely_ai",
-        "confidence": 0.82,
+        "confidence": 0.70,
         "markers": ["2024-onwards", "no-musicbrainz"],
         "reasoning": "Catalog originates 2025 with no MusicBrainz entry.",
     }
@@ -150,7 +150,7 @@ def test_agent_terminates_on_submit_verdict() -> None:
     assert result.terminated_by == TERMINATED_SUBMIT_VERDICT
     assert result.verdict is not None
     assert result.verdict.verdict == "likely_ai"
-    assert result.verdict.confidence == 0.82
+    assert result.verdict.confidence == 0.70
     # One API call was enough
     assert client.messages.create.call_count == 1
 

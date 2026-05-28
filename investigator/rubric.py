@@ -259,7 +259,7 @@ laundering mechanism itself.
 
 Hard rule (not negotiable, no "likely_" softening):
   • Same-name collision detected (definitions below) → verdict is
-    **`ai`**. Confidence floor **0.90**. NOT `likely_ai`. NOT `unclear`.
+    **`ai`** at confidence **0.90**. NOT `likely_ai`. NOT `unclear`.
     NOT `human`. The collision IS the evidence; you do not need an
     additional marker to reach `ai`.
   • If a submitter URL is provided, the verdict scope is the
@@ -555,14 +555,15 @@ CONFIDENCE CALIBRATION
 ===========================================================================
 
 The verdict is one of five values: ai | likely_ai | unclear | likely_human |
-human. The confidence value (0.0–1.0) drives downstream routing:
+human. The confidence value is restricted to {0.50, 0.70, 0.90, 0.95}
+(see rule 0 below) and drives downstream routing:
 
-  ≥ 0.90    →  May auto-merge to the index. The bar is high.
-  0.70–0.90 →  Auto-merge only if you ALSO set auto_merge_recommended=true,
-               AND the verdict is supported by ≥ 3 INDEPENDENT signal
-               categories (not three markers — three categories).
-  0.50–0.70 →  Routes to human review (`needs-review` label).
-  < 0.50    →  No PR, no merge. Use verdict 'unclear'.
+  0.95  →  Self-disclosure tier. Auto-merge eligible.
+  0.90  →  Confident verdict. Auto-merge eligible if 3+ independent
+           signal categories (or the RULE B collision rule fired).
+  0.70  →  Directional with contradicting evidence. Routes to human
+           review (`needs-review` label). No auto-merge.
+  0.50  →  Toss-up. Verdict MUST be `unclear`. No PR, no merge.
 
 Independent signal categories (this is the rule that breaks most cases):
 
@@ -590,34 +591,32 @@ specific markers fired.
 
 Hard rules (the code will check several of these):
 
-  0. CAP confidence at 0.95. Even when every signal aligns and there is
-     zero contradicting evidence, do NOT exceed 0.95. The model is not
-     calibrated well enough for the difference between 0.95 ("1 in 20
-     wrong") and 0.99 ("1 in 100 wrong") to be meaningful — they're
-     different epistemic claims, and only the former is honestly backed
-     by this rubric. Save 0.99+ for the case where the artist literally
-     disclosed AI generation in their own bio (and even then, prefer
-     0.95).
+  0. CONFIDENCE IS A FOUR-BUCKET SCALE — NOT A CONTINUOUS NUMBER. The
+     model is not calibrated well enough to distinguish 0.85 from 0.92
+     in any honest sense, and outputting different decimals across runs
+     for similar evidence is fabrication. Use exactly one of these
+     four values for `confidence`:
 
-  0a. CONFIDENCE MUST BE DERIVED, NOT INVENTED. Do not output a round
-      default number (0.90, 0.92, 0.85, 0.80) without showing the
-      derivation in `reasoning`. The agent's job is to compute a number
-      from gates that fired, not to pick a plausible-looking number.
-      Approved derivation method:
-        baseline 0.50
-        + 0.15 per Tier 1 marker that fired (max one)
-        + 0.10 per independent Tier 2 marker that fired (max three)
-        + 0.05 per Tier 3 cluster (max one — the whole cluster counts once)
-        + 0.10 if RULE B collision floor applied
-        - 0.10 per content-specific bridge artifact that disproves a
-          would-have-fired marker (named human collaborator credited on
-          THIS release, personal-channel post about THIS release,
-          press review of THIS release)
-      Cap at 0.95 floor at 0.0. The reasoning paragraph must enumerate
-      each contribution — "baseline 0.50 + 0.15 [2024-onwards] + 0.10
-      [pooled-identity] + 0.10 [collision floor] = 0.85". If you can't
-      show the math, the number is fabricated and the verdict will be
-      rejected.
+       0.50  — genuinely toss-up; evidence supports both directions.
+               Verdict MUST be `unclear`. Use when you cannot honestly
+               commit to AI or human after running the cheap-recon
+               phase.
+       0.70  — directional verdict with non-trivial contradicting
+               evidence. Use for `likely_ai` or `likely_human` when the
+               case leans clearly but isn't airtight.
+       0.90  — confident verdict. Multiple mutually-reinforcing signals
+               pointing the same way AND no unexplained contradicting
+               evidence. Use for `ai`, `human`, or for the firm end of
+               `likely_ai`/`likely_human` (preferring `ai`/`human` at
+               this confidence when the evidence supports it).
+       0.95  — reserved for explicit self-disclosure ("Made with Suno"
+               in the bio, "AI-generated" tag on the channel, etc.).
+               Don't reach for it otherwise.
+
+     Any other value (0.80, 0.85, 0.87, 0.92, etc.) is a tell that the
+     number was invented. Pick a bucket from the four above. If you
+     can't decide between two buckets, drop to the lower one — overrating
+     confidence is the failure mode this rule exists to prevent.
 
   0b. HUMAN VERDICT GATE. To submit `human` or `likely_human`, you MUST
       enumerate in `reasoning` the specific would-have-fired AI markers
@@ -628,17 +627,18 @@ Hard rules (the code will check several of these):
       the specific release, personal-channel posts referencing the
       specific release by name, press reviews of the specific release.
       An empty enumeration → the verdict is wrong, you must reconsider.
-  1. NEVER report confidence > 0.70 with evidence from fewer than 2
-     independent categories.
-  2. NEVER report confidence > 0.90 with evidence from fewer than 3
-     independent categories.
+  1. NEVER report confidence 0.70 or higher with evidence from fewer
+     than 2 independent categories. (Exception: RULE B collision goes
+     directly to 0.90 — the collision itself is the evidence.)
+  2. NEVER report confidence 0.90 or higher with evidence from fewer
+     than 3 independent categories. (Same exception for RULE B.)
   3. NEVER fabricate evidence. If a tool returned nothing, write it that
      way in the evidence list. Absence is data; speculation is not.
   4. NEVER flag a marker you can't quote evidence for. Every marker in
      the `markers` field must correspond to at least one entry in the
      `evidence` field that supports it.
-  5. WHEN IN DOUBT, drop the confidence. A confident `unclear` at 0.55
-     is preferable to a wrong `likely_ai` at 0.85.
+  5. WHEN IN DOUBT, drop the confidence. A confident `unclear` at 0.50
+     is preferable to a wrong `likely_ai` at 0.70.
   6. CONTRADICTING evidence outweighs supporting evidence — BUT IT MUST BE
      ARTIFACT-LEVEL, not REGISTRATION-LEVEL.
 
@@ -715,12 +715,12 @@ you to call request_escalation INSTEAD of submit_verdict:
      bio claim that could mean either AI tools or recording tools, etc.)
      is itself unresolved. Sonnet needs to do the deeper search. Escalate.
 
-  3. LOW CONFIDENCE — your verdict would land below 0.65
-     Before calling submit_verdict, draft your confidence. If you would
-     submit anything below 0.65, call request_escalation with trigger=
-     "low-confidence" instead. "Unclear at 0.55" is a Sonnet job, not a
-     Haiku one — Sonnet can either firm up the evidence or land a
-     well-supported "unclear" at higher confidence.
+  3. LOW CONFIDENCE — your verdict would land at the 0.50 toss-up
+     bucket. Before calling submit_verdict, decide which bucket your
+     confidence lands in. If it's 0.50 (genuinely unclear), call
+     request_escalation with trigger="low-confidence" instead — Sonnet
+     can either firm up the evidence to a 0.70/0.90 verdict, or land a
+     well-supported `unclear` at 0.50.
 
 DO NOT escalate to avoid hard work. Escalation is for genuine structural
 conflicts and self-acknowledged low confidence — not for "this seems
@@ -772,8 +772,8 @@ Phase 3 — Specialized (only when signals are mixed):
 
 Stop early when you have enough. If by iteration 3 you have `2024-onwards`
 + `no-musicbrainz` + a verified `popularity-follower-mismatch` (catalog
-size vs. Deezer/Last.fm engagement), that's a confident likely_ai at
-0.75–0.85 — submit and move on.
+size vs. Deezer/Last.fm engagement), that's a confident verdict at 0.90
+— submit and move on.
 
 Do NOT stop early when you have a CONTRADICTION. If your stack contains
 both AI markers AND any "STRONG human artifact" (Discogs physical press,
@@ -786,8 +786,9 @@ specific failure mode the continuity check exists to prevent. The cost of
 
 Stop early when there's nothing to find. If by iteration 4 the artist has
 a MusicBrainz entry with relationships, a Discogs vinyl press, and 2018-era
-releases, this is a real artist — submit `human` at 0.85+ and don't burn
-budget on vision passes "just to confirm."
+releases, this is a real artist — submit `human` at 0.90 (and only after
+applying the rule 0b human-verdict-gate enumeration) and don't burn budget
+on vision passes "just to confirm."
 
 ===========================================================================
 WORKED EXAMPLE
@@ -824,13 +825,14 @@ At iteration 3, evidence stack:
   • `high-output`               — Category D (Tier 3 cluster — cluster-mate)
 
 Independent categories: A, B, D. That's three. → eligible for confidence
-in the 0.85–0.92 range. The category-D markers are independent of each
-other (release-vs-fans isn't duration cluster), but counted carefully they
-strengthen category D without doubling it.
+0.90 (per rule 1 + 2, three independent categories required). The
+category-D markers are independent of each other (release-vs-fans isn't
+duration cluster), but counted carefully they strengthen category D
+without doubling it.
 
 Submit:
-  verdict: "likely_ai"
-  confidence: 0.87
+  verdict: "ai"
+  confidence: 0.90
   markers: ["2024-onwards", "no-musicbrainz",
             "popularity-follower-mismatch", "suno-duration-cap",
             "high-output"]
@@ -839,7 +841,7 @@ Submit:
    fans indicates algorithmic distribution without organic audience;
    top-tracks cluster 2:02–2:25 consistent with Suno generation. Five
    markers across three independent signal categories."
-  auto_merge_recommended: false   (just under 0.90 threshold)
+  auto_merge_recommended: true   (0.90 + 3 categories qualifies)
 
 Note: I did NOT run analyze_album_art here. With three independent
 categories already supporting the verdict, the vision pass would burn
@@ -866,9 +868,11 @@ COMMON FAILURE MODES (don't do these)
 
 4. Ignoring contradicting evidence. If the artist has a Discogs vinyl
    release, a populated MB entry with members and ISNI, or a documented
-   pre-2020 tour history, that's strong human evidence regardless of how
-   AI-ish the visuals look. Drop the confidence below 0.70 even with
-   multiple AI markers firing.
+   pre-2020 tour history that passes the continuity check, that's
+   artifact-level human evidence and downgrades the verdict (likely_ai
+   at 0.70 instead of ai at 0.90, or further). DO NOT use contradicting
+   evidence to flip into `human` without satisfying the rule 0b
+   human-verdict-gate enumeration.
 
 5. Treating a MusicBrainz STUB as a human signal. If lookup_musicbrainz
    returns `found_exact=true` but `entry_quality == "stub"`, that is
@@ -902,9 +906,8 @@ Before calling submit_verdict, verify:
     `human`) with confidence ≥ 0.90. Reasoning enumerates the
     candidates. Scope = URL-anchored sub-catalog if URL provided,
     otherwise the dispatched name as a whole.
-  □ Confidence value is DERIVED, not invented — `reasoning` shows the
-    contribution math (rule 0a). No round defaults (0.90, 0.92, 0.85,
-    0.80) without an explicit derivation line.
+  □ Confidence is exactly one of {0.50, 0.70, 0.90, 0.95} (rule 0).
+    No other value — 0.80, 0.85, 0.87, 0.92, etc. are fabrications.
   □ If verdict is `human` or `likely_human`, `reasoning` enumerates the
     specific would-have-fired AI markers and the CONTENT-SPECIFIC
     artifact that disproves each (rule 0b). MB full entry alone does
@@ -922,8 +925,9 @@ Before calling submit_verdict, verify:
     pre-2020 catalog, documented live performance history, label
     relationships. Empty `evidence` reads as "no evidence at all" to a
     downstream consumer; cite what you found.
-  □ Confidence value matches the category-independence rule (≥ 2 cat for
-    > 0.70, ≥ 3 cat for > 0.90, cluster counted as 1)
+  □ Confidence value matches the category-independence rule (≥ 2 cat
+    for 0.70+, ≥ 3 cat for 0.90+, cluster counted as 1, RULE B
+    collision exception)
   □ Reasoning paragraph cites specific findings, not generic ones
   □ auto_merge_recommended is false unless confidence ≥ 0.90 AND ≥ 3
     independent categories AND no contradicting evidence
@@ -984,8 +988,8 @@ STRICTER REQUIREMENTS:
 
   4. HARDER CONFIDENCE CAP when continuity unresolved — if you cannot
      fully resolve the bridge between historical artifact and current
-     catalog, cap confidence at 0.85 (not 0.95). Save the 0.85+ range
-     for cases you genuinely closed out.
+     catalog, cap confidence at 0.70 (not 0.90 or 0.95). Save 0.90+ for
+     cases you genuinely closed out.
 
   5. SUBMIT_VERDICT IS YOUR TERMINAL ACTION — you do NOT have access to
      request_escalation. You are the escalation target; you must reach a
