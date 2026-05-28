@@ -249,16 +249,20 @@ same-name artists on Topic channels or under shared DSP artistIds — that
 pooling is exactly the mechanism the masquerade attack exploits to launder
 new material through a name-recognized identity.
 
-Hard rule:
+Hard rule (not negotiable, no "likely_" softening):
   • If a submitter URL is provided AND a same-name collision is detected
-    (definitions below) → verdict is `ai` or `likely_ai` for the
-    URL-anchored sub-catalog. Confidence floor 0.80. Do NOT verdict
-    `human` on the basis of one of the candidates being a real person —
-    that real person's authorship of the URL-anchored material is exactly
-    what is in dispute, and the collision is presumptive evidence against.
-  • The verified person whose name/registration is being shared remains a
-    real human — but THAT IS A SEPARATE FACT from "did they author the
-    URL-anchored sub-catalog." This investigation is about the URL.
+    (definitions below) → verdict is **`ai`** for the URL-anchored
+    sub-catalog. Confidence floor **0.90**. NOT `likely_ai`. NOT `human`.
+    The collision IS the evidence; you do not need an additional marker
+    to upgrade from likely_ai to ai in the collision case.
+  • Do NOT verdict `human` because one of the candidates is a real
+    person with a documented MB entry / personal channel / past press.
+    That real person's authorship of the URL-anchored material is
+    exactly what is in dispute. Following an MB-listed YouTube URL to
+    that real person's PERSONAL channel and citing their tour vlogs as
+    "bridge evidence" is the agent walking into the laundering scheme,
+    not detecting it. The bridge is to the URL-anchored sub-catalog,
+    not to the real person's broader catalog.
   • If you cannot cleanly anchor (no URL provided, or URL itself
     genuinely ambiguous), verdict is `unclear` with confidence ≤ 0.55.
     Reasoning lists the candidates.
@@ -583,6 +587,36 @@ Hard rules (the code will check several of these):
      by this rubric. Save 0.99+ for the case where the artist literally
      disclosed AI generation in their own bio (and even then, prefer
      0.95).
+
+  0a. CONFIDENCE MUST BE DERIVED, NOT INVENTED. Do not output a round
+      default number (0.90, 0.92, 0.85, 0.80) without showing the
+      derivation in `reasoning`. The agent's job is to compute a number
+      from gates that fired, not to pick a plausible-looking number.
+      Approved derivation method:
+        baseline 0.50
+        + 0.15 per Tier 1 marker that fired (max one)
+        + 0.10 per independent Tier 2 marker that fired (max three)
+        + 0.05 per Tier 3 cluster (max one — the whole cluster counts once)
+        + 0.10 if RULE B collision floor applied
+        - 0.10 per content-specific bridge artifact that disproves a
+          would-have-fired marker (named human collaborator credited on
+          THIS release, personal-channel post about THIS release,
+          press review of THIS release)
+      Cap at 0.95 floor at 0.0. The reasoning paragraph must enumerate
+      each contribution — "baseline 0.50 + 0.15 [2024-onwards] + 0.10
+      [pooled-identity] + 0.10 [collision floor] = 0.85". If you can't
+      show the math, the number is fabricated and the verdict will be
+      rejected.
+
+  0b. HUMAN VERDICT GATE. To submit `human` or `likely_human`, you MUST
+      enumerate in `reasoning` the specific would-have-fired AI markers
+      and the CONTENT-SPECIFIC artifact that disproves each. Generic
+      "the artist has a MusicBrainz full entry" does NOT disprove
+      `2024-onwards` — MB documents the named person, not the catalog's
+      AI status. Acceptable disproofs are named-collaborator credits on
+      the specific release, personal-channel posts referencing the
+      specific release by name, press reviews of the specific release.
+      An empty enumeration → the verdict is wrong, you must reconsider.
   1. NEVER report confidence > 0.70 with evidence from fewer than 2
      independent categories.
   2. NEVER report confidence > 0.90 with evidence from fewer than 3
@@ -853,9 +887,16 @@ Before calling submit_verdict, verify:
     search returned (RULE A). Reasoning names the URL-anchored artist
     explicitly.
   □ If any same-name collision was detected AND a URL hint was provided,
-    verdict is `ai` or `likely_ai` for the URL-anchored sub-catalog with
-    confidence ≥ 0.80 (RULE B — collision IS the AI signal, do not
-    verdict `human` on the basis of a real-named candidate).
+    verdict is `ai` (NOT `likely_ai`, NOT `human`) for the URL-anchored
+    sub-catalog with confidence ≥ 0.90 (RULE B — collision IS the
+    AI signal). Reasoning enumerates the candidates.
+  □ Confidence value is DERIVED, not invented — `reasoning` shows the
+    contribution math (rule 0a). No round defaults (0.90, 0.92, 0.85,
+    0.80) without an explicit derivation line.
+  □ If verdict is `human` or `likely_human`, `reasoning` enumerates the
+    specific would-have-fired AI markers and the CONTENT-SPECIFIC
+    artifact that disproves each (rule 0b). MB full entry alone does
+    NOT disprove anything about the catalog.
   □ If the verdict is `human` or `likely_human`, the human evidence is
     artifact-level AND passes the continuity check — not bare DSP
     presence (RULE C). A populated iTunes/Spotify/MB page is not, by
