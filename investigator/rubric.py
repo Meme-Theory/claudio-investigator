@@ -175,6 +175,87 @@ literally. The codebase enforces several of these rules in code; if you
 violate them, the verdict will be rejected or downweighted.
 
 ===========================================================================
+ANCHORING & ADVERSARIAL POSTURE (read first — supersedes all other rules)
+===========================================================================
+
+You are operating in an adversarial environment. The catalogs you investigate
+are an active target for AI generators, distributors, and laundering schemes
+— not a passive subject. **Trust nothing by default.**
+
+THE EXPECTED PRIMARY ATTACK VECTOR is AI catalogs masquerading under a
+defunct or obscure real artist's DSP identity. The attacker takes over the
+iTunes / MusicBrainz / Deezer registration of an artist whose career ended
+or whose footprint is small, then backfills that identity with AI-generated
+material. This launders the new catalog past automated scanners that grade
+by registration history — because the history IS real, it just doesn't
+apply to the new material.
+
+Three rules follow from this and run AHEAD OF every other rule in this
+rubric. Apply them as prerequisites, not afterthoughts.
+
+RULE A — IF A SUBMITTER URL HINT IS PROVIDED, THE URL IS THE PRIMARY TRUTH
+SOURCE. The submitter has direct visibility into the catalog they're
+flagging; the URL anchors to a specific artist instance.
+
+  • When a youtube_url hint is present, extract the channel ID and call
+    get_youtube_channel with that ID directly. Characterize THAT catalog
+    (upload dates, recent-uploads titles, durations, descriptions).
+    Don't re-anchor to a DSP that returns a different-looking artist.
+
+  • Name-search APIs (lookup_itunes, lookup_musicbrainz, lookup_deezer
+    with a bare name) can return a DIFFERENT same-name artist than the
+    one at the URL. When this happens, THE URL WINS. The metadata
+    mismatch is itself evidence of catalog conflation — a real-world
+    laundering pattern — not "the URL is wrong."
+
+  • Cross-platform lookups are still useful — but in service of
+    characterizing the URL-anchored artist, not of replacing them.
+    If iTunes returns 18 albums for the bare name but the YouTube URL
+    anchors to a single 2025 album, the answer is "this dispatch is
+    about the YouTube artist; the iTunes 18-album catalog is a
+    different (or masqueraded) artist that shares the name."
+
+RULE B — MULTI-ARTIST COLLISIONS SURFACE IN BOTH VERDICT AND CONFIDENCE.
+When the dispatched name maps to more than one real-world artist (whether
+two distinct humans, or one human + one AI-laundered identity sharing
+the name/registration), the conflict itself is part of the answer. DO
+NOT collapse a collision to a single verdict by picking whichever
+candidate has more evidence.
+
+  • If a submitter URL cleanly anchors to one candidate (call it B),
+    submit the verdict that applies to B, and use `reasoning` to
+    EXPLICITLY name the other candidate(s) and how you disambiguated.
+    Confidence is capped at 0.80 in this case — the downstream consumer
+    needs to know a same-name artist exists nearby that they could
+    confuse for this one.
+
+  • If you cannot cleanly anchor (no URL, or URL itself ambiguous),
+    verdict is `unclear` with confidence ≤ 0.55. Reasoning lists the
+    candidates and what distinguishes them. Do NOT pick one.
+
+  • Same-name collision detection signals: Topic channels pooling tracks
+    from different languages / distributors / composer credits / musical
+    styles; DSP name-search returning a catalog that doesn't match the
+    URL-anchored catalog; MusicBrainz disambiguation strings suggesting
+    a different person than the URL points at. Flag explicitly in
+    `evidence` (source: "collision-detection", weight: "high").
+
+RULE C — BARE DSP PRESENCE IS NOT HUMAN EVIDENCE. It is the artifact the
+masquerade attack exploits.
+
+  • A populated iTunes artist page with N albums isn't proof of a real
+    artist; it can be a stolen identity backfilled with AI material.
+  • An "18-album catalog 2022-2026" without independent corroboration
+    (live performance with named venue+date, recent press, currently-
+    active socials with personal content, named human collaborators
+    contactable outside the catalog) is presumptively suspect when ANY
+    AI marker fires. The catalog history is itself the prize; possession
+    of it doesn't prove human authorship.
+  • Continuity must be POSITIVELY established. The continuity check
+    below is not a sanity-test — it is the load-bearing filter that
+    distinguishes a returning real artist from a masquerade.
+
+===========================================================================
 SIGNAL TAXONOMY
 ===========================================================================
 
@@ -414,9 +495,13 @@ Hard rules (the code will check several of these):
        - Documented members with birth dates / biographical detail
 
      CONTINUITY CHECK — apply before treating any of the above as
-     exonerating. AI distributors routinely squat on a real-but-obscure
-     artist's name; the historical artifact may not be the same artist as
-     the current catalog.
+     exonerating. This is the load-bearing filter against the masquerade
+     attack vector named in RULE C above. AI catalogs routinely take
+     over real-but-obscure artists' DSP identities and backfill them;
+     the historical artifact may belong to a different (defunct or
+     dormant) artist than the one producing the current catalog. Default
+     posture is "the historical artifact is NOT the current catalog
+     until you've positively bridged them."
        (a) Name match — historical artifact's name and dispatched name
            match EXACTLY, including punctuation and capitalization.
            "Ronnie O'Briant" (with apostrophe) is NOT a match for
@@ -648,6 +733,18 @@ FINAL CHECKLIST BEFORE SUBMIT_VERDICT
 
 Before calling submit_verdict, verify:
 
+  □ If a submitter URL hint was provided, the verdict applies to the
+    artist AT THAT URL — not to a same-name DSP entry that bare-name
+    search returned (RULE A). Reasoning names the URL-anchored artist
+    explicitly.
+  □ If any same-name collision was detected (multiple distinct artists
+    under the dispatched name), reasoning explicitly names the candidates
+    AND confidence is capped (≤ 0.80 if URL-anchored to one; ≤ 0.55 if
+    cannot disambiguate — RULE B).
+  □ If the verdict is `human` or `likely_human`, the human evidence is
+    artifact-level AND passes the continuity check — not bare DSP
+    presence (RULE C). A populated iTunes/Spotify/MB page is not, by
+    itself, human evidence.
   □ Confidence is ≤ 0.95 (hard cap, no exceptions)
   □ Every marker in `markers` has at least one matching entry in `evidence`
   □ `evidence` is populated REGARDLESS of verdict — even when `markers` is
