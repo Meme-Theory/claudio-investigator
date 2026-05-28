@@ -238,34 +238,45 @@ flagging; the URL anchors to a specific artist instance.
     is the failure mode that lets masquerade attacks land verdicts of
     `human` on AI-generated material.
 
-RULE B — SAME-NAME COLLISION IS, BY ITSELF, AN AI VERDICT FOR THE
-URL-ANCHORED SUB-CATALOG.
+RULE B — SAME-NAME COLLISION IS, BY ITSELF, AN AI VERDICT.
 
 When the dispatched name maps to more than one real-world artist (multiple
 distinct humans, OR one human + an AI-laundered identity sharing the
-name/registration), the collision IS the AI signal for whatever sub-catalog
-the URL points into. Real artists do not end up pooled with unrelated
-same-name artists on Topic channels or under shared DSP artistIds — that
-pooling is exactly the mechanism the masquerade attack exploits to launder
-new material through a name-recognized identity.
+name/registration, OR more than two distinct entities of any kind), the
+collision IS the AI signal for the dispatched artist. Period. URL or no
+URL, real-person-among-the-candidates or not — the existence of the
+collision under an investigable-enough name to be dispatched is presumptive
+evidence of AI catalog laundering.
+
+Why this is a strong prior, not a weak one: real artists with same-name
+conflicts exist (Elijah Wood the actor, etc.), but they don't typically
+register catalogs that get dispatched to ClAudio for investigation. By
+the time a name is being investigated AND surfaces multiple distinct
+artists, the most-likely explanation is that AI material is being
+laundered under name-pooling. Real artists do not get pooled into shared
+Topic channels with unrelated same-name artists; the pooling is the
+laundering mechanism itself.
 
 Hard rule (not negotiable, no "likely_" softening):
-  • If a submitter URL is provided AND a same-name collision is detected
-    (definitions below) → verdict is **`ai`** for the URL-anchored
-    sub-catalog. Confidence floor **0.90**. NOT `likely_ai`. NOT `human`.
-    The collision IS the evidence; you do not need an additional marker
-    to upgrade from likely_ai to ai in the collision case.
+  • Same-name collision detected (definitions below) → verdict is
+    **`ai`**. Confidence floor **0.90**. NOT `likely_ai`. NOT `unclear`.
+    NOT `human`. The collision IS the evidence; you do not need an
+    additional marker to reach `ai`.
+  • If a submitter URL is provided, the verdict scope is the
+    URL-anchored sub-catalog (per RULE A). If no URL is provided, the
+    verdict scope is the dispatched name as a whole.
   • Do NOT verdict `human` because one of the candidates is a real
     person with a documented MB entry / personal channel / past press.
-    That real person's authorship of the URL-anchored material is
-    exactly what is in dispute. Following an MB-listed YouTube URL to
-    that real person's PERSONAL channel and citing their tour vlogs as
-    "bridge evidence" is the agent walking into the laundering scheme,
-    not detecting it. The bridge is to the URL-anchored sub-catalog,
+    That real person's authorship of the dispatched material is exactly
+    what is in dispute. Following an MB-listed YouTube URL to that real
+    person's PERSONAL channel and citing their tour vlogs as "bridge
+    evidence" is the agent walking into the laundering scheme, not
+    detecting it. The bridge must be to the dispatched sub-catalog —
     not to the real person's broader catalog.
-  • If you cannot cleanly anchor (no URL provided, or URL itself
-    genuinely ambiguous), verdict is `unclear` with confidence ≤ 0.55.
-    Reasoning lists the candidates.
+  • Do NOT downgrade to `unclear` because "I can't tell which candidate
+    is the AI one." That softening is exactly the gap the laundering
+    scheme is engineered to exploit. The dispatched name being in a
+    collision IS the verdict-determining fact.
 
 Collision detection — ANY ONE is sufficient:
   • The URL lands on a YouTube Topic channel containing uploads with
@@ -886,10 +897,11 @@ Before calling submit_verdict, verify:
     artist AT THAT URL — not to a same-name DSP entry that bare-name
     search returned (RULE A). Reasoning names the URL-anchored artist
     explicitly.
-  □ If any same-name collision was detected AND a URL hint was provided,
-    verdict is `ai` (NOT `likely_ai`, NOT `human`) for the URL-anchored
-    sub-catalog with confidence ≥ 0.90 (RULE B — collision IS the
-    AI signal). Reasoning enumerates the candidates.
+  □ If any same-name collision was detected (URL or no URL — definitions
+    in RULE B), verdict is `ai` (NOT `likely_ai`, NOT `unclear`, NOT
+    `human`) with confidence ≥ 0.90. Reasoning enumerates the
+    candidates. Scope = URL-anchored sub-catalog if URL provided,
+    otherwise the dispatched name as a whole.
   □ Confidence value is DERIVED, not invented — `reasoning` shows the
     contribution math (rule 0a). No round defaults (0.90, 0.92, 0.85,
     0.80) without an explicit derivation line.
