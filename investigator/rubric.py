@@ -196,8 +196,26 @@ Three rules follow from this and run AHEAD OF every other rule in this
 rubric. Apply them as prerequisites, not afterthoughts.
 
 RULE A — IF A SUBMITTER URL HINT IS PROVIDED, THE URL IS THE PRIMARY TRUTH
-SOURCE. The submitter has direct visibility into the catalog they're
-flagging; the URL anchors to a specific artist instance.
+SOURCE. THE ONLY TRUTH SOURCE FOR ARTIST IDENTITY. The submitter has
+direct visibility into the catalog they're flagging; the URL anchors to
+a specific artist instance — and no other anchor is valid.
+
+  • You may NOT augment with URLs you discover yourself. Any URL surfaced
+    by another tool (MusicBrainz `relations[]` listing a YouTube channel,
+    Last.fm bio linking an "official site," iTunes returning an
+    artistViewUrl, etc.) is NOT an authoritative anchor — those URLs are
+    adversarially controllable by the same metadata chain the masquerade
+    attack exploits. Do not call get_youtube_channel on a URL you found
+    in MB relations. Do not "verify" the artist by following a
+    Last.fm-listed channel. The only YouTube channel you may evaluate is
+    the one reachable from the submitter's youtube_url hint.
+  • You may NOT name-search YouTube. The get_youtube_channel tool now
+    rejects free-text artist names — if you have no youtube_url hint,
+    skip the YouTube evaluation entirely and rely on iTunes / MB /
+    Deezer name lookups for what they return (which is metadata, not
+    a URL to follow). Googling the artist name returns the wrong
+    artist in every same-name-collision case and gives the agent a
+    fake anchor that pretends to be the URL the submitter sent.
 
   • When a youtube_url hint is present, extract the channel ID and call
     get_youtube_channel with that ID directly. Characterize THAT catalog
@@ -257,26 +275,50 @@ laundered under name-pooling. Real artists do not get pooled into shared
 Topic channels with unrelated same-name artists; the pooling is the
 laundering mechanism itself.
 
-Hard rule (not negotiable, no "likely_" softening):
+Hard rule (not negotiable, no "likely_" softening, no escape via
+candidate-attribution):
+
   • Same-name collision detected (definitions below) → verdict is
-    **`ai`** at confidence **0.90**. NOT `likely_ai`. NOT `unclear`.
-    NOT `human`. The collision IS the evidence; you do not need an
-    additional marker to reach `ai`.
-  • If a submitter URL is provided, the verdict scope is the
-    URL-anchored sub-catalog (per RULE A). If no URL is provided, the
-    verdict scope is the dispatched name as a whole.
-  • Do NOT verdict `human` because one of the candidates is a real
-    person with a documented MB entry / personal channel / past press.
-    That real person's authorship of the dispatched material is exactly
-    what is in dispute. Following an MB-listed YouTube URL to that real
-    person's PERSONAL channel and citing their tour vlogs as "bridge
-    evidence" is the agent walking into the laundering scheme, not
-    detecting it. The bridge must be to the dispatched sub-catalog —
-    not to the real person's broader catalog.
+    **`ai`** at confidence **0.90**. Always. The collision IS the
+    evidence; you do not need an additional marker to reach `ai`. You
+    MUST set the `pooled-identity` marker (the schema will reject
+    `human`/`likely_human` verdicts that have this marker — submitting
+    `human` here is not just discouraged, it is impossible).
+
+  • CANDIDATE ATTRIBUTION IS FORBIDDEN. You may NOT reason as follows:
+       "The URL-anchored track is attributed to Candidate A per iTunes
+        and MusicBrainz. Candidate A is a documented real human.
+        Therefore the verdict is human."
+    The DSP metadata chain that would tell you "this track is by
+    Candidate A vs Candidate B" is the metadata being laundered. iTunes
+    artistId, MusicBrainz MBID, Last.fm scrobbles, YouTube Topic-channel
+    membership — ALL of those are the laundering surface. They are
+    exactly what an attacker controls when uploading AI material under a
+    real artist's identity. Trusting them to "resolve" the collision
+    cancels out the collision detection.
+
+  • The collision is itself the verdict. The question "which candidate
+    really authored the URL-anchored track" is not answerable from the
+    DSP metadata in a collision case, and the rubric does not require
+    you to answer it. The pooling-by-name mechanism IS the laundering;
+    material uploaded into a name that is in a collision pool is AI
+    material, regardless of which DSP-claimed candidate the chain
+    attributes it to.
+
+  • The verified real person (if any of the candidates is a documented
+    human with MB-full and personal-channel evidence) remains a real
+    person. That is a separate fact from "did they author the
+    URL-anchored material." This investigation is about the URL, and
+    the URL lands in a laundering pool. Their realness does not
+    transfer.
+
   • Do NOT downgrade to `unclear` because "I can't tell which candidate
     is the AI one." That softening is exactly the gap the laundering
     scheme is engineered to exploit. The dispatched name being in a
     collision IS the verdict-determining fact.
+
+  • Scope: if a submitter URL is provided, the verdict applies to the
+    URL-anchored material. If no URL, to the dispatched name as a whole.
 
 Collision detection — ANY ONE is sufficient:
   • The URL lands on a YouTube Topic channel containing uploads with

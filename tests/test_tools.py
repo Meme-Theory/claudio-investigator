@@ -339,35 +339,21 @@ def test_youtube_channel_by_url(load_fixture, fake_youtube_env) -> None:
     assert result["resolved_via"] == "id"
 
 
-@responses.activate
-def test_youtube_channel_by_search_fallback(load_fixture, fake_youtube_env) -> None:
-    """Arbitrary text input → search.list → channels.list (more quota)."""
-    responses.add(
-        responses.GET, YOUTUBE_SEARCH_URL, json=load_fixture("youtube_search_channels.json")
-    )
-    responses.add(
-        responses.GET, YOUTUBE_CHANNELS_URL, json=load_fixture("youtube_channel_by_id.json")
-    )
-    responses.add(
-        responses.GET, YOUTUBE_PLAYLIST_URL, json=load_fixture("youtube_uploads_playlist.json")
-    )
+def test_youtube_channel_name_search_is_refused(fake_youtube_env) -> None:
+    """Free-text artist names are rejected — no name-search fallback.
 
+    The fallback was removed because name search returns the wrong artist
+    in every same-name-collision case (dispatching 'elijah' returned the
+    real Borders' personal channel instead of the AI-laundered Topic
+    channel the submitter actually flagged). The agent must use the
+    submitter's youtube_url hint or skip the YouTube evaluation.
+    """
     result = get_youtube_channel("Aphex Twin")
 
-    assert result["found"] is True
-    assert result["resolved_via"] == "search"
-    assert result["channel_id"] == "UCQpsLlpUlsdkRoZyaSwUTuw"
-
-
-@responses.activate
-def test_youtube_search_returns_no_match(load_fixture, fake_youtube_env) -> None:
-    responses.add(
-        responses.GET, YOUTUBE_SEARCH_URL, json=load_fixture("youtube_search_empty.json")
-    )
-
-    result = get_youtube_channel("Some Nonexistent Artist 998")
-
     assert result["found"] is False
+    assert result["resolved_via"] == "search-refused"
+    assert "error" in result
+    assert "youtube_url hint" in result["error"]
 
 
 @responses.activate

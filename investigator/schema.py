@@ -10,7 +10,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 VerdictLabel = Literal["ai", "likely_ai", "unclear", "likely_human", "human"]
 EvidenceWeight = Literal["low", "medium", "high"]
@@ -85,6 +85,37 @@ class Verdict(BaseModel):
                 f"0.95 for explicit self-disclosure only."
             )
         return v
+
+    @model_validator(mode="after")
+    def _pooled_identity_forbids_human_verdict(self) -> Verdict:
+        """Schema-enforce RULE B: collision detected → not human.
+
+        If the agent flagged `pooled-identity` (the collision marker), it
+        has acknowledged a same-name pooling scenario. Per RULE B that is
+        a hard `ai` verdict — `human`/`likely_human` are forbidden and
+        `unclear` is also forbidden (the collision IS the verdict). The
+        agent's retry-on-bad-submit loop will feed this back so the model
+        either drops the marker (must show why pooling isn't real) or
+        picks a non-human verdict.
+        """
+        if "pooled-identity" in self.markers and self.verdict in (
+            "human", "likely_human", "unclear"
+        ):
+            raise ValueError(
+                f"verdict={self.verdict!r} is forbidden when marker "
+                f"`pooled-identity` is set. Per RULE B, a same-name "
+                f"collision is, by itself, an `ai` verdict at confidence "
+                f"0.90 — the pooling-by-name mechanism IS the laundering, "
+                f"and DSP attribution of the URL-anchored material to a "
+                f"specific candidate is exactly what the attacker "
+                f"controls (and therefore not credible). Either change "
+                f"verdict to `ai` (or `likely_ai` if you have artifact-"
+                f"level positive evidence about authorship that overrides "
+                f"the collision), or drop the `pooled-identity` marker "
+                f"and explain in reasoning why the same-name pooling is "
+                f"not actually a collision."
+            )
+        return self
 
 
 class ArtistRecord(BaseModel):

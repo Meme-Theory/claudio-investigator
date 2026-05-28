@@ -94,21 +94,21 @@ TOOLS = [
     {
         "name": "get_youtube_channel",
         "description": (
-            "Get YouTube channel data by handle, channel ID, watch URL, or "
-            "arbitrary search string. Returns creation date, subscriber count, "
-            "video count, and a sample of recent uploads WITH per-video durations "
-            "in seconds. When given a watch/share URL (e.g. "
-            "music.youtube.com/watch?v=ID), the tool resolves video → channel "
-            "automatically and surfaces the URL-anchored video's snippet as "
-            "`anchor_video` (title, description, publishedAt, channel title). "
-            "ALWAYS pass the submitter's youtube_url hint directly to this tool "
-            "— do NOT fall back to searching by artist name. The watch URL is "
-            "the authoritative anchor; name search returns the wrong artist in "
-            "every same-name-collision case. Channel creation date in 2024+ "
-            "with high upload velocity is a strong AI signal. Recent-uploads "
-            "durations feed the `suno-duration-cap` marker as a secondary source "
-            "to Deezer. Recent-uploads titles often contain explicit AI markers "
-            "(\"[AI]\", \"(AI)\", \"Suno\", etc.) — read them."
+            "Get YouTube channel data by channel ID, @handle, or watch URL. "
+            "Returns creation date, subscriber count, video count, and a sample "
+            "of recent uploads WITH per-video durations in seconds. When given "
+            "a watch/share URL (music.youtube.com/watch?v=ID), the tool resolves "
+            "video → channel automatically and surfaces the URL-anchored "
+            "video's snippet as `anchor_video`. ONLY pass the submitter's "
+            "youtube_url hint to this tool. Free-text artist names are "
+            "REJECTED — name search returns the wrong artist in every same-"
+            "name-collision case and is the laundering attack surface. "
+            "If no YouTube URL was provided by the submitter, do not call this "
+            "tool; skip the YouTube evaluation and rely on iTunes / MB / "
+            "Deezer name lookups instead. Channel creation date in 2024+ with "
+            "high upload velocity is a strong AI signal. Recent-uploads "
+            "durations feed `suno-duration-cap` as a secondary source to "
+            "Deezer. Recent-uploads titles often contain explicit AI markers."
         ),
         "input_schema": {
             "type": "object",
@@ -116,10 +116,9 @@ TOOLS = [
                 "identifier": {
                     "type": "string",
                     "description": (
-                        "Channel ID (e.g. 'UCxxx...'), @handle (e.g. '@AphexTwin'), "
-                        "a youtube.com or music.youtube.com URL (watch/share/channel/"
-                        "handle), or a free-text artist name (search; quota-expensive "
-                        "fallback only)."
+                        "MUST be one of: a channel ID (UCxxx...), @handle, or "
+                        "a youtube.com / music.youtube.com URL (watch / share / "
+                        "channel / handle). Free-text artist names are rejected."
                     ),
                 }
             },
@@ -308,10 +307,26 @@ def get_youtube_channel(identifier: str, **_: Any) -> dict:
         anchor_video = resolved["video"]
         channel = _fetch_channel(session, channel_id=resolved["channel_id"], key=key)
     else:
-        resolved_id = _search_for_channel(session, value, key)
-        if not resolved_id:
-            return {"found": False, "query": identifier, "resolved_via": "search"}
-        channel = _fetch_channel(session, channel_id=resolved_id, key=key)
+        # Name-search is REMOVED — the agent must use a URL / channel ID /
+        # handle from the submitter's youtube_url hint. Googling the artist
+        # name returns the wrong artist in every same-name-collision case
+        # and gives the agent a fake anchor it can pretend is the URL the
+        # submitter sent. If no submitter URL is available, no YouTube
+        # evaluation — fall back to iTunes / MB / Deezer name lookups
+        # (those return DSP metadata, not navigable URLs to a wrong
+        # artist's personal channel).
+        return {
+            "found": False,
+            "query": identifier,
+            "resolved_via": "search-refused",
+            "error": (
+                "get_youtube_channel does not accept free-text artist names. "
+                "Pass the submitter's youtube_url hint, a channel ID "
+                "(UCxxx...), an @handle, or a watch/share URL. If no "
+                "YouTube URL was provided by the submitter, skip the "
+                "YouTube evaluation — do not name-search."
+            ),
+        }
 
     if not channel:
         return {"found": False, "query": identifier, "resolved_via": kind}
