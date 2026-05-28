@@ -51,6 +51,8 @@ SIGNAL_MARKERS: list[str] = [
     "high-output",                   # SOA lift 1.07 — weak alone; cluster-mate of ai-visuals
     "no-live-presence",              # untested in SOA
     "anonymous",                     # SOA lift 1.00 — does NOT discriminate alone; keep as cluster-mate only
+    "pooled-identity",               # added 2026-05-28; Topic channel / DSP artistId pools multiple distinct same-name artists
+    "unbridged-recent-subcatalog",   # added 2026-05-28; verified historical artist has a recent sub-catalog with no personal-channel/press bridge
 ]
 
 
@@ -215,6 +217,27 @@ flagging; the URL anchors to a specific artist instance.
     about the YouTube artist; the iTunes 18-album catalog is a
     different (or masqueraded) artist that shares the name."
 
+  • SUB-CATALOG ISOLATION — the URL points at a specific track in a
+    specific upload context, not at an entire pooled channel. When the
+    YouTube channel you land on is itself a pooled identity (Topic
+    channel containing tracks from multiple distinct artists — see
+    pooled-identity detection below), you MUST isolate the URL-anchored
+    sub-catalog before evaluating it. Methods:
+      - Read the URL-anchored video's description: it contains
+        "Provided to YouTube by {distributor}" and the album / single
+        title. Filter the channel's other uploads to tracks from the
+        SAME distributor + SAME release-window + SAME language.
+      - Treat that filtered subset as "the catalog to evaluate." Other
+        tracks in the pool belong to other artists and are NOT part of
+        this dispatch.
+      - Apply the marker rules (`2024-onwards`, `high-output`,
+        `popularity-follower-mismatch`, etc.) to the sub-catalog, NOT
+        the whole pool. A pool that includes a 2014 release does NOT
+        exonerate a 2025-only sub-catalog inside it.
+    Evaluating "the whole pool" instead of the URL-isolated sub-catalog
+    is the failure mode that lets masquerade attacks land verdicts of
+    `human` on AI-generated material.
+
 RULE B — MULTI-ARTIST COLLISIONS SURFACE IN BOTH VERDICT AND CONFIDENCE.
 When the dispatched name maps to more than one real-world artist (whether
 two distinct humans, or one human + one AI-laundered identity sharing
@@ -254,6 +277,29 @@ masquerade attack exploits.
   • Continuity must be POSITIVELY established. The continuity check
     below is not a sanity-test — it is the load-bearing filter that
     distinguishes a returning real artist from a masquerade.
+  • A MusicBrainz `entry_quality == "full"` entry exonerates THE ARTIST
+    (the named person whose biographical detail it documents) — it does
+    NOT certify any specific sub-catalog as that person's work. When the
+    URL-anchored sub-catalog is recent (last 24 months) and lives in a
+    pooled identity (Topic channel pooled with other artists, or DSP
+    artistId with style/language discontinuity vs. the verified
+    person's prior work), the MB full entry's exoneration does not
+    automatically apply to the sub-catalog. Treat sub-catalog
+    provenance as a separate question requiring its own bridge evidence
+    (the artist's PERSONAL channel — not the pooled Topic channel —
+    posting about the release, named collaborators credited on the
+    recording with their own verifiable presence, press coverage of
+    THIS specific release).
+  • "Live performance" inferred from video TITLE alone is registration-
+    level, not artifact-level. A video titled "SKIN (Live from Nashville,
+    TN)" is a string in a title field — anyone can type it. To weight
+    as artifact-level bridge evidence, you need at least one of:
+    independent corroboration from a tour calendar / venue listing /
+    press review; vision-tool confirmation of crowd, venue signage, or
+    in-person performance imagery (Phase 4); or upload on the
+    artist's PERSONAL channel (not a Topic channel) with surrounding
+    contextual content (rehearsal vlogs, tour announcements). The
+    title alone proves nothing.
 
 ===========================================================================
 SIGNAL TAXONOMY
@@ -382,7 +428,54 @@ least one Tier 1 marker before pushing confidence above 0.70.
     Evidence: cite which platforms returned data and which didn't.
     Phase 0 caveat: Do NOT include TikTok / Instagram absence in this. SOA
     data shows TikTok and Instagram are platform-independent of AI status
-    — equal coverage for disclosed-AI vs. undisclosed entries.
+     — equal coverage for disclosed-AI vs. undisclosed entries.
+
+  • `pooled-identity`
+    What: The URL-anchored channel (typically a YouTube "- Topic"
+    channel, but also possible on DSP artistId pages) contains tracks
+    from multiple distinct artists who happen to share the dispatched
+    name. Detection signals — ANY ONE qualifies:
+      - Mixed-language uploads with no plausible single-artist
+        explanation (Portuguese AND English tracks, with different
+        composer credits per language).
+      - Multiple distributors credited across uploads ("Provided to
+        YouTube by Real Euro" on some, "Provided to YouTube by CmdShft"
+        on others) with no overlap in tracklist.
+      - Style / genre discontinuity across uploads that can't be
+        explained as one artist's range.
+      - MusicBrainz / Last.fm bio explicitly enumerating multiple
+        distinct artists under the name.
+    Evidence: cite the specific divergence and the source.
+    Why this is an AI signal: pooled identity is the mechanism that
+    enables masquerade attacks. A real artist sharing a Topic channel
+    with an unrelated same-name artist is the laundering surface, not
+    a neutral fact. Combine with sub-catalog isolation per RULE A.
+    Caveats: Some Topic channels pool tracks under one artist with
+    multiple aliases — that's NOT this marker. The signal is
+    "distinct artists pooled," not "one artist with variations."
+
+  • `unbridged-recent-subcatalog`
+    What: The URL-anchored sub-catalog is recent (last 24 months) AND
+    the dispatched-name identity has a documented older history (MB
+    full entry, pre-2024 catalog, etc.), BUT no bridge evidence
+    connects the older identity to the recent sub-catalog. The verified
+    older identity exonerates the historical catalog; it does NOT
+    automatically exonerate the recent sub-catalog.
+    Evidence: cite the absence of bridge — checked the artist's
+    PERSONAL channel (not the Topic channel) for posts/videos about
+    the recent release, checked Last.fm bio for mention, checked
+    MusicBrainz release-group relations for the specific release.
+    Bridge evidence that DOES count (when present, this marker does NOT
+    fire): personal channel uploads referencing the recent release with
+    contextual content (rehearsal vlogs, tour announcements, behind-
+    the-scenes); MB release-group relations naming the verified person
+    as performer/producer/writer for the specific release; press
+    review of the specific release naming the verified person.
+    Bridge evidence that does NOT count (does not block this marker):
+    video TITLES mentioning live performance without independent
+    corroboration; co-presence on the same Topic channel; shared
+    distributor crediting "elijah" (the name) without naming the
+    verified person specifically.
 
 TIER 3 — THE COOCCURRENCE CLUSTER
 The Phase 0 EDA found these three markers co-occur at Jaccard 0.49–0.65 in
@@ -451,6 +544,8 @@ Independent signal categories (this is the rule that breaks most cases):
                                               `recent-only-listener-history`
   Category E — Presence in the world      →  `anonymous`, `no-live-presence`,
                                               `inconsistent-style`
+  Category F — Identity integrity         →  `pooled-identity`,
+                                              `unbridged-recent-subcatalog`
 
 Markers within ONE category don't independently corroborate each other.
 `no-musicbrainz` and `no-physical-release` are both absence-of-catalog

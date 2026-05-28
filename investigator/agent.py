@@ -46,8 +46,14 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_MODEL = "claude-haiku-4-5"
 ESCALATION_MODEL = "claude-sonnet-4-6"
-DEFAULT_MAX_TOKENS = 2048
+DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.2
+
+# Per-investigation cap on how many times the agent may submit a malformed
+# verdict before we give up. The retry path is for transient mistakes
+# (truncation, missing field); a persistently-broken model shouldn't burn
+# the whole budget on it.
+MAX_INVALID_SUBMIT_ATTEMPTS = 2
 
 # Loop terminated_by values — keep stable; downstream code switches on these.
 TERMINATED_SUBMIT_VERDICT = "submit_verdict"
@@ -161,6 +167,7 @@ def investigate(
         {"role": "user", "content": build_initial_prompt(artist_name, hints or {})}
     ]
     transcript: list[dict] = []
+    invalid_submit_attempts = 0
 
     while budget.has_remaining():
         try:
@@ -212,21 +219,50 @@ def investigate(
         # submit_verdict is terminal — intercept BEFORE executing any other tool
         # this turn. Doing it first means the agent doesn't waste a tool call
         # if it submits alongside another action.
-        for block in tool_uses:
-            if getattr(block, "name", None) == "submit_verdict":
-                try:
-                    verdict = Verdict(**(block.input or {}))
-                except Exception as e:
-                    logger.exception("invalid verdict payload from submit_verdict")
+        #
+        # If the submit payload fails Pydantic validation (e.g. missing
+        # `reasoning` because the agent ran into max_tokens mid-call), feed the
+        # validation error back as a tool_result so the agent can retry with a
+        # corrected payload. Killing the whole investigation on one malformed
+        # call wastes the in-flight evidence and produces no ledger entry.
+        # Cap retries so a persistently-bad agent doesn't loop forever.
+        submit_block = next(
+            (b for b in tool_uses if getattr(b, "name", None) == "submit_verdict"),
+            None,
+        )
+        if submit_block is not None:
+            try:
+                verdict = Verdict(**(submit_block.input or {}))
+            except Exception as e:
+                logger.warning("invalid verdict payload, feeding error back: %s", e)
+                invalid_submit_attempts += 1
+                if invalid_submit_attempts > MAX_INVALID_SUBMIT_ATTEMPTS:
                     return InvestigationResult(
                         verdict=None, budget=budget, transcript=transcript,
                         model=model, terminated_by=TERMINATED_INVALID_VERDICT,
-                        error=str(e),
+                        error=f"exceeded {MAX_INVALID_SUBMIT_ATTEMPTS} invalid submit attempts; last error: {e}",
                     )
-                return InvestigationResult(
-                    verdict=verdict, budget=budget, transcript=transcript,
-                    model=model, terminated_by=TERMINATED_SUBMIT_VERDICT,
-                )
+                messages.append({"role": "assistant", "content": response.content})
+                messages.append({"role": "user", "content": [{
+                    "type": "tool_result",
+                    "tool_use_id": submit_block.id,
+                    "content": json.dumps({
+                        "error": "validation_error",
+                        "detail": str(e),
+                        "note": (
+                            "submit_verdict payload failed schema validation. "
+                            "Required fields: verdict, confidence, markers, reasoning. "
+                            "Retry with all required fields populated. Keep reasoning "
+                            "to ~3-4 sentences to fit in max_tokens."
+                        ),
+                    }),
+                    "is_error": True,
+                }]})
+                continue
+            return InvestigationResult(
+                verdict=verdict, budget=budget, transcript=transcript,
+                model=model, terminated_by=TERMINATED_SUBMIT_VERDICT,
+            )
 
         # request_escalation is "soft-terminal" — Haiku stops, Sonnet picks up.
         # Swap model + budget + system prompt + tools, acknowledge the call as

@@ -242,8 +242,13 @@ def test_agent_handles_unknown_tool_with_error_flag() -> None:
     assert "unknown tool" in tool_results[0]["content"]
 
 
-def test_agent_handles_invalid_verdict_payload() -> None:
-    """submit_verdict called with payload that fails Pydantic validation."""
+def test_agent_terminates_after_persistent_invalid_verdict_payloads() -> None:
+    """Three malformed submit_verdict calls in a row → terminate with INVALID_VERDICT.
+
+    MAX_INVALID_SUBMIT_ATTEMPTS=2 means the first two bad submits get fed back
+    as tool_results for retry; the third one exceeds the cap and the loop gives
+    up. This protects against a model stuck in a malformed-submit loop.
+    """
     bad_input = {
         "verdict": "ai",
         "confidence": 1.5,  # out of [0, 1] range — Pydantic Field constraint
@@ -251,12 +256,39 @@ def test_agent_handles_invalid_verdict_payload() -> None:
         "reasoning": "x",
     }
     client = _make_client([
-        _make_response([_tool_use_block("submit_verdict", bad_input)], stop_reason="tool_use"),
+        _make_response([_tool_use_block("submit_verdict", bad_input, block_id="b1")], stop_reason="tool_use"),
+        _make_response([_tool_use_block("submit_verdict", bad_input, block_id="b2")], stop_reason="tool_use"),
+        _make_response([_tool_use_block("submit_verdict", bad_input, block_id="b3")], stop_reason="tool_use"),
     ])
     result = investigate("X", client=client)
     assert result.terminated_by == TERMINATED_INVALID_VERDICT
     assert result.verdict is None
     assert result.error is not None
+    assert client.messages.create.call_count == 3
+
+
+def test_agent_retries_invalid_verdict_payload_then_succeeds() -> None:
+    """A single malformed submit_verdict gets fed back as a tool_result error;
+    the agent's next response submits a valid verdict and the loop succeeds.
+
+    This is the normal-recovery path: agents that truncate mid-call (e.g. hit
+    max_tokens before writing `reasoning`) should retry once and land it.
+    """
+    bad_input = {
+        "verdict": "ai",
+        "confidence": 0.85,
+        "markers": [],
+        # reasoning missing — typical max_tokens-truncation failure
+    }
+    client = _make_client([
+        _make_response([_tool_use_block("submit_verdict", bad_input, block_id="b1")], stop_reason="tool_use"),
+        _make_response([_tool_use_block("submit_verdict", _valid_verdict_input(), block_id="b2")], stop_reason="tool_use"),
+    ])
+    result = investigate("X", client=client)
+    assert result.terminated_by == TERMINATED_SUBMIT_VERDICT
+    assert result.verdict is not None
+    assert result.verdict.verdict == "likely_ai"
+    assert client.messages.create.call_count == 2
 
 
 def test_agent_terminates_on_budget_exhaustion() -> None:
